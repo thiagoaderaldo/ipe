@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Este é o repositório oficial do sistema Ipê. Sistema destinado ao controle de ocorrências da Defesa Civil de Fortaleza, parte integrante da Secretaria Municipal de Segurança Cidadã - SESEC.
 
 Tecnologias utlizadas:
@@ -14,3 +15,7 @@ Tecnologias utlizadas:
 ===
 
 IPÊ - Software destinado à Defesa Civil de Fortaleza, intregrante da Secretaria de Segurança Cidadã - SESEC.
+=======
+# ipe
+Sistema de Ocorrências para a Defesa Civil de Fortaleza
+>>>>>>> 2af0f7aea8f9ca32bbca6fe11cc03c1ff833e721
