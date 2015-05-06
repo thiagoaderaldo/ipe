@@ -1,0 +1,151 @@
+/* 
+    Document   : ipe-bootstrap-custom
+    Created on : 09/07/2013, 11:21:06
+    Author     : adminiscti
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+.ui-widget {
+
+    font-size: 0.9em;
+}
+
+
+.ui-widget .ui-widget {
+    font-size: 1.0em;
+}
+.ui-widget input,
+.ui-widget select,
+.ui-widget textarea,
+.ui-widget button {
+
+    font-size: 1.0em;
+}
+
+.ui-toolbar.ui-widget-header{
+    background: #00aba5;
+}
+
+.pf-dashboard-column {width:200px;}
+
+.ui-clock {
+    background-color: white;
+    color: orange;
+    height: 100px;
+    font-size: larger;
+    font-weight: bold;
+}
+
+.ui-dashboard-column{
+    padding-left: 10px;
+}
+
+.ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield {
+    border-radius: 0px;
+    text-height: inherit;
+    min-height: 30px!important;
+
+}
+
+.ui-inputfield.ui-state-error, .ui-widget-header .ui-inputfield.ui-state-error, .ui-widget-content .ui-inputfield.ui-state-error {
+    color: #333!important;
+    border: 2px solid red!important;
+}
+
+.ui-selectonemenu{
+    box-sizing: content-box;
+}
+
+.ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
+    color: #FFF!important;
+    text-decoration: none!important;
+    background-color: #00EAA5!important;
+    background-position: 0px center!important;
+    background-image: linear-gradient(to bottom, #0CC, #00ABA5)!important;
+    background-repeat: repeat-x;
+    text-shadow: none;
+}
+
+.ui-wizard-step-title {
+    font-size: 18px!important;
+    margin: 0px 3px 0px 0px!important;
+    padding: 0.4em!important;
+    float: left!important;
+}
+
+
+
+
+.ui-panel-titlebar{
+    padding: 10px 15px !important;
+    border-bottom: 1px solid transparent;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+}
+
+
+/* PANELS */
+.ui-panel{
+    padding: 0.0em !important;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+}
+.ui-corner-all {
+    border-radius: 0px;
+}
+.ui-widget-content {
+    border: 0px solid #DDD;
+    background: none repeat scroll 0% 0% #FFF;
+    color: #333;
+    
+}
+.panel-blue .ui-panel-titlebar{
+
+    color: #FFF;
+    background-color: #428BCA;
+    border-color: #428BCA;
+    
+}
+.panel-green .ui-panel-titlebar{
+
+    color: #FFF;
+    background-color: #18BC9C;
+    border-color: #18BC9C;
+    
+}
+
+.panel-light-dark .ui-panel-titlebar{
+    color: #FFF;
+    background-color: #2C3E50;
+    border-color: #2C3E50;
+    
+}
+.panel-red .ui-panel-titlebar{
+    color: #FFF;
+    background-color: #E74C3C;
+    border-color: #E74C3C;
+    
+}
+.panel-orange .ui-panel-titlebar{
+    color: #FFF;
+    background-color: #F39C12;
+    border-color: #F39C12;
+    
+}
+
+/* BUTTONS  */
+.ui-button{
+    
+}
+
+.button-blue .ui-button{
+
+    color: #FFF;
+    background-color: #428BCA !important;
+    border-color: #428BCA !important;
+    
+}
+

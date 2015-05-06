@@ -1,0 +1,609 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/ipe-template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{pt_br.CreateAtendimentosTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="header-body">
+            <h:outputText value="Página: Cadastro de ocorrência."></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <p:messages id="atdMessages" closable="true"/>
+            </h:panelGroup>
+            <h:form id="createOcorrencia" acceptcharset="ISO-8859-1" enctype="application/form-data">
+                <h:outputScript name="locales-primefaces.js" target="head" library="js" />
+                <p:wizard backLabel="Voltar"
+                          nextLabel="Avançar"
+                          >
+                    <p:tab id="personal" title="Procedência">
+                        <p:panel  header="Informações de procedência">
+                            <div class="ui-grid ui-grid-responsive">
+                                <div class="ui-grid-row">
+                                    <div class="ui-grid-col-1">
+                                        <h:outputLabel id="holTitulo"
+                                                       value="#{pt_br.CreateAtendimentosLabel_titulo}" 
+                                                       for="holTitulo" />
+                                    </div>
+                                </div>
+                                <div class="ui-grid-row">
+                                    <div class="ui-grid-col-1">
+                                        <p:inputText id="pitTitulo" 
+                                                     value="#{atendimentosController.selected.titulo}" 
+                                                     title="#{pt_br.CreateAtendimentosTitle_titulo}" 
+                                                     maxlength="45"
+                                                     style="min-width: 250px;"
+                                                     />
+                                    </div>
+                                </div>
+                                <div class="ui-grid-row">
+                                    <div class="ui-grid-col-1">
+                                        <h:outputLabel id="holProcedencia"
+                                                       value="#{pt_br.CreateAtendimentosLabel_procedencia}" 
+                                                       for="psomProcedencia" />
+                                    </div>
+                                </div>
+                                <div class="ui-grid-row">
+                                    <div class="ui-grid-col-1">
+                                        <p:selectOneMenu id="psomProcedencia" 
+                                                         value="#{atendimentosController.selected.procedencia}" 
+                                                         style="min-width: 260px;"
+                                                         >
+                                            <f:selectItem id="procedenciaCIOPS" itemValue="CIOPS" itemLabel="CIOPS"/>
+                                            <f:selectItem id="procedenciaSPU" itemValue="SPU" itemLabel="SPU"/>
+                                            <f:selectItem id="procedenciaDC-BASE" itemValue="DC-BASE" itemLabel="DC-BASE"/>
+                                            <f:selectItem id="procedenciaDC-SER" itemValue="DC-SER" itemLabel="DC-SER"/>
+                                        </p:selectOneMenu>
+                                    </div>
+                                </div>
+                                <div class="ui-grid-row">
+                                    <div class="ui-grid-col-1">
+                                        <h:outputLabel value="#{pt_br.CreateAtendimentosLabel_protProcedencia}" 
+                                                       id="holProtProcedencia"
+                                                       for="protProcedencia" />
+                                    </div>
+                                </div>
+                                <div class="ui-grid-row">
+                                    <div class="ui-grid-col-1">
+                                        <p:inputText id="pitProtProcedencia" 
+                                                     value="#{atendimentosController.selected.protProcedencia}" 
+                                                     title="#{pt_br.CreateAtendimentosTitle_protProcedencia}" 
+                                                     maxlength="45"
+                                                     style="min-width: 250px;"
+                                                     />
+                                    </div>
+                                </div>
+                                <div class="ui-grid-row">
+                                    <div class="ui-grid-col-1">
+                                        <h:outputLabel value="#{pt_br.CreateAtendimentosLabel_descInicial}" 
+                                                       id="holDescInicial"
+                                                       for="pitaDescInicial" />
+                                    </div>
+                                </div>
+                                <div class="ui-grid-row">
+                                    <div class="ui-grid-col-1">
+                                        <p:inputTextarea rows="10"                                                          
+                                                         cols="30" 
+                                                         id="pitaDescInicial" 
+                                                         value="#{atendimentosController.selected.descInicial}" 
+                                                         title="#{pt_br.CreateAtendimentosTitle_descInicial}" 
+                                                         required="true" 
+                                                         requiredMessage="#{pt_br.CreateAtendimentosRequiredMessage_descInicial}"
+                                                         style="min-width: 250px;"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </p:panel>
+                    </p:tab>
+                    <p:tab id="tabSolicitante" title="Solicitante">
+                        <p:panel header="Digite informações do solicitante.">
+                            <div class="ui-grid-row">
+                                <div class="ui-grid-col-1">
+                                    <h:outputLabel id="holSolicitante"
+                                                   value="#{pt_br.CreateAtendimentosLabel_solicitante}"
+                                                   for="holSolicitante" />
+                                </div>
+                            </div>
+                            <div class="ui-grid-row">
+                                <div class="ui-grid-col-1">
+                                    <p:inputText id="pitSolicitante" 
+                                                 value="#{atendimentosController.selected.solicitante}" 
+                                                 title="#{pt_br.CreateAtendimentosTitle_solicitante}" 
+                                                 required="true" 
+                                                 requiredMessage="#{pt_br.CreateAtendimentosRequiredMessage_solicitante}"
+                                                 style="min-width: 250px;"/>
+                                </div>
+                            </div>
+                            <div class="ui-grid-row">
+                                <div class="ui-grid-col-1">
+                                    <h:outputLabel id="holTelSolicitante"
+                                                   value="#{pt_br.CreateAtendimentosLabel_telSolicitante}" 
+                                                   for="holTelSolicitante" />
+                                </div>
+                            </div>
+                            <div class="ui-grid-row">
+                                <div class="ui-grid-col-1">
+                                    <p:inputMask id="pimTelSolicitante"
+                                                 mask="(99)9999-9999"
+                                                 value="#{atendimentosController.selected.telSolicitante}" 
+                                                 title="#{pt_br.CreateAtendimentosTitle_telSolicitante}" 
+                                                 maxlength="11"
+                                                 />
+                                </div>
+                            </div>
+
+
+                        </p:panel>
+                    </p:tab>
+                    <p:tab id="tabLocalDaOcorrencia" title="Localização">
+                        <p:panel header="Digite informações do preliminares da ocorrência">
+                            <div class="ui-grid-row">
+                                <div class="ui-grid-col-1">
+                                    <h:outputLabel value="#{pt_br.CreateAtendimentosLabel_localizacao}" 
+                                                   id="holLocalizacao"
+                                                   for="localizacao" />
+
+                                </div>
+                            </div>
+                            <div class="ui-grid-row">
+                                <div class="ui-grid-col-1">
+                                    <h:panelGrid columns="2">
+
+                                        <p:inputText id="pitLocalizacao" 
+                                                     value="#{atendimentosController.selected.localizacao}" 
+                                                     title="#{pt_br.CreateAtendimentosTitle_localizacao}" 
+                                                     required="true" 
+                                                     requiredMessage="#{pt_br.CreateAtendimentosRequiredMessage_localizacao}"                                     
+                                                     maxlength="45"
+                                                     style="min-width: 250px;"/>
+
+                                        <h:commandButton type="button" icon="ui-icon-pin-s"  
+                                                         id="hcbGMaps"
+                                                         value="Google Maps" onclick="PF('dlg').show()" 
+                                                         styleClass="btn btn-warning btn-lg"/>  
+
+                                        <p:dialog  appendTo="@(body)"
+                                                   widgetVar="dlg" 
+                                                   width="625" 
+                                                   height="500" 
+                                                   modal="true"
+                                                   header="Pesquisar endereço">
+
+                                            <script type="text/javascript">
+                                                function geocode() {                                
+                                                    PF('geoGmap').geocode(document.getElementById('createOcorrencia:address').value);                
+                                                }
+ 
+                                                function reverseGeocode() {
+                                                    var lat = document.getElementById('lat').value,
+                                                    lng = document.getElementById('lng').value;
+ 
+                                                    PF('revGeoMap').reverseGeocode(lat, lng);
+                                                }
+                                            </script>
+
+
+                                            <h:form prependId="false">
+                                                <h:panelGrid columns="3">
+                                                    <p:outputLabel for="address" value="Digite o endereço:" />
+
+                                                    <p:inputText id="address" />
+
+                                                    <p:commandButton value="Pesquisar" 
+                                                                     icon="ui-icon-search" 
+                                                                     onclick="geocode()" 
+                                                                     type="button" 
+                                                                     style="height: 40px"
+                                                                     />
+                                                </h:panelGrid>
+                                                <br/>
+                                                <p:gmap id="geoGmap" 
+                                                        widgetVar="geoGmap"
+                                                        center="#{geocodeView.centerGeoMap}"
+                                                        model="#{geocodeView.geoModel}"
+                                                        zoom="11" 
+                                                        type="ROADMAP"  
+                                                        style="width:600px;height:400px" 
+                                                        streetView="true"
+                                                        >
+                                                    <p:ajax event="geocode" listener="#{geocodeView.onGeocode}" update="@this" />
+                                                </p:gmap>
+                                            </h:form>
+
+
+                                        </p:dialog> 
+                                    </h:panelGrid>
+                                </div>
+                            </div>
+
+                            <div class="ui-grid-row">
+                                <div class="ui-grid-col-1">
+                                    <h:outputLabel value="#{pt_br.CreateAtendimentosLabel_numCasa}" 
+                                                   for="numCasa" 
+                                                   id="holNumCasa"
+                                                   />
+                                </div>
+                            </div>
+                            <div class="ui-grid-row">
+                                <div class="ui-grid-col-1">
+                                    <p:inputText id="pitNumCasa" 
+                                                 value="#{atendimentosController.selected.numCasa}" 
+                                                 title="#{pt_br.CreateAtendimentosTitle_numCasa}"
+                                                 style="min-width: 250px;"/>
+                                </div>
+                            </div>
+                            <div class="ui-grid-row">
+                                <div class="ui-grid-col-1">
+                                    <h:outputLabel value="#{pt_br.CreateAtendimentosLabel_pontoReferencia}" 
+                                                   for="pontoReferencia" 
+                                                   id="holPontoReferencia"
+                                                   />
+                                </div>
+                            </div>
+                            <div class="ui-grid-row">
+                                <div class="ui-grid-col-1">
+                                    <p:inputText id="pitPontoReferencia" 
+                                                 value="#{atendimentosController.selected.pontoReferencia}"
+                                                 title="#{pt_br.CreateAtendimentosTitle_pontoReferencia}"
+                                                 style="min-width: 250px;"/>
+                                </div>
+                            </div>
+                            <div class="ui-grid-row">
+                                <div class="ui-grid-col-1">
+                                    <h:outputLabel value="#{pt_br.CreateAtendimentosLabel_idBairro}" 
+                                                   for="idBairro" 
+                                                   id="holIdBairro"
+                                                   />
+                                </div>
+                            </div>
+                            <div class="ui-grid-row">
+                                <p:selectOneMenu id="psomBairro" 
+                                                 value="#{bairrosBySerDropdownView.bairro}" 
+                                                 title="#{pt_br.CreateAtendimentosTitle_idBairro}"
+                                                 style="width:260px"
+                                                 required="true"
+                                                 requiredMessage="#{pt_br.CreateAtendimentosRequiredMessage_idBairro}"
+                                                 binding="#{atendimentosController.SOMBairros}"
+                                                 >
+                                    <p:ajax listener="#{bairrosBySerDropdownView.onBairroChange}" update="ser" />
+                                    <f:selectItem itemLabel="Selecione um bairro:" itemValue="" noSelectionOption="true" />
+                                    <f:selectItems value="#{bairrosBySerDropdownView.bairros}" />
+
+                                </p:selectOneMenu>
+                            </div>
+                            <div class="ui-grid-row">
+                                <div class="ui-grid-col-1">
+                                    <h:outputLabel value="#{pt_br.CreateAtendimentosLabel_idSer}" 
+                                                   for="idSer" />
+                                </div>
+                            </div>
+                            <div class="ui-grid-row">
+                                <div class="ui-grid-col-1">
+                                    <p:selectOneMenu id="ser" 
+                                                     value="#{bairrosBySerDropdownView.ser}" 
+                                                     style="width:260px"
+                                                     title="#{pt_br.CreateAtendimentosTitle_idSer}" 
+                                                     required="true"
+                                                     requiredMessage="#{pt_br.CreateAtendimentosRequiredMessage_idSer}"
+                                                     binding="#{atendimentosController.SOMSer}"
+                                                     >
+
+                                        <f:selectItems value="#{bairrosBySerDropdownView.sers}" />
+                                    </p:selectOneMenu>
+                                </div>
+                            </div>
+
+                        </p:panel>
+                    </p:tab>
+
+
+
+                    <p:tab id="tabInformacoesAdicionais" title="Informações adicionais">
+
+                        <p:panel header="Digite alguma informação complementar." style="color: #0088cc">
+                            <div class="ui-grid-row">
+                                <div class="ui-grid-col-1">
+                                    <h:outputLabel value="#{pt_br.CreateAtendimentosLabel_idTipologia}" 
+                                                   for="idTipologia" />
+                                </div>
+                            </div>
+                            <div class="ui-grid-row">
+                                <div class="ui-grid-col-1">
+
+                                    <p:selectOneMenu id="idTipologia" 
+                                                     value="#{atendimentosController.selected.idTipologia}"
+                                                     style="min-width: 260px;"
+                                                     >
+                                        <f:selectItems value="#{tipologiasController.itemsAvailableSelectOne}"/>
+                                    </p:selectOneMenu>
+                                </div>
+                            </div>
+                            <div class="ui-grid-row">
+                                <div class="ui-grid-col-1">
+                                    <h:outputLabel value="#{pt_br.CreateAtendimentosLabel_dataSolicitacao}" 
+                                                   id="holDataSolicitacao"
+                                                   for="holDataSolicitacao" />
+                                </div>
+                            </div>
+
+                            <div class="ui-grid-row">
+                                <div class="ui-grid-col-1">
+                                    <h:panelGroup>
+                                        <p:calendar id="pcDataAtendimento" 
+                                                    size="10"                                     
+                                                    locale="pt_BR"
+                                                    pattern="dd/MM/yyyy"
+                                                    style="text-align: center;"
+                                                    maxlength="10"
+                                                    value="#{atendimentosController.selected.dataSolicitacao}" 
+                                                    title="#{pt_br.CreateAtendimentosTitle_dataSolicitacao}"
+                                                    required="true" 
+                                                    requiredMessage="#{pt_br.CreateAtendimentosRequiredMessage_dataSolicitacao}"
+                                                    onkeyup="Formatadata(this,event)"
+                                                    effect="slideDown">
+                                        </p:calendar>                        
+                                    </h:panelGroup>
+                                </div>
+                            </div>
+                            <div class="ui-grid-row">
+                                <div class="ui-grid-col-1">
+                                    <h:outputLabel id="holHoraSolicitacao"
+                                                   value="#{pt_br.CreateAtendimentosLabel_horaSolicitacao}" 
+                                                   for="holHoraSolicitacao" />
+                                </div>
+                            </div>
+                            <div class="ui-grid-row">
+                                <div class="ui-grid-col-1">
+                                    <p:inputMask mask="99:99" 
+                                                 size="10" 
+                                                 style="text-align: center; color: orangered" 
+                                                 id="pimHoraSolicitacao" 
+                                                 value="#{atendimentosController.selected.horaSolicitacao}" 
+                                                 title="#{pt_br.CreateAtendimentosTitle_horaSolicitacao}" 
+                                                 required="true" 
+                                                 requiredMessage="#{pt_br.CreateAtendimentosRequiredMessage_horaSolicitacao}">
+                                        <f:convertDateTime pattern="HH:mm" locale="pt,BR" timeZone="GMT-3"/>
+                                    </p:inputMask>
+                                </div>
+                            </div>
+                            <div class="ui-grid-row">
+                                <div class="ui-grid-col-1">
+                                    <h:outputLabel value="#{pt_br.CreateAtendimentosLabel_observacao}" 
+                                                   for="observacao" />
+                                </div>
+                            </div>
+                            <div class="ui-grid-row">
+                                <div class="ui-grid-col-1">
+                                    <p:inputText id="observacao" 
+                                                 value="#{atendimentosController.selected.observacao}" 
+                                                 title="#{pt_br.CreateAtendimentosTitle_observacao}" 
+                                                 maxlength="45"
+                                                 style="min-width: 250px;"/>
+                                </div>
+                            </div>
+                            <div class="ui-grid-row">
+                                <div class="ui-grid-col-1">
+                                    <h:outputLabel value="#{pt_br.CreateAtendimentosLabel_idEstatus}" 
+                                                   for="idEstatus" />
+                                </div>
+                            </div>
+                            <div class="ui-grid-row">
+                                <div class="ui-grid-col-1">
+
+                                    <p:selectOneMenu id="idEstatus" 
+                                                     value="#{atendimentosController.selected.idEstatus}"                                       
+                                                     style="min-width: 260px;"
+                                                     >
+
+                                        <f:selectItems value="#{estatusController.itemsAvailableSelectOne}"/>
+
+                                        <!--
+                                        <f:selectItem  id="estatusPendente" itemValue="2"  itemLabel="Pendente"/>
+                                        <f:converter converterId="integerConverter"/>
+                                        -->
+                                    </p:selectOneMenu>
+                                </div>
+                            </div>
+
+                            <div class="ui-grid-row">
+                                <div class="ui-grid-col-1">
+
+                                </div>
+                            </div>
+                        </p:panel>
+                    </p:tab>
+                    <p:tab id="confirm" title="Confirmação">
+                        <p:panel header="Confirma dados digitados?">
+                            <div class="ui-grid-row">
+                                <div class="ui-grid-col-4">
+                                    <h3>Procedência</h3>
+                                    <span/>
+                                </div>
+                            </div>
+                            <div class="ui-grid-row">
+                                <div class="ui-grid-col-4">
+                                    <h:outputLabel value="#{pt_br.CreateAtendimentosLabel_procedencia}" />
+                                    <span/>
+                                    <h:outputText value="#{atendimentosController.selected.procedencia}"  styleClass="outputLabel"/>
+
+                                </div>
+                            </div>
+                            <div class="ui-grid-row">
+                                <div class="ui-grid-col-4">
+                                    <h:outputLabel value="#{pt_br.CreateAtendimentosLabel_protProcedencia}" />
+                                    <span/>
+                                    <h:outputText value="#{atendimentosController.selected.protProcedencia}"  styleClass="outputLabel"/>
+
+                                </div>
+                            </div>
+                            <div class="ui-grid-row">
+                                <div class="ui-grid-col-4" style="text-wrap: none; width: 250px">
+                                    <h:outputLabel value="#{pt_br.CreateAtendimentosLabel_descInicial}"  />
+                                    <span/>
+                                    <h:outputText value="#{atendimentosController.selected.descInicial}"  
+
+                                                  styleClass="outputLabel"/>
+
+                                </div>
+                            </div>
+                            <div class="box-footer clearfix"></div>
+                            <div class="ui-grid-row">
+                                <div class="ui-grid-row">
+                                    <div class="ui-grid-col-4">
+                                        <h3>Solicitante</h3>
+                                        <span/>
+                                    </div>
+                                </div>
+                                <div class="ui-grid-row">
+                                    <div class="ui-grid-col-4">
+                                        <h:outputLabel value="#{pt_br.CreateAtendimentosLabel_solicitante}"  />
+                                        <span/>
+                                        <h:outputText value="#{atendimentosController.selected.solicitante}"  styleClass="outputLabel"/>
+
+                                    </div>
+                                </div>
+                                <div class="ui-grid-row">
+                                    <div class="ui-grid-col-4">
+                                        <h:outputLabel value="#{pt_br.CreateAtendimentosLabel_telSolicitante}"  />
+                                        <span/>
+                                        <h:outputText value="#{atendimentosController.selected.telSolicitante}"  styleClass="outputLabel"/>
+
+                                    </div>
+                                </div>
+
+                                <div class="box-footer clearfix"></div>
+
+                                <div class="ui-grid-row">
+                                    <div class="ui-grid-col-4">
+                                        <h3>Localização</h3>
+                                    </div>
+                                </div>
+                                <div class="ui-grid-row">
+                                    <div class="ui-grid-col-4">
+                                        <h:outputLabel value="#{pt_br.CreateAtendimentosLabel_localizacao}"  />
+                                        <span/>
+                                        <h:outputText value="#{atendimentosController.selected.localizacao}"  styleClass="outputLabel"/>
+
+                                    </div>
+                                </div>
+                                <div class="ui-grid-row">
+                                    <div class="ui-grid-col-4">
+                                        <h:outputLabel value="#{pt_br.CreateAtendimentosLabel_numCasa}"  />
+                                        <span/>
+                                        <h:outputText value="#{atendimentosController.selected.numCasa}"  styleClass="outputLabel"/>
+
+                                    </div>
+                                </div>
+                                <div class="ui-grid-row">
+                                    <div class="ui-grid-col-4">
+                                        <h:outputLabel value="#{pt_br.CreateAtendimentosLabel_pontoReferencia}"  />
+                                        <span/>
+                                        <h:outputText value="#{atendimentosController.selected.pontoReferencia}"  styleClass="outputLabel"/>
+
+                                    </div>
+                                </div>
+                                <div class="ui-grid-row">
+                                    <div class="ui-grid-col-4">
+                                        <h:outputLabel value="#{pt_br.CreateAtendimentosLabel_idBairro}"  />
+                                        <span/>
+                                        <h:outputText value="#{bairrosBySerDropdownView.bairro}"  styleClass="outputLabel"/>
+
+                                    </div>
+                                </div>
+                                <div class="ui-grid-row">
+                                    <div class="ui-grid-col-4">
+                                        <h:outputLabel value="#{pt_br.CreateAtendimentosLabel_idSer}"  />
+                                        <span/>
+                                        <h:outputText value="#{bairrosBySerDropdownView.ser}"  styleClass="outputLabel"/>
+
+                                    </div>
+                                </div>
+                                <div class="box-footer clearfix"></div>
+                                <div class="ui-grid-row">
+                                    <div class="ui-grid-col-4">
+                                        <h3>Informações adicionais</h3>
+                                    </div>
+                                </div> 
+                                <div class="ui-grid-row">
+                                    <div class="ui-grid-col-4">
+                                        <h:outputLabel value="#{pt_br.CreateAtendimentosLabel_idTipologia}"  />
+                                        <span/>
+                                        <h:outputText value="#{atendimentosController.selected.idTipologia.nome}"  styleClass="outputLabel"/>
+
+
+                                    </div>
+                                </div>
+                                <div class="ui-grid-row">
+                                    <div class="ui-grid-col-4">
+                                        <h:outputLabel value="#{pt_br.CreateAtendimentosLabel_dataSolicitacao}"  />
+                                        <span/>
+                                        <h:outputText value="#{atendimentosController.selected.dataSolicitacao}"  styleClass="outputLabel">
+                                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                                        </h:outputText>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            <div class="ui-grid-row">
+                                <div class="ui-grid-col-4">
+                                    <h:outputLabel value="#{pt_br.CreateAtendimentosLabel_horaSolicitacao}"  />
+                                    <span/>
+                                    <h:outputText value="#{atendimentosController.selected.horaSolicitacao}"  styleClass="outputLabel">
+                                        <f:convertDateTime pattern="HH:mm" />
+                                    </h:outputText>
+
+                                </div>
+                            </div>
+                            <div class="ui-grid-row">
+                                <div class="ui-grid-col-4">
+                                    <h:outputLabel value="#{pt_br.CreateAtendimentosLabel_observacao}"  />
+                                    <span/>
+                                    <h:outputText value="#{atendimentosController.selected.observacao}"  styleClass="outputLabel"/>
+
+                                </div>
+                            </div>
+                            <div class="ui-grid-row">
+                                <div class="ui-grid-col-4">
+                                    <h:outputLabel value="#{pt_br.CreateAtendimentosLabel_idEstatus}"  />
+                                    <span/>
+                                    <h:outputText value="#{atendimentosController.selected.idEstatus.nome}"  styleClass="outputLabel"/>
+
+                                </div>
+                            </div>
+                            <br />
+                            <div class="box-footer clearfix">
+                                <br />
+                                <h:commandButton action="#{atendimentosController.create}" 
+                                                 value="#{pt_br.CreateAtendimentosSaveLink}"
+                                                 styleClass="btn btn-primary btn-lg"
+
+                                                 >
+                                    <p:message style="font-size: large" for="atdMessages" />
+                                </h:commandButton>
+                            </div>
+                        </p:panel>
+                    </p:tab>
+                </p:wizard>
+
+                <br />
+                <br />
+                <h:commandLink action="#{atendimentosController.prepareList}" value="#{pt_br.CreateAtendimentosShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <div class="box-footer clearfix">
+                    <h:link outcome="/index" value="#{pt_br.CreateAtendimentosIndexLink}"/>
+                </div>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

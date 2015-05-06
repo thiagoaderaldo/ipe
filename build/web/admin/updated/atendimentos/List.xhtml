@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListAtendimentosTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListAtendimentosEmpty}" rendered="#{atendimentosController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{atendimentosController.items.rowCount > 0}">
+                    <h:outputText value="#{atendimentosController.pagination.pageFirstItem + 1}..#{atendimentosController.pagination.pageLastItem + 1}/#{atendimentosController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{atendimentosController.previous}" value="#{bundle.Previous} #{atendimentosController.pagination.pageSize}" rendered="#{atendimentosController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{atendimentosController.next}" value="#{bundle.Next} #{atendimentosController.pagination.pageSize}" rendered="#{atendimentosController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{atendimentosController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAtendimentosTitle_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAtendimentosTitle_protocolo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.protocolo}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAtendimentosTitle_titulo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.titulo}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAtendimentosTitle_procedencia}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.procedencia}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAtendimentosTitle_protProcedencia}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.protProcedencia}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAtendimentosTitle_dataSolicitacao}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dataSolicitacao}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAtendimentosTitle_horaSolicitacao}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.horaSolicitacao}">
+                                <f:convertDateTime pattern="HH:mm:ss" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAtendimentosTitle_localizacao}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.localizacao}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAtendimentosTitle_solicitante}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.solicitante}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAtendimentosTitle_responsavel}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.responsavel}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAtendimentosTitle_telSolicitante}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.telSolicitante}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAtendimentosTitle_descInicial}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.descInicial}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAtendimentosTitle_descFinal}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.descFinal}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAtendimentosTitle_dataConclusao}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dataConclusao}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAtendimentosTitle_horaConclusao}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.horaConclusao}">
+                                <f:convertDateTime pattern="HH:mm:ss" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAtendimentosTitle_observacao}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.observacao}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAtendimentosTitle_idEstatus}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idEstatus}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAtendimentosTitle_idTipologia}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idTipologia}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAtendimentosTitle_idSer}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idSer}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAtendimentosTitle_idBairro}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idBairro}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAtendimentosTitle_numCasa}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.numCasa}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAtendimentosTitle_pontoReferencia}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.pontoReferencia}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAtendimentosTitle_equipe}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.equipe}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAtendimentosTitle_vtr}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.vtr}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAtendimentosTitle_proprietarioResidencia}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.proprietarioResidencia}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAtendimentosTitle_qtdComodosCasa}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.qtdComodosCasa}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAtendimentosTitle_qtdPessoasAtingidas}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.qtdPessoasAtingidas}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{atendimentosController.prepareView}" value="#{bundle.ListAtendimentosViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{atendimentosController.prepareEdit}" value="#{bundle.ListAtendimentosEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{atendimentosController.destroy}" value="#{bundle.ListAtendimentosDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{atendimentosController.prepareCreate}" value="#{bundle.ListAtendimentosCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListAtendimentosIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

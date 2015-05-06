@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../ipe-template.xhtml">
+            <ui:define name="title">
+                <h:outputText value="Iguana - Área Administrativa"></h:outputText>
+            </ui:define>
+            <ui:define name="logout">
+                <div id="admin_logout" name="admin_login" align="right">
+                    <h:form>
+                        <h:commandLink action="#{request.session.invalidate}" value="Sair">
+                        </h:commandLink>
+                    </h:form>
+                </div>
+            </ui:define>
+            <ui:define name="body">
+                
+                <h:body>
+                    <p style="text-align: justify">
+                        <h4>
+                            Olá Administrador,
+                            <br></br>
+                            <br></br>
+                            Você está acessando a Área Administrativa do sistema Iguana;
+                            <br></br>
+                            <br></br>
+                            Utilize os links abaixo para cadastrar ou remover usuários.
+                            <br></br>
+                            de atendimentos realizados pelo setor de TI.
+                            <br></br>
+                            <br></br>
+                            Navegue no menu ao lado para realizar suas operações.
+                        </h4>
+                    </p>        
+                    <h:form>
+                        <h:commandLink action="/admin/grupos/Create?faces-redirect=true" value="Cadastrar grupo"/>
+                    </h:form>
+                    <h:form>
+                        <h:commandLink action="/admin/usuarios/Create?faces-redirect=true" value="Cadastrar usuário"/>
+                    </h:form>
+                </h:body>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

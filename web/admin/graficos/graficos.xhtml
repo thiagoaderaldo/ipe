@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./../../ipe-template.xhtml">
+
+            <ui:define name="title">
+                Gráficos
+            </ui:define>
+
+            <ui:define name="body">
+                <div align="center">
+                    <h2>Estatisticas de atendimentos por responsáveis</h2>
+                    
+                        <p:pieChart id="sample" value="#{pieChartBean.pieModelByResponsible}" legendPosition="w" legendRows="40" legendCols="2"
+                                    title="Gráfico de Pizza em %" style="width:450px;height:300px" sliceMargin="5" diameter="150" 
+                                    fill="false" showDataLabels="true"/>
+                        <p:barChart id="basic" value="#{barChartBean.categoryModelByResponsible}" showDatatip="false" 
+                                    legendPosition="ne" title="Gráfico de Barras pelo Total de Atendimentos" min="0" style="width: 600px;height:400px" 
+                                    xaxisAngle="-40" yaxisAngle="50" xaxisLabel="Responsável pelo Atendimento" yaxisLabel="Quantidade de Atendimentos"/>
+
+                </div>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

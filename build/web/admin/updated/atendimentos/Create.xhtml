@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateAtendimentosTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateAtendimentosLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{atendimentosController.selected.id}" title="#{bundle.CreateAtendimentosTitle_id}" required="true" requiredMessage="#{bundle.CreateAtendimentosRequiredMessage_id}"/>
+                    <h:outputLabel value="#{bundle.CreateAtendimentosLabel_protocolo}" for="protocolo" />
+                    <h:inputText id="protocolo" value="#{atendimentosController.selected.protocolo}" title="#{bundle.CreateAtendimentosTitle_protocolo}" />
+                    <h:outputLabel value="#{bundle.CreateAtendimentosLabel_titulo}" for="titulo" />
+                    <h:inputText id="titulo" value="#{atendimentosController.selected.titulo}" title="#{bundle.CreateAtendimentosTitle_titulo}" required="true" requiredMessage="#{bundle.CreateAtendimentosRequiredMessage_titulo}"/>
+                    <h:outputLabel value="#{bundle.CreateAtendimentosLabel_procedencia}" for="procedencia" />
+                    <h:inputText id="procedencia" value="#{atendimentosController.selected.procedencia}" title="#{bundle.CreateAtendimentosTitle_procedencia}" required="true" requiredMessage="#{bundle.CreateAtendimentosRequiredMessage_procedencia}"/>
+                    <h:outputLabel value="#{bundle.CreateAtendimentosLabel_protProcedencia}" for="protProcedencia" />
+                    <h:inputText id="protProcedencia" value="#{atendimentosController.selected.protProcedencia}" title="#{bundle.CreateAtendimentosTitle_protProcedencia}" />
+                    <h:outputLabel value="#{bundle.CreateAtendimentosLabel_dataSolicitacao}" for="dataSolicitacao" />
+                    <h:inputText id="dataSolicitacao" value="#{atendimentosController.selected.dataSolicitacao}" title="#{bundle.CreateAtendimentosTitle_dataSolicitacao}" required="true" requiredMessage="#{bundle.CreateAtendimentosRequiredMessage_dataSolicitacao}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateAtendimentosLabel_horaSolicitacao}" for="horaSolicitacao" />
+                    <h:inputText id="horaSolicitacao" value="#{atendimentosController.selected.horaSolicitacao}" title="#{bundle.CreateAtendimentosTitle_horaSolicitacao}" required="true" requiredMessage="#{bundle.CreateAtendimentosRequiredMessage_horaSolicitacao}">
+                        <f:convertDateTime pattern="HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateAtendimentosLabel_localizacao}" for="localizacao" />
+                    <h:inputText id="localizacao" value="#{atendimentosController.selected.localizacao}" title="#{bundle.CreateAtendimentosTitle_localizacao}" required="true" requiredMessage="#{bundle.CreateAtendimentosRequiredMessage_localizacao}"/>
+                    <h:outputLabel value="#{bundle.CreateAtendimentosLabel_solicitante}" for="solicitante" />
+                    <h:inputText id="solicitante" value="#{atendimentosController.selected.solicitante}" title="#{bundle.CreateAtendimentosTitle_solicitante}" required="true" requiredMessage="#{bundle.CreateAtendimentosRequiredMessage_solicitante}"/>
+                    <h:outputLabel value="#{bundle.CreateAtendimentosLabel_responsavel}" for="responsavel" />
+                    <h:inputText id="responsavel" value="#{atendimentosController.selected.responsavel}" title="#{bundle.CreateAtendimentosTitle_responsavel}" required="true" requiredMessage="#{bundle.CreateAtendimentosRequiredMessage_responsavel}"/>
+                    <h:outputLabel value="#{bundle.CreateAtendimentosLabel_telSolicitante}" for="telSolicitante" />
+                    <h:inputText id="telSolicitante" value="#{atendimentosController.selected.telSolicitante}" title="#{bundle.CreateAtendimentosTitle_telSolicitante}" />
+                    <h:outputLabel value="#{bundle.CreateAtendimentosLabel_descInicial}" for="descInicial" />
+                    <h:inputTextarea rows="4" cols="30" id="descInicial" value="#{atendimentosController.selected.descInicial}" title="#{bundle.CreateAtendimentosTitle_descInicial}" required="true" requiredMessage="#{bundle.CreateAtendimentosRequiredMessage_descInicial}"/>
+                    <h:outputLabel value="#{bundle.CreateAtendimentosLabel_descFinal}" for="descFinal" />
+                    <h:inputTextarea rows="4" cols="30" id="descFinal" value="#{atendimentosController.selected.descFinal}" title="#{bundle.CreateAtendimentosTitle_descFinal}" />
+                    <h:outputLabel value="#{bundle.CreateAtendimentosLabel_dataConclusao}" for="dataConclusao" />
+                    <h:inputText id="dataConclusao" value="#{atendimentosController.selected.dataConclusao}" title="#{bundle.CreateAtendimentosTitle_dataConclusao}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateAtendimentosLabel_horaConclusao}" for="horaConclusao" />
+                    <h:inputText id="horaConclusao" value="#{atendimentosController.selected.horaConclusao}" title="#{bundle.CreateAtendimentosTitle_horaConclusao}" >
+                        <f:convertDateTime pattern="HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateAtendimentosLabel_observacao}" for="observacao" />
+                    <h:inputText id="observacao" value="#{atendimentosController.selected.observacao}" title="#{bundle.CreateAtendimentosTitle_observacao}" />
+                    <h:outputLabel value="#{bundle.CreateAtendimentosLabel_idEstatus}" for="idEstatus" />
+                    <h:selectOneMenu id="idEstatus" value="#{atendimentosController.selected.idEstatus}" title="#{bundle.CreateAtendimentosTitle_idEstatus}" required="true" requiredMessage="#{bundle.CreateAtendimentosRequiredMessage_idEstatus}">
+                        <f:selectItems value="#{estatusController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateAtendimentosLabel_idTipologia}" for="idTipologia" />
+                    <h:selectOneMenu id="idTipologia" value="#{atendimentosController.selected.idTipologia}" title="#{bundle.CreateAtendimentosTitle_idTipologia}" >
+                        <f:selectItems value="#{tipologiasController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateAtendimentosLabel_idSer}" for="idSer" />
+                    <h:selectOneMenu id="idSer" value="#{atendimentosController.selected.idSer}" title="#{bundle.CreateAtendimentosTitle_idSer}" required="true" requiredMessage="#{bundle.CreateAtendimentosRequiredMessage_idSer}">
+                        <f:selectItems value="#{serController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateAtendimentosLabel_idBairro}" for="idBairro" />
+                    <h:selectOneMenu id="idBairro" value="#{atendimentosController.selected.idBairro}" title="#{bundle.CreateAtendimentosTitle_idBairro}" required="true" requiredMessage="#{bundle.CreateAtendimentosRequiredMessage_idBairro}">
+                        <f:selectItems value="#{bairrosController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateAtendimentosLabel_numCasa}" for="numCasa" />
+                    <h:inputText id="numCasa" value="#{atendimentosController.selected.numCasa}" title="#{bundle.CreateAtendimentosTitle_numCasa}" />
+                    <h:outputLabel value="#{bundle.CreateAtendimentosLabel_pontoReferencia}" for="pontoReferencia" />
+                    <h:inputText id="pontoReferencia" value="#{atendimentosController.selected.pontoReferencia}" title="#{bundle.CreateAtendimentosTitle_pontoReferencia}" />
+                    <h:outputLabel value="#{bundle.CreateAtendimentosLabel_equipe}" for="equipe" />
+                    <h:inputText id="equipe" value="#{atendimentosController.selected.equipe}" title="#{bundle.CreateAtendimentosTitle_equipe}" required="true" requiredMessage="#{bundle.CreateAtendimentosRequiredMessage_equipe}"/>
+                    <h:outputLabel value="#{bundle.CreateAtendimentosLabel_vtr}" for="vtr" />
+                    <h:inputText id="vtr" value="#{atendimentosController.selected.vtr}" title="#{bundle.CreateAtendimentosTitle_vtr}" />
+                    <h:outputLabel value="#{bundle.CreateAtendimentosLabel_proprietarioResidencia}" for="proprietarioResidencia" />
+                    <h:inputText id="proprietarioResidencia" value="#{atendimentosController.selected.proprietarioResidencia}" title="#{bundle.CreateAtendimentosTitle_proprietarioResidencia}" />
+                    <h:outputLabel value="#{bundle.CreateAtendimentosLabel_qtdComodosCasa}" for="qtdComodosCasa" />
+                    <h:inputText id="qtdComodosCasa" value="#{atendimentosController.selected.qtdComodosCasa}" title="#{bundle.CreateAtendimentosTitle_qtdComodosCasa}" />
+                    <h:outputLabel value="#{bundle.CreateAtendimentosLabel_qtdPessoasAtingidas}" for="qtdPessoasAtingidas" />
+                    <h:inputText id="qtdPessoasAtingidas" value="#{atendimentosController.selected.qtdPessoasAtingidas}" title="#{bundle.CreateAtendimentosTitle_qtdPessoasAtingidas}" />
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{atendimentosController.create}" value="#{bundle.CreateAtendimentosSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{atendimentosController.prepareList}" value="#{bundle.CreateAtendimentosShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateAtendimentosIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

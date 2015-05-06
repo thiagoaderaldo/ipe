@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/ipe-template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{pt_br.ViewAtendimentosTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{pt_br.ViewAtendimentosLabel_id}"/>
+                    <h:outputText value="#{atendimentosController.selected.id}" title="#{pt_br.ViewAtendimentosTitle_id}"/>
+                    <h:outputText value="#{pt_br.ViewAtendimentosLabel_protocolo}"/>
+                    <h:outputText value="#{atendimentosController.selected.protocolo}" title="#{pt_br.ViewAtendimentosTitle_protocolo}"/>
+                    <h:outputText value="#{pt_br.ViewAtendimentosLabel_titulo}"/>
+                    <h:outputText value="#{atendimentosController.selected.titulo}" title="#{pt_br.ViewAtendimentosTitle_titulo}"/>
+                    <h:outputText value="#{pt_br.ViewAtendimentosLabel_procedencia}"/>
+                    <h:outputText value="#{atendimentosController.selected.procedencia}" title="#{pt_br.ViewAtendimentosTitle_procedencia}"/>
+                    <h:outputText value="#{pt_br.ViewAtendimentosLabel_protProcedencia}"/>
+                    <h:outputText value="#{atendimentosController.selected.protProcedencia}" title="#{pt_br.ViewAtendimentosTitle_protProcedencia}"/>
+                    <h:outputText value="#{pt_br.ViewAtendimentosLabel_dataSolicitacao}"/>
+                    <h:outputText value="#{atendimentosController.selected.dataSolicitacao}" title="#{pt_br.ViewAtendimentosTitle_dataSolicitacao}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                    <h:outputText value="#{pt_br.ViewAtendimentosLabel_horaSolicitacao}"/>
+                    <h:outputText value="#{atendimentosController.selected.horaSolicitacao}" title="#{pt_br.ViewAtendimentosTitle_horaSolicitacao}">
+                        <f:convertDateTime pattern="HH:mm:ss" />
+                    </h:outputText>
+                    <h:outputText value="#{pt_br.ViewAtendimentosLabel_localizacao}"/>
+                    <h:outputText value="#{atendimentosController.selected.localizacao}" title="#{pt_br.ViewAtendimentosTitle_localizacao}"/>
+                    <h:outputText value="#{pt_br.ViewAtendimentosLabel_solicitante}"/>
+                    <h:outputText value="#{atendimentosController.selected.solicitante}" title="#{pt_br.ViewAtendimentosTitle_solicitante}"/>
+                    <h:outputText value="#{pt_br.ViewAtendimentosLabel_responsavel}"/>
+                    <h:outputText value="#{atendimentosController.selected.responsavel}" title="#{pt_br.ViewAtendimentosTitle_responsavel}"/>
+                    <h:outputText value="#{pt_br.ViewAtendimentosLabel_telSolicitante}"/>
+                    <h:outputText value="#{atendimentosController.selected.telSolicitante}" title="#{pt_br.ViewAtendimentosTitle_telSolicitante}"/>
+                    <h:outputText value="#{pt_br.ViewAtendimentosLabel_descInicial}"/>
+                    <h:outputText value="#{atendimentosController.selected.descInicial}" title="#{pt_br.ViewAtendimentosTitle_descInicial}"/>
+                    <h:outputText value="#{pt_br.ViewAtendimentosLabel_descFinal}"/>
+                    <h:outputText value="#{atendimentosController.selected.descFinal}" title="#{pt_br.ViewAtendimentosTitle_descFinal}"/>
+                    <h:outputText value="#{pt_br.ViewAtendimentosLabel_dataConclusao}"/>
+                    <h:outputText value="#{atendimentosController.selected.dataConclusao}" title="#{pt_br.ViewAtendimentosTitle_dataConclusao}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                    <h:outputText value="#{pt_br.ViewAtendimentosLabel_horaConclusao}"/>
+                    <h:outputText value="#{atendimentosController.selected.horaConclusao}" title="#{pt_br.ViewAtendimentosTitle_horaConclusao}">
+                        <f:convertDateTime pattern="HH:mm:ss" />
+                    </h:outputText>
+                    <h:outputText value="#{pt_br.ViewAtendimentosLabel_observacao}"/>
+                    <h:outputText value="#{atendimentosController.selected.observacao}" title="#{pt_br.ViewAtendimentosTitle_observacao}"/>
+                    <h:outputText value="#{pt_br.ViewAtendimentosLabel_idEstatus}"/>
+                    <h:outputText value="#{atendimentosController.selected.idEstatus}" title="#{pt_br.ViewAtendimentosTitle_idEstatus}"/>
+                    <h:outputText value="#{pt_br.ViewAtendimentosLabel_idTipologia}"/>
+                    <h:outputText value="#{atendimentosController.selected.idTipologia}" title="#{pt_br.ViewAtendimentosTitle_idTipologia}"/>
+                    <h:outputText value="#{pt_br.ViewAtendimentosLabel_idSer}"/>
+                    <h:outputText value="#{atendimentosController.selected.idSer}" title="#{pt_br.ViewAtendimentosTitle_idSer}"/>
+                    <h:outputText value="#{pt_br.ViewAtendimentosLabel_idBairro}"/>
+                    <h:outputText value="#{atendimentosController.selected.idBairro}" title="#{pt_br.ViewAtendimentosTitle_idBairro}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{atendimentosController.destroyAndView}" value="#{pt_br.ViewAtendimentosDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{pt_br.ViewAtendimentosEditLink}"/>
+                <br />
+                <h:commandLink action="#{atendimentosController.prepareCreate}" value="#{pt_br.ViewAtendimentosCreateLink}" />
+                <br />
+                <h:commandLink action="#{atendimentosController.prepareList}" value="#{pt_br.ViewAtendimentosShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{pt_br.ViewAtendimentosIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

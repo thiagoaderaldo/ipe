@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/ipe-template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{pt_br.ViewUsuariosTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{pt_br.ViewUsuariosLabel_matricula}"/>
+                    <h:outputText value="#{usuariosController.selected.matricula}" title="#{pt_br.ViewUsuariosTitle_matricula}"/>
+                    <h:outputText value="#{pt_br.ViewUsuariosLabel_nome}"/>
+                    <h:outputText value="#{usuariosController.selected.nome}" title="#{pt_br.ViewUsuariosTitle_nome}"/>
+                    <h:outputText value="#{pt_br.ViewUsuariosLabel_telefone}"/>
+                    <h:outputText value="#{usuariosController.selected.telefone}" title="#{pt_br.ViewUsuariosTitle_telefone}"/>
+                    <h:outputText value="#{pt_br.ViewUsuariosLabel_celular}"/>
+                    <h:outputText value="#{usuariosController.selected.celular}" title="#{pt_br.ViewUsuariosTitle_celular}"/>
+                    <h:outputText value="#{pt_br.ViewUsuariosLabel_login}"/>
+                    <h:outputText value="#{usuariosController.selected.login}" title="#{pt_br.ViewUsuariosTitle_login}"/>
+                    <h:outputText value="#{pt_br.ViewUsuariosLabel_email}"/>
+                    <h:outputText value="#{usuariosController.selected.email}" title="#{pt_br.ViewUsuariosTitle_email}"/>
+                    <h:outputText value="#{pt_br.ViewUsuariosLabel_senha}"/>
+                    <h:outputText value="#{usuariosController.selected.senha}" title="#{pt_br.ViewUsuariosTitle_senha}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{usuariosController.destroyAndView}" value="#{pt_br.ViewUsuariosDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{pt_br.ViewUsuariosEditLink}"/>
+                <br />
+                <h:commandLink action="#{usuariosController.prepareCreate}" value="#{pt_br.ViewUsuariosCreateLink}" />
+                <br />
+                <h:commandLink action="#{usuariosController.prepareList}" value="#{pt_br.ViewUsuariosShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{pt_br.ViewUsuariosIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

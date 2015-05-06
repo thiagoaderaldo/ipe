@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="keywords" content="css3, login, form, custom, input, submit, button, html5, placeholder" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title><ui:insert name="title">Default Title</ui:insert></title>
+        <h:outputStylesheet name="css/ipe-bootstrap-custom.css"/>
+        <h:outputStylesheet name="css/responsiveMenu.css"/>
+        <!-- bootstrap 3.0.2 -->
+        <h:outputStylesheet  name="css/bootstrap.min.css" />
+        <!-- font Awesome -->
+        <h:outputStylesheet name="css/font-awesome.min.css" />
+        <!-- Theme style -->
+        <h:outputStylesheet name="css/AdminLTE.css"  />
+        <link rel="icon"
+              type="image/png" 
+              href="/ipe/resources/css/images/ipe-favicon.png" />
+    </h:head>
+
+    <h:body>
+        <p:layout fullPage="true">
+
+            <p:layoutUnit position="north" size="80" style="border: 0px;">
+
+                <table>
+                    <tr>
+                        <td>
+                            <img width="90px" 
+                                 height="50px" 
+                                 alt="Ipê" 
+                                 src="/ipe/resources/images/ipe-181x120.png"/>
+                        </td>
+                        <td style="width: 20px;"></td>
+                        <td>
+                            <img width="120px" 
+                                 height="50px" 
+                                 alt="Secretaria Municipal de Segurança Cidadã" 
+                                 src="/ipe/resources/images/LOGO-SESEC-300x102-RGB.jpg"/>
+                        </td>
+                        <td style="width: 20px;"></td>
+                        <td>
+                            <img width="50px" 
+                                 height="50px" 
+                                 alt="Secretaria Municipal de Segurança Cidadã" 
+                                 src="/ipe/resources/images/LOGO-DEFESA-CIVIL-60x60-RGB.jpg"/>
+                        </td> 
+                    </tr>
+                </table>              
+            </p:layoutUnit>
+
+            <p:layoutUnit position="south" style="border: 0px; font-size: 10px; height: 20px;">
+                <div id="footText" align="center">
+                    <p>
+                        <b>SESEC - SECRETARIA MUNICIPAL DE SEGURANÇA CIDADÃ.</b>                       
+                        CTI - COORDENAÇÃO DE TECNOLOGIA DA INFORMAÇÃO.
+                        RUA DELMIRO DE FARIAS, 1900. RODOLFO TEÓFILO. 3281-9877.
+                    </p>
+                </div>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="center" style="border: 0px;">
+                <ui:insert name="body"></ui:insert>
+            </p:layoutUnit>
+
+        </p:layout>
+
+    </h:body>
+    <!-- AdminLTE App -->
+    <h:outputScript  name="js/AdminLTE/app.js" />
+</html>

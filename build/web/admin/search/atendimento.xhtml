@@ -1,0 +1,151 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="/ipe-template.xhtml">
+
+            <ui:define name="title">
+                Pesquisar Atendimento
+            </ui:define>
+            <ui:define name="header-body">
+                <h:outputText value="Pesquisar atendimento"></h:outputText>
+            </ui:define>
+            <ui:define name="body">
+                <h:outputScript name="locales-primefaces.js" target="head" library="js" />
+                <script
+                    src="#{facesContext.externalContext.requestContextPath}/scripts/scripts.js"
+                    type="text/javascript">
+                </script>
+
+                <p style="text-align: justify;">
+                    Para pesquisar por um atendimento selecione uma das opções e
+                    preencha os campos necessários.
+                </p>
+                <h:form acceptcharset="ISO-8859-1" id="formSearch" 
+                        enctype="application/form-data">
+                    <p:selectOneMenu  value="#{atendimentosController.pesquisa.opcao}"
+                                      style="min-width: 260px">
+                        <f:selectItem  itemValue="1" id="pesqDatas" itemLabel="Datas"/>
+                        <f:selectItem  itemValue="2" id="pesqEstatus" itemLabel="Estatus"/>
+                        <f:selectItem  itemValue="3" id="pesqResponsavel" itemLabel="Responsável"/>
+                        <f:selectItem  itemValue="4" id="pesqEquipamento" itemLabel="Título do Atendimento"/> 
+                        <f:ajax event="change" render="formSearch:forms"/>
+                    </p:selectOneMenu>
+                    <br/>
+                    <br/>
+
+                    <h:panelGroup id="forms">                        
+                        <h:panelGrid  rendered="#{atendimentosController.pesquisa.opcao == 1}" columns="1">
+                            <h:outputText value="#{pt_br.SearchAtendimento_Lable_Date1}" style="color: #35bcb8;"/>                                
+                            <p:calendar pattern="dd/MM/yyyy" value="#{atendimentosController.data1}"
+                                        locale="pt_BR"
+                                        required="true"
+                                        requiredMessage="É necessário preencher o campo 'De:'"
+                                        binding="#{atendimentosController.searchDate1}"
+                                        id="date1"
+                                        style="text-align: center; min-width: 260px;"                                        
+                                        title="Utilize o formato dd/mm/aaaa"
+                                        onkeyup="Formatadata(this,event)"
+                                        effect="slideDown"
+
+                                        >
+                            </p:calendar>
+                            <h:outputText value="Exemplo: 01/03/2012" style="color: #f39c12;"/>
+                            <h:outputText value="#{pt_br.SearchAtendimento_Lable_Date2}" style="color: #35bcb8;"/>
+                            <p:calendar value="#{atendimentosController.data2}"
+                                        locale="pt_BR"
+                                        pattern="dd/MM/yyyy"
+                                        required="true"
+                                        requiredMessage="É necessário preencher o campo 'Até:'"
+                                        binding="#{atendimentosController.searchDate2}"
+                                        id="date2"
+                                        style="text-align: center; min-width: 250px"
+                                        maxlength="10"
+                                        title="Utilize o formato dd/mm/aaaa"
+                                        onkeyup="Formatadata(this,event)"
+                                        effect="slideDown"
+                                        >
+                                <f:convertDateTime timeZone="GMT-3" locale="pt_BR" pattern="dd/MM/yyyy" />
+                            </p:calendar>
+                            <h:outputText value="Exemplo: 05/08/2012" style="color: #f39c12;"/>
+                            <br/>
+                            <p:commandButton value="#{pt_br.SearchAtendimento_ButtonFind}"
+                                             action="#{atendimentosController.searchesController}"
+                                             icon="ui-icon-search"
+                                             styleClass="btn btn-info btn-lg" />
+
+                        </h:panelGrid>
+                        <h:panelGrid id="formSearchEstatus" style="vertical-align: middle;"
+                                     columns="1" 
+                                     rendered="#{atendimentosController.pesquisa.opcao == 2}">                                                                                  
+                            <p:selectOneMenu  value="#{atendimentosController.estatus}"
+                                              id="estatus"
+                                              style="min-width: 260px"
+                                              title="Preecha o tipo de estatus que deseja visualizar.">
+                                <f:selectItem  itemValue="1" id="pesqConcluido" itemLabel="Concluído"/>
+                                <f:selectItem  itemValue="2" id="pesqPendente" itemLabel="Pendente"/>
+                            </p:selectOneMenu>
+                            <br/>
+                            <p:commandButton value="#{pt_br.SearchAtendimento_ButtonFind}"                                         
+                                             action="#{atendimentosController.searchesController}"
+                                             styleClass="btn btn-info btn-lg"
+                                             icon="ui-icon-search"
+                                             />
+                        </h:panelGrid>
+
+                        <h:panelGrid id="formSearchResponsavel" 
+                                     rendered="#{atendimentosController.pesquisa.opcao == 3}" 
+                                     columns="1">                           
+                            <p:inputText value="#{atendimentosController.responsavel}"
+                                         required="true"
+                                         requiredMessage="É necessário preencher o campo 'Responsável:'"
+                                         id="inputSearchResponsavel"
+                                         binding="#{atendimentosController.hitResponsavel}"
+                                         icon="ui-icon-search"
+                                         maxlength="45"
+                                         style="min-width: 250px"
+                                         title="Digite o nome ou parte do nome do responsável envolvido no atendimento atendimento."/>
+                            <br/>
+                            <p:commandButton value="#{pt_br.SearchAtendimento_ButtonFind}"
+                                             action="#{atendimentosController.searchesController}" 
+                                             styleClass="btn btn-info btn-lg" 
+                                             icon="ui-icon-search"
+                                             />
+
+                        </h:panelGrid>
+                        <h:panelGrid id="formSearchEquipamento" rendered="#{atendimentosController.pesquisa.opcao == 4}"
+                                     columns="1">                           
+                            <p:inputText value="#{atendimentosController.equipamento}"
+                                         required="true"
+                                         requiredMessage="É necessário preencher o campo 'Título do Atendimento'"
+                                         id="inputSearchEquipamento"
+                                         binding="#{atendimentosController.hitEquipamento}"                                        
+                                         maxlength="45"
+                                         style="min-width: 250px"
+                                         title="Digite o nome ou parte do nome do equipamento envolvido no atendimento."/>
+                            <br/>
+                            <p:commandButton value="#{pt_br.SearchAtendimento_ButtonFind}"
+                                             action="#{atendimentosController.searchesController}" 
+                                             styleClass="btn btn-info btn-lg"                                              
+
+                                             icon="ui-icon-search"/>
+
+                        </h:panelGrid>
+                    </h:panelGroup>
+
+
+                </h:form>
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages id="errorMessages" errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+            </ui:define>
+        </ui:composition>
+
+    </body>
+</html>

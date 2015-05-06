@@ -1,0 +1,77 @@
+/* 
+    Document   : responsiveMenu
+    Created on : 01/02/2014, 15:22:13
+    Author     : thiago
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+@media screen and (max-width: 980px) {
+ 
+    .pagewrap {
+        width: 94%;
+    }
+    .content {
+        width: 65%;
+    }
+    .sidebar {
+        width: 30%;
+    }
+ 
+}
+
+@media screen and (max-width: 700px) {
+ 
+    #content {
+        width: auto;
+        float: none;
+    }
+    #sidebar {
+        width: auto;
+        float: none;
+    }
+ 
+}
+
+@media screen and (max-width: 480px) {
+ 
+    #header {
+        height: auto;
+    }
+    h1 {
+        font-size: 24px;
+    }
+    #sidebar {
+        display: none;
+    }
+ 
+}
+
+@media screen and (min-width : 700px) and (max-width : 1440px){
+    .verticalmenu{
+        display: none !important;
+        
+    }
+    .verticalDataTable{
+        display: none !important;
+    }
+}
+
+
+
+@media screen and (max-width : 700px){
+    .horizontalmenu{
+        display: none !important;
+    }
+    .horizontaldataTable{
+        display: none !important;
+    }
+}
+
+.menuFont{
+    font-size: 0.8em;
+}
+
+
+
+

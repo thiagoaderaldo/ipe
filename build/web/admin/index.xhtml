@@ -1,0 +1,150 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/ipe-template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="Benvindo."></h:outputText>
+        </ui:define>
+        <ui:define name="header-body">
+            <h:outputText value="Painel de Controle"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form id="formDashboard">                
+                <p:growl id="growl"  showDetail="true" sticky="true"/>  
+                <p:dashboard id="board" style="min-height: 1000px" model="#{dashboardBean.model}">  
+                    <p:ajax event="reorder" listener="#{dashboardBean.handleReorder}" update="growl" />  
+                    <p:panel id="noticias" 
+                             header="Notícias" 
+                             toggleable="true" 
+                             toggleTitle="Recolher painel de notícias."
+                             styleClass="panel-green"
+                             >  
+                        <p style="text-align: justify;">
+                            <table align="center" width="400px">
+                                <tr>
+                                    <td align="center">
+                                        <img width="190px" 
+                                             height="100px" 
+                                             alt="Iguana" 
+                                             src="/ipe/resources/images/ipe-300x199.png"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center"><h2>Versão 0.1.2 - 30/04/2014</h2></td>
+
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <p><b style="color: red; font-size: small">NOVIDADES DA VERSÃO 0.1.2 - 30/04/2014: </b></p>
+                                        <ul>
+                                            <li style="font-size: small;padding-top: 5px">Modificações na tela de cadastro, conforme solicitado.</li>
+                                            <li style="font-size: small;padding-top: 5px">A tabela com os atendimentos cadastrados estão agora com um belo design. É possível acessar na página <b>Cadastrar > Atendimento > Exibir todas as ocorrências cadastradas.</b></li>
+                                        </ul>
+                                    </td>
+                                </tr>                         
+                                <tr>
+                                    <td>
+                                        <p><b style="color: green; font-size: small">NOVIDADES DA VERSÃO 0.1.1 - 23/04/2014: </b></p>
+                                        <ul>
+                                            <li style="font-size: small;padding-top: 5px">Criação do sistema com os requisitos levantados.</li>
+                                        </ul>
+                                    </td>
+                                </tr>                         
+                            </table>
+                        </p>  
+                    </p:panel>  
+
+
+
+                    <p:panel id="resumo"  
+                             header="Resumo das Atividades" 
+                             toggleable="true" 
+                             toggleTitle="Recolher painel de resumo das atividades."
+                             styleClass="panel-blue"
+                             >
+                        <h:panelGrid columns="2">
+                            <h:outputText value="Horário:"/>
+                            <p:clock pattern="dd/MM/yyy - HH:mm:ss" mode="server"/>
+                        </h:panelGrid>
+                        <h:panelGrid columns="2">
+                            <h:outputText value="Pendências:"/>
+                            <h:outputText value="5" style="color: red; font-weight: bold"/>
+                            <h:outputText value="Qtd. Solic. Dia:"/>
+                            <h:outputText value="10" style="color: green; font-weight: bold"/> 
+                            <p:button styleClass="button-blue" value="ENVIAR"/>
+                        </h:panelGrid>
+
+                    </p:panel>  
+
+
+                    <p:panel id="gmapsearch"  
+                             header="Google Maps" 
+                             toggleable="true" 
+                             toggleTitle="Recolher painel de resumo das atividades."
+                             styleClass="panel-orange"
+                             >
+                        <script type="text/javascript">
+                            function geocode() {                                
+                                PF('geoGmap').geocode(document.getElementById('formDashboard:address').value);                
+                            }
+ 
+                            function reverseGeocode() {
+                                var lat = document.getElementById('lat').value,
+                                lng = document.getElementById('lng').value;
+ 
+                                PF('revGeoMap').reverseGeocode(lat, lng);
+                            }
+                        </script>
+
+
+                        <h:form prependId="false">
+                            <h:panelGrid columns="3">
+                                <p:outputLabel for="address" value="Digite o endereço:" />
+
+                                <p:inputText id="address" />
+
+                                <p:commandButton value="Pesquisar" 
+                                                 icon="ui-icon-search" 
+                                                 onclick="geocode()" 
+                                                 type="button" 
+                                                 style="height: 40px"
+                                                 />
+                            </h:panelGrid>
+                            <br/>
+                            <p:gmap id="geoGmap" 
+                                    widgetVar="geoGmap"
+                                    center="#{geocodeView.centerGeoMap}"
+                                    model="#{geocodeView.geoModel}"
+                                    zoom="11" 
+                                    type="ROADMAP"  
+                                    style="width:580px;height:400px" 
+                                    streetView="true"
+                                    >
+                                <p:ajax event="geocode" listener="#{geocodeView.onGeocode}" update="@this" />
+                            </p:gmap>
+                        </h:form>
+
+                    </p:panel>
+
+                </p:dashboard>  
+
+
+            </h:form>  
+
+        </ui:define>
+    </ui:composition>
+
+
+
+
+
+
+
+</html>
+
