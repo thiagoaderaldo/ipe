@@ -8,13 +8,9 @@ Tecnologias utlizadas:
  - JDK 1.7;
  - JSF 2.1
  - EclipseLink 2;
- - Primefaces 5.2-SNAPSHOT;
+ - Primefaces 5.2;
  - MySQL 5.5;
  - MySQL Workbench 6.1;
- - Kubuntu 14.04.
+ - Kubuntu 15.04.
 
-===
-
-# ipe
-Sistema de Ocorrências para a Defesa Civil de Fortaleza
 
