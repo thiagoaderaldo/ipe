@@ -27,9 +27,11 @@ public class DashboardBean implements Serializable {
         column1.addWidget("resumo");
         column1.addWidget("noticias");  
         column2.addWidget("gmapsearch");  
+        column2.addWidget("dados");  
+        column2.addWidget("riscos");  
         
         model.addColumn(column1);  
-        model.addColumn(column2);   
+        model.addColumn(column2);    
     }  
       
     public void handleReorder(DashboardReorderEvent event) {  

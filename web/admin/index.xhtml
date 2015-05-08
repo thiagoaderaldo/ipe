@@ -22,7 +22,7 @@
                              header="Notícias" 
                              toggleable="true" 
                              toggleTitle="Recolher painel de notícias."
-                             styleClass="panel-green"
+                             styleClass="ui-panel-success"
                              >  
                         <p style="text-align: justify;">
                             <table align="center" width="400px">
@@ -66,7 +66,7 @@
                              header="Resumo das Atividades" 
                              toggleable="true" 
                              toggleTitle="Recolher painel de resumo das atividades."
-                             styleClass="panel-blue"
+                             styleClass="ui-panel-info"
                              >
                         <h:panelGrid columns="2">
                             <h:outputText value="Horário:"/>
@@ -77,7 +77,16 @@
                             <h:outputText value="5" style="color: red; font-weight: bold"/>
                             <h:outputText value="Qtd. Solic. Dia:"/>
                             <h:outputText value="10" style="color: green; font-weight: bold"/> 
-                            <p:button styleClass="button-blue" value="ENVIAR"/>
+                            <p:button value="Primary" styleClass="ui-button-primary"/>
+                            <br/>
+                            <p:button value="Success" styleClass="ui-button-success"/>
+                            <br/>
+                            <p:button value="Info" styleClass="ui-button-info"/>
+                            <br/>
+                            <p:button value="Warning" styleClass="ui-button-warning"/>
+                            <br/>
+                            <p:button value="Danger" styleClass="ui-button-danger"/>
+                            <br/>
                         </h:panelGrid>
 
                     </p:panel>  
@@ -87,7 +96,7 @@
                              header="Google Maps" 
                              toggleable="true" 
                              toggleTitle="Recolher painel de resumo das atividades."
-                             styleClass="panel-orange"
+                             styleClass="ui-panel-warning"
                              >
                         <script type="text/javascript">
                             function geocode() {                                
@@ -130,6 +139,18 @@
                             </p:gmap>
                         </h:form>
 
+                    </p:panel>
+                    <p:panel id="dados"
+                             header="Dados do sistema"
+                             styleClass="ui-panel-primary"
+                             toggleable="true">
+                        <h:outputText value="adogiaodghoadihfgoiahdfoghaodifhgadhfgoiahdfgo"/>
+                    </p:panel>
+                    <p:panel id="riscos"
+                             header="Riscos"
+                             styleClass="ui-panel-danger"
+                             toggleable="true">
+                        <h:outputText value="adogiaodghoadihfgoiahdfoghaodifhgadhfgoiahdfgo"/>
                     </p:panel>
 
                 </p:dashboard>  

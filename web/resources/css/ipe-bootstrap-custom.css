@@ -39,9 +39,13 @@ root {
     font-size: larger;
     font-weight: bold;
 }
-
+/*
 .ui-dashboard-column{
     padding-left: 10px;
+}
+*/
+.ui-dashboard-line{
+    padding-top: 10px;
 }
 
 .ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield {
@@ -77,9 +81,6 @@ root {
     float: left!important;
 }
 
-
-
-
 .ui-panel-titlebar{
     padding: 10px 15px !important;
     border-bottom: 1px solid transparent;
@@ -90,6 +91,7 @@ root {
 
 /* PANELS */
 .ui-panel{
+    margin: 20px 10px 10px 10px;
     padding: 0.0em !important;
     box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
 }
@@ -100,52 +102,146 @@ root {
     border: 0px solid #DDD;
     background: none repeat scroll 0% 0% #FFF;
     color: #333;
-    
-}
-.panel-blue .ui-panel-titlebar{
 
-    color: #FFF;
-    background-color: #428BCA;
-    border-color: #428BCA;
-    
 }
-.panel-green .ui-panel-titlebar{
+
+.ui-panel-primary .ui-panel-titlebar{
+    color: #FFF;
+    background-color: #2C3E50;
+    border-color: #2C3E50;
+
+}
+
+.ui-panel-success .ui-panel-titlebar{
 
     color: #FFF;
     background-color: #18BC9C;
     border-color: #18BC9C;
-    
+
 }
 
-.panel-light-dark .ui-panel-titlebar{
+.ui-panel-info .ui-panel-titlebar{
+
     color: #FFF;
-    background-color: #2C3E50;
-    border-color: #2C3E50;
-    
+    background-color: #428BCA;
+    border-color: #428BCA;
+
 }
-.panel-red .ui-panel-titlebar{
+
+.ui-panel-danger .ui-panel-titlebar{
     color: #FFF;
     background-color: #E74C3C;
     border-color: #E74C3C;
-    
+
 }
-.panel-orange .ui-panel-titlebar{
+.ui-panel-warning .ui-panel-titlebar{
     color: #FFF;
     background-color: #F39C12;
     border-color: #F39C12;
-    
+
 }
 
 /* BUTTONS  */
-.ui-button{
-    
+
+.ui-button-primary {
+    color: #FFF !important;
+    font-size: 18px !important;
+    text-shadow: 0px 0px 0px rgba(255, 255, 255, 0.75) !important;
+    text-decoration-style: solid !important;
+    background: #2C3E50 !important;
+    background-image: -moz-linear-gradient(center top , #2C3E50, #2C3E50) !important;
+    background-repeat: repeat-x !important;
+    border-width: 2px !important;
+    border-style: none !important;
+    -moz-border-top-colors: none !important;
+    -moz-border-right-colors: none !important;
+    -moz-border-bottom-colors: none !important;
+    -moz-border-left-colors: none !important;
+    border-image: none !important;
+    border-color: #2C3E50 #2C3E50 #B3B3B3 !important;
+    border-radius: 4px !important;
+    box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.2) inset, 0px 1px 2px rgba(0, 0, 0, 0.05) !important;
+
 }
 
-.button-blue .ui-button{
+.ui-button-info {
+    color: #FFF !important;
+    font-size: 18px !important;
+    text-shadow: 0px 0px 0px rgba(255, 255, 255, 0.75) !important;
+    text-decoration-style: solid !important;
+    background: #428BCA !important;
+    background-image: -moz-linear-gradient(center top , #428BCA, #428BCA) !important;
+    background-repeat: repeat-x !important;
+    border-width: 2px !important;
+    border-style: none !important;
+    -moz-border-top-colors: none !important;
+    -moz-border-right-colors: none !important;
+    -moz-border-bottom-colors: none !important;
+    -moz-border-left-colors: none !important;
+    border-image: none !important;
+    border-color: #428BCA #428BCA #B3B3B3 !important;
+    border-radius: 4px !important;
+    box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.2) inset, 0px 1px 2px rgba(0, 0, 0, 0.05) !important;
 
-    color: #FFF;
-    background-color: #428BCA !important;
-    border-color: #428BCA !important;
-    
+}
+
+.ui-button-success{
+    color: #FFF !important;
+    font-size: 18px !important;
+    text-shadow: 0px 0px 0px rgba(255, 255, 255, 0.75) !important;
+    background: #18BC9C !important;
+    text-decoration-style: solid !important;
+    background-image: -moz-linear-gradient(center top , #18BC9C, #18BC9C) !important;
+    background-repeat: repeat-x !important;
+    border-width: 2px !important;
+    border-style: none !important;
+    -moz-border-top-colors: none !important;
+    -moz-border-right-colors: none !important;
+    -moz-border-bottom-colors: none !important;
+    -moz-border-left-colors: none !important;
+    border-image: none !important;
+    border-color: #18BC9C #18BC9C #B3B3B3 !important;
+    border-radius: 4px !important;
+    box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.2) inset, 0px 1px 2px rgba(0, 0, 0, 0.05) !important;
+}
+
+.ui-button-warning{
+    color: #FFF !important;
+    font-size: 18px !important;
+    text-shadow: 0px 0px 0px rgba(255, 255, 255, 0.75) !important;
+    background: #F39C12 !important;
+    text-decoration-style: solid !important;
+    background-image: -moz-linear-gradient(center top , #F39C12, #F39C12) !important;
+    background-repeat: repeat-x !important;
+    border-width: 2px !important;
+    border-style: none !important;
+    -moz-border-top-colors: none !important;
+    -moz-border-right-colors: none !important;
+    -moz-border-bottom-colors: none !important;
+    -moz-border-left-colors: none !important;
+    border-image: none !important;
+    border-color: #F39C12 #F39C12 #B3B3B3 !important;
+    border-radius: 4px !important;
+    box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.2) inset, 0px 1px 2px rgba(0, 0, 0, 0.05) !important;
+}
+
+.ui-button-danger{
+    color: #FFF !important;
+    font-size: 18px !important;
+    text-shadow: 0px 0px 0px rgba(255, 255, 255, 0.75) !important;
+    background: #E74C3C !important;
+    text-decoration-style: solid !important;
+    background-image: -moz-linear-gradient(center top , #E74C3C, #E74C3C) !important;
+    background-repeat: repeat-x !important;
+    border-width: 2px !important;
+    border-style: none !important;
+    -moz-border-top-colors: none !important;
+    -moz-border-right-colors: none !important;
+    -moz-border-bottom-colors: none !important;
+    -moz-border-left-colors: none !important;
+    border-image: none !important;
+    border-color: #E74C3C #E74C3C #B3B3B3 !important;
+    border-radius: 4px !important;
+    box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.2) inset, 0px 1px 2px rgba(0, 0, 0, 0.05) !important;
 }
 
