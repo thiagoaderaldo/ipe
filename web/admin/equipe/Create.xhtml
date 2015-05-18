@@ -2,126 +2,214 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:f="http://java.sun.com/jsf/core">
 
     <body>
 
         <ui:composition template="./../../ipe-template.xhtml">
 
             <ui:define name="title">
-                Cadastrar equipe
+                title
             </ui:define>
 
             <ui:define name="header-body">
-                Cadastrar equipe
+                header-body
             </ui:define>
 
             <ui:define name="body">
-                <div class="ui-grid ui-grid-responsive">
-                    <div class="ui-grid-row">
-                        <div class="ui-grid-col-2">
-                            <h:outputLabel value="#{pt_br.CreateEquipeLabel_protocolo}" 
-                                           for="equipe" />
+                <h:panelGroup id="messagePanel" layout="block">
+                    <p:messages id="messages"/>
+                </h:panelGroup>
+                <h:form id="editOcorrencia" acceptcharset="ISO-8859-1" enctype="application/form-data">
+                    <h:outputScript name="locales-primefaces.js" target="head" library="js" />
+                    <p:panel      header="Finalizar / Editar Ocorrência"
+                                  toggleable="true" 
+                                  collapsed="false"
+                                  >
+                        <div class="ui-grid-row">
+                            <div class="ui-grid-col-4">
+                                <h:outputLabel value="#{pt_br.CreateAtendimentosLabel_equipe}"/>
+                            </div>                                                
+                        </div>
+                        <div class="ui-grid-row">
+                            <div class="ui-grid-col-4">
+                                <p:inputText value="#{atendimentosController.selected.equipe}"/>
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="ui-grid-row">
+                            <div class="ui-grid-col-4">
+                                <p:commandButton styleClass="ui-button-warning" 
+                                                 value="Atualizar"
+                                                 action="#{atendimentosController.update}"
+                                                 update="messages"/>
+                            </div>                                                    
                         </div>
 
-                    </div>
-                    <div class="ui-grid-row">
-                        <div class="ui-grid-col-1">
-                            <p:inputText value="" 
-                                         />
-                        </div>
-                    </div>
+                    </p:panel>
                     <br/>
-                    <div class="ui-grid-row">
-                        <div class="ui-grid-col-2">
-                            <h:outputLabel value="#{pt_br.CreateEquipeLabel_equipe}" 
-                                           for="equipe" />
+                    <div class="box-footer clearfix">
+                    </div>
+                    <p:panel header="Dados iniciais da ocorrência."
+                             toggleable="true" 
+                             collapsed="true">
+                        <div class="ui-grid-row">
+                            <div class="ui-grid-col-4">
+                                <h3>Procedência</h3>
+                                <span/>
+                            </div>
                         </div>
-                        <!--
-                        <div class="ui-grid-col-1">
-                            
-                            <p:inputText id="equipe" 
-                                         value="#{atendimentosController.selected.equipe}" 
-                                         title="#{bundle.CreateAtendimentosTitle_equipe}" 
-                                         required="true" 
-                                         requiredMessage="#{bundle.CreateAtendimentosRequiredMessage_equipe}"
-                                         style="min-width: 250px;"/>
-                            
+                        <div class="ui-grid-row">
+                            <div class="ui-grid-col-4">
+                                <h:outputLabel value="#{pt_br.CreateAtendimentosLabel_procedencia}" />
+                                <span/>
+                                <h:outputText value="#{atendimentosController.selected.procedencia}"  styleClass="outputLabel"/>
+
+                            </div>
                         </div>
-                        -->
-                    </div>
-                    <div class="ui-grid-row">
-                        <div class="ui-grid-col-2">
-                            <p:pickList id="PojoPickList" value="#{pickListView.agentes}" var="agente" 
-                                        itemValue="#{agente}" itemLabel="#{agente}" showSourceControls="false" showTargetControls="true" showCheckbox="true"
-                                        showSourceFilter="true" showTargetFilter="true" filterMatchMode="contains" >
+                        <div class="ui-grid-row">
+                            <div class="ui-grid-col-4">
+                                <h:outputLabel value="#{pt_br.CreateAtendimentosLabel_protProcedencia}" />
+                                <span/>
+                                <h:outputText value="#{atendimentosController.selected.protProcedencia}"  styleClass="outputLabel"/>
 
-                                <f:facet name="sourceCaption">Agentes disponíveis</f:facet>
-                                <f:facet name="targetCaption">Equipe</f:facet>
-
-
-                                <p:column style="width:25%">
-                                    <h:outputText  />
-                                </p:column>
-
-                                <p:column style="width:75%;">
-                                    <h:outputText value="#{agente}" />
-                                </p:column>
-                            </p:pickList>
-
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <br/>
-                <div class="ui-grid-row">
-                    <div class="ui-grid-col-2">
-                        <h:outputLabel value="#{pt_br.CreateEquipeLabel_equipeapoio}" 
-                                       for="equipe" />
-                    </div>
-                    <!--
-                    <div class="ui-grid-col-1">
-                        
-                        <p:inputText id="equipe" 
-                                     value="#{atendimentosController.selected.equipe}" 
-                                     title="#{bundle.CreateAtendimentosTitle_equipe}" 
-                                     required="true" 
-                                     requiredMessage="#{bundle.CreateAtendimentosRequiredMessage_equipe}"
-                                     style="min-width: 250px;"/>
-                        
-                    </div>
-                    -->
-                </div>
-                <div class="ui-grid-row">
-                    <div class="ui-grid-col-2">
-                        <p:pickList id="PojoPickList2" value="#{pickListView.agentes}" var="agente" 
-                                    itemValue="#{agente}" itemLabel="#{agente}" showSourceControls="false" showTargetControls="true" showCheckbox="true"
-                                    showSourceFilter="true" showTargetFilter="true" filterMatchMode="contains" >
+                        <div class="ui-grid-row">
+                            <div class="ui-grid-col-4" style="text-wrap: none; width: 250px">
+                                <h:outputLabel value="#{pt_br.CreateAtendimentosLabel_descInicial}"  />
+                                <span/>
+                                <h:outputText value="#{atendimentosController.selected.descInicial}"  
 
-                            <f:facet name="sourceCaption">Agentes disponíveis</f:facet>
-                            <f:facet name="targetCaption">Equipe</f:facet>
+                                              styleClass="outputLabel"/>
 
+                            </div>
+                        </div>
+                        <div class="box-footer clearfix"></div>
+                        <div class="ui-grid-row">
+                            <div class="ui-grid-row">
+                                <div class="ui-grid-col-4">
+                                    <h3>Solicitante</h3>
+                                    <span/>
+                                </div>
+                            </div>
+                            <div class="ui-grid-row">
+                                <div class="ui-grid-col-4">
+                                    <h:outputLabel value="#{pt_br.CreateAtendimentosLabel_solicitante}"  />
+                                    <span/>
+                                    <h:outputText value="#{atendimentosController.selected.solicitante}"  styleClass="outputLabel"/>
 
-                            <p:column style="width:25%">
-                                <h:outputText  />
-                            </p:column>
+                                </div>
+                            </div>
+                            <div class="ui-grid-row">
+                                <div class="ui-grid-col-4">
+                                    <h:outputLabel value="#{pt_br.CreateAtendimentosLabel_telSolicitante}"  />
+                                    <span/>
+                                    <h:outputText value="#{atendimentosController.selected.telSolicitante}"  styleClass="outputLabel"/>
 
-                            <p:column style="width:75%;">
-                                <h:outputText value="#{agente}" />
-                            </p:column>
-                        </p:pickList>
+                                </div>
+                            </div>
 
-                    </div>
-                </div>
+                            <div class="box-footer clearfix"></div>
 
-                <br/>
-                <div class="ui-grid-row">
-                    <div class="ui-grid-col-1">
-                        <p:commandButton icon="fa fa-save" value="Salvar" 
-                                         />
-                    </div>
-                </div>
+                            <div class="ui-grid-row">
+                                <div class="ui-grid-col-4">
+                                    <h3>Localização</h3>
+                                </div>
+                            </div>
+                            <div class="ui-grid-row">
+                                <div class="ui-grid-col-4">
+                                    <h:outputLabel value="#{pt_br.CreateAtendimentosLabel_localizacao}"  />
+                                    <span/>
+                                    <h:outputText value="#{atendimentosController.selected.localizacao}"  styleClass="outputLabel"/>
+
+                                </div>
+                            </div>
+                            <div class="ui-grid-row">
+                                <div class="ui-grid-col-4">
+                                    <h:outputLabel value="#{pt_br.CreateAtendimentosLabel_numCasa}"  />
+                                    <span/>
+                                    <h:outputText value="#{atendimentosController.selected.numCasa}"  styleClass="outputLabel"/>
+
+                                </div>
+                            </div>
+                            <div class="ui-grid-row">
+                                <div class="ui-grid-col-4">
+                                    <h:outputLabel value="#{pt_br.CreateAtendimentosLabel_pontoReferencia}"  />
+                                    <span/>
+                                    <h:outputText value="#{atendimentosController.selected.pontoReferencia}"  styleClass="outputLabel"/>
+
+                                </div>
+                            </div>
+                            <div class="ui-grid-row">
+                                <div class="ui-grid-col-4">
+                                    <h:outputLabel value="#{pt_br.CreateAtendimentosLabel_idBairro}"  />
+                                    <span/>
+                                    <h:outputText value="#{bairrosBySerDropdownView.bairro}"  styleClass="outputLabel"/>
+
+                                </div>
+                            </div>
+                            <div class="ui-grid-row">
+                                <div class="ui-grid-col-4">
+                                    <h:outputLabel value="#{pt_br.CreateAtendimentosLabel_idSer}"  />
+                                    <span/>
+                                    <h:outputText value="#{bairrosBySerDropdownView.ser}"  styleClass="outputLabel"/>
+
+                                </div>
+                            </div>
+                            <div class="box-footer clearfix"></div>
+                            <div class="ui-grid-row">
+                                <div class="ui-grid-col-4">
+                                    <h3>Informações adicionais</h3>
+                                </div>
+                            </div> 
+                            <div class="ui-grid-row">
+                                <div class="ui-grid-col-4">
+                                    <h:outputLabel value="#{pt_br.CreateAtendimentosLabel_idTipologia}"  />
+                                    <span/>
+                                    <h:outputText value="#{atendimentosController.selected.idTipologia.nome}"  styleClass="outputLabel"/>
+                                </div>
+                            </div>
+                            <div class="ui-grid-row">
+                                <div class="ui-grid-col-4">
+                                    <h:outputLabel value="#{pt_br.CreateAtendimentosLabel_dataSolicitacao}"  />
+                                    <span/>
+                                    <h:outputText value="#{atendimentosController.selected.dataSolicitacao}"  styleClass="outputLabel">
+                                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                                    </h:outputText>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ui-grid-row">
+                            <div class="ui-grid-col-4">
+                                <h:outputLabel value="#{pt_br.CreateAtendimentosLabel_horaSolicitacao}"  />
+                                <span/>
+                                <h:outputText value="#{atendimentosController.selected.horaSolicitacao}"  styleClass="outputLabel">
+                                    <f:convertDateTime pattern="HH:mm" />
+                                </h:outputText>
+
+                            </div>
+                        </div>
+                        <div class="ui-grid-row">
+                            <div class="ui-grid-col-4">
+                                <h:outputLabel value="#{pt_br.CreateAtendimentosLabel_observacao}"  />
+                                <span/>
+                                <h:outputText value="#{atendimentosController.selected.observacao}"  styleClass="outputLabel"/>
+
+                            </div>
+                        </div>
+                        <div class="ui-grid-row">
+                            <div class="ui-grid-col-4">
+                                <h:outputLabel value="#{pt_br.CreateAtendimentosLabel_idEstatus}"  />
+                                <span/>
+                                <h:outputText value="#{atendimentosController.selected.idEstatus.nome}"  styleClass="outputLabel"/>
+
+                            </div>
+                        </div>
+                    </p:panel>
+                </h:form>
             </ui:define>
 
         </ui:composition>

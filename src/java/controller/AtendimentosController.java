@@ -32,6 +32,7 @@ import org.primefaces.component.selectonemenu.SelectOneMenu;
 import br.gov.ce.fortaleza.sesec.util.DateManager;
 import br.gov.ce.fortaleza.sesec.util.FacesUtils;
 import br.gov.ce.fortaleza.sesec.util.Protocolo;
+import javax.faces.component.html.HtmlOutputText;
 
 @ManagedBean(name = "atendimentosController")
 @SessionScoped
@@ -49,9 +50,18 @@ public class AtendimentosController implements Serializable {
     private Calendar searchDate1, searchDate2;
     private HtmlInputText hitEstatus, hitResponsavel, hitEquipamento;
     private SelectOneMenu SOMBairros, SOMSer;
-    String estatus, responsavel, equipamento;
+    String estatus, responsavel, equipamento, equipe;
     private BairrosJpaController bjc = null;
     private SerJpaController sjc = null;
+    private HtmlOutputText hotAgentesEquipe;
+
+    public HtmlOutputText getHotAgentesEquipe() {
+        return hotAgentesEquipe;
+    }
+
+    public void setHotAgentesEquipe(HtmlOutputText hotAgentesEquipe) {
+        this.hotAgentesEquipe = hotAgentesEquipe;
+    }
 
     public SelectOneMenu getSOMSer() {
         return SOMSer;
@@ -60,7 +70,7 @@ public class AtendimentosController implements Serializable {
     public void setSOMSer(SelectOneMenu SOMSer) {
         this.SOMSer = SOMSer;
     }
-    
+
     public SelectOneMenu getSOMBairros() {
         return SOMBairros;
     }
@@ -165,6 +175,14 @@ public class AtendimentosController implements Serializable {
         this.searchDate2 = searchDate2;
     }
 
+    public String getEquipe() {
+        return equipe;
+    }
+
+    public void setEquipe(String equipe) {
+        this.equipe = equipe;
+    }
+
     public AtendimentosController() {
         this.pesquisa = new Pesquisa();
         this.pesquisa.setOpcao(1);
@@ -223,15 +241,8 @@ public class AtendimentosController implements Serializable {
         try {
             createProtocolo();
             bjc = new BairrosJpaController(Persistence.createEntityManagerFactory("ipePU"));
-             System.out.println("getSOMBairros().getValue().toString(): " + getSOMBairros().getValue().toString());
             current.setIdBairro(bjc.findBairrosByNome(getSOMBairros().getValue().toString()));
-           System.out.println("current.getIdBairro.getNome(): " + 
-                   current.getIdBairro().getNome() + "\n"+
-                   "current.getIdBairro.getId(): " +  
-                   current.getIdBairro().getId());
-            
             sjc = new SerJpaController(Persistence.createEntityManagerFactory("ipePU"));
-            System.out.println("getSOMSer().getValue().toString()" + getSOMSer().getValue().toString());
             current.setIdSer(sjc.findSerByNome(getSOMSer().getValue().toString()));
             getJpaController().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/pt_br").getString("AtendimentosCreated"));
@@ -249,13 +260,19 @@ public class AtendimentosController implements Serializable {
         return "Edit";
     }
 
+    public String prepareEditEquipe() {
+        current = (Atendimentos) getItems().getRowData();
+        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        return "/admin/equipe/Create";
+    }
+
     public String update() {
         try {
             getJpaController().edit(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/pt_br").getString("AtendimentosUpdated"));
             return "View";
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/pt_br").getString("PersistenceErrorOccured"));
+            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/pt_br").getString("PersistenceErrorOccured") + " Descrição do erro: " + e.getMessage());
             return null;
         }
     }
@@ -290,6 +307,8 @@ public class AtendimentosController implements Serializable {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/pt_br").getString("PersistenceErrorOccured"));
         }
     }
+
+
 
     private void updateCurrentItem() {
         int count = getJpaController().getAtendimentosCount();
@@ -566,7 +585,6 @@ public class AtendimentosController implements Serializable {
         switch (pesquisa.getOpcao()) {
             case 1: {
                 try {
-                    System.out.println("Opção em 1: " + pesquisa.getOpcao());
                     pesquisa = new Pesquisa();
                     searchedList = getAtendimentosBetweenDates(DateManager.DateUtilToString("dd/MM/yyyy", data1),
                             DateManager.DateUtilToString("dd/MM/yyyy", data2));
@@ -578,7 +596,6 @@ public class AtendimentosController implements Serializable {
 
             case 2: {
                 try {
-                    System.out.println("Opção em 2: " + pesquisa.getOpcao());
                     pesquisa = new Pesquisa();
                     searchedList = getAtendimentosByEstatus(estatus);
                     return searchedListAtendimentoByEstatus(estatus);
@@ -591,7 +608,6 @@ public class AtendimentosController implements Serializable {
 
             case 3: {
                 try {
-                    System.out.println("Opção em 3: " + pesquisa.getOpcao());
                     pesquisa = new Pesquisa();
                     searchedList = getAtendimentosByResponsavel(responsavel);
                     return searchedListAtendimentoByResponsavel();
@@ -603,7 +619,6 @@ public class AtendimentosController implements Serializable {
             }
             case 4: {
                 try {
-                    System.out.println("Opção em 4: " + pesquisa.getOpcao());
                     pesquisa = new Pesquisa();
                     searchedList = getAtendimentosByEquipamento(equipamento);
                     return searchedListAtendimentoByEquipamento();
@@ -617,5 +632,56 @@ public class AtendimentosController implements Serializable {
         }
 
         return null;
+    }
+
+    /**
+     * *************************************************************************
+     * Os métodos abaixo permitem a busca pelo EQUIPE do atendimento.
+     * *************************************************************************
+     */
+    public List<Atendimentos> getAtendimentoByEquipe(String equipe) {
+
+        return getJpaController().findAtendimentoByEquipe(equipe);
+    }
+    
+    public List<Atendimentos> getAtendimentosWhereEquipeIsNull() {
+
+        return getJpaController().findAtendimentosWhereEquipeIsNull();
+    }
+
+    public String searchedListAtendimentoByEquipe() {
+        recreateModel();
+        //return "/atendimentos/searchedatendimentosbyestatus.xhtml?faces-redirect=true";
+        return "/admin/atendimentos/list_atendimentos_sem_equipe.xhtml?faces-redirect=true";
+    }
+
+    public PaginationHelper getSearchedAtendimentoByEquipePagination() {
+        if (pagination == null) {
+            pagination = new PaginationHelper(10) {
+                @Override
+                public int getItemsCount() {
+                    return getJpaController().getAtendimentosCount();
+                }
+
+                @Override
+                public DataModel createPageDataModel() {
+                    return new ListDataModel(getAtendimentoByEquipe(equipe));
+                }
+            };
+        }
+        return pagination;
+    }
+
+    public DataModel getSearchedItemsByEquipe() {
+        if (items == null) {
+            items = getSearchedAtendimentoByEquipePagination().createPageDataModel();
+        }
+        return items;
+    }
+    
+        public String equipeVoid() {
+        searchedList = getAtendimentosWhereEquipeIsNull();
+
+        return searchedListAtendimentoByEquipe();
     }
 }

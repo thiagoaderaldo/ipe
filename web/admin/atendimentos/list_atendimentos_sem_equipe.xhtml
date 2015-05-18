@@ -1,0 +1,229 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../../ipe-template.xhtml">
+
+            <ui:define name="title">
+                Atendimentos sem equipe.
+            </ui:define>
+
+            <ui:define name="header-body">
+                Lista de Atendimentos Sem Equipe
+            </ui:define>
+
+            <ui:define name="body">
+                <h:form id="formTableAtendimentos" styleClass="horizontaldataTable">
+                    <h:panelGroup id="messagePanel" 
+                                  layout="block">
+                        <p:messages id="messages"/>
+                    </h:panelGroup>
+                    <h:outputText escape="false" 
+                                  value="#{pt_br.ListAtendimentosEmpty}" 
+                                  rendered="#{atendimentosController.searchedItems.rowCount == 0}"/>
+                    <h:panelGroup id="panelGroupDataTableAtendimentos" rendered="#{atendimentosController.searchedItems.rowCount > 0}">
+
+                        <p:dataTable id="dataTableAtendimentos"
+                                     value="#{atendimentosController.items}"
+                                     var="item"
+                                     paginator="true" rows="10"  
+                                     paginatorTemplate="{CurrentPageReport}  
+                                     {FirstPageLink} {PreviousPageLink} {PageLinks}
+                                     {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                                     rowsPerPageTemplate="5,10,20,50,100"
+
+                                     >
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{pt_br.ListAtendimentosTitle_protocolo}"/>
+                                </f:facet>
+                                <h:outputText style="color: red" value="#{item.protocolo}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{pt_br.ListAtendimentosTitle_titulo}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.titulo}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{pt_br.ListAtendimentosTitle_procedencia}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.procedencia}"/>
+                            </p:column>                       
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{pt_br.ListAtendimentosTitle_dataSolicitacao}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.dataSolicitacao}">
+                                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                                </h:outputText>
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{pt_br.ListAtendimentosTitle_localizacao}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.localizacao}"/>
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{pt_br.ListAtendimentosTitle_responsavel}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.responsavel}"/>
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText  value="#{pt_br.ListAtendimentosTitle_descInicial}"/>
+                                </f:facet>
+                                <h:outputText style="text-align: center; text-wrap: normal; white-space: normal" value="#{item.descInicial}"/>
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{pt_br.ListAtendimentosTitle_idEstatus}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.idEstatus.nome}"/>
+                            </p:column>
+
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{pt_br.ListAtendimentosTitle_idBairro}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.idBairro.nome}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="&nbsp;"/>
+                                </f:facet>
+                                <h:commandLink action="#{atendimentosController.prepareView}" value="#{pt_br.ListAtendimentosViewLink}"/>
+                                <br/>                                
+                                <h:commandLink action="#{atendimentosController.prepareEditEquipe}" value="#{pt_br.ListAtendimentosEditEquipeLink}"/>
+                            </p:column>
+                        </p:dataTable>
+
+                    </h:panelGroup>
+                    <br />
+                    <div class="box-footer clearfix">
+                        <h:commandLink action="#{atendimentosController.prepareCreate}" 
+                                       value="#{pt_br.ListAtendimentosCreateLink}"/>
+                        <br />
+                        <br />
+                        <h:commandLink value="#{pt_br.ListAtendimentosIndexLink}" 
+                                       action="/index" 
+                                       immediate="true" />
+                    </div>
+
+
+                    <p:dialog widgetVar="detalhesDialog" resizable="false" id="detalhesDialog"  
+                              showEffect="fade" hideEffect="explode" modal="true"
+                              appendToBody="true"
+                              header="Detalhes do atendimento"
+                              footer="Iguana - Help Desk"
+                              >  
+
+                        <h:panelGrid columns="2" id="panelGridVisualizar" style="overflow: scroll; max-width: 700px; max-height: 200px;"> 
+                            <h:outputText value="#{pt_br.ViewAtendimentosLabel_id}"/>
+                            <h:outputText value="#{atendimentosController.selected.id}" title="#{pt_br.ViewAtendimentosTitle_id}"/>
+                            <h:outputText value="#{pt_br.ViewAtendimentosLabel_protocolo}"/>
+                            <h:outputText value="#{atendimentosController.selected.protocolo}" title="#{pt_br.ViewAtendimentosTitle_protocolo}"/>
+                            <h:outputText value="#{pt_br.ViewAtendimentosLabel_titulo}"/>
+                            <h:outputText value="#{atendimentosController.selected.titulo}" title="#{pt_br.ViewAtendimentosTitle_titulo}"/>
+                            <h:outputText value="#{pt_br.ViewAtendimentosLabel_procedencia}"/>
+                            <h:outputText value="#{atendimentosController.selected.procedencia}" title="#{pt_br.ViewAtendimentosTitle_procedencia}"/>
+                            <h:outputText value="#{pt_br.ViewAtendimentosLabel_protProcedencia}"/>
+                            <h:outputText value="#{atendimentosController.selected.protProcedencia}" title="#{pt_br.ViewAtendimentosTitle_protProcedencia}"/>
+                            <h:outputText value="#{pt_br.ViewAtendimentosLabel_dataSolicitacao}"/>
+                            <h:outputText value="#{atendimentosController.selected.dataSolicitacao}" title="#{pt_br.ViewAtendimentosTitle_dataSolicitacao}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                            <h:outputText value="#{pt_br.ViewAtendimentosLabel_horaSolicitacao}"/>
+                            <h:outputText value="#{atendimentosController.selected.horaSolicitacao}" title="#{pt_br.ViewAtendimentosTitle_horaSolicitacao}">
+                                <f:convertDateTime pattern="HH:mm:ss" />
+                            </h:outputText>
+                            <h:outputText value="#{pt_br.ViewAtendimentosLabel_localizacao}"/>
+                            <h:outputText value="#{atendimentosController.selected.localizacao}" title="#{pt_br.ViewAtendimentosTitle_localizacao}"/>
+                            <h:outputText value="#{pt_br.ViewAtendimentosLabel_solicitante}"/>
+                            <h:outputText value="#{atendimentosController.selected.solicitante}" title="#{pt_br.ViewAtendimentosTitle_solicitante}"/>
+                            <h:outputText value="#{pt_br.ViewAtendimentosLabel_responsavel}"/>
+                            <h:outputText value="#{atendimentosController.selected.responsavel}" title="#{pt_br.ViewAtendimentosTitle_responsavel}"/>
+                            <h:outputText value="#{pt_br.ViewAtendimentosLabel_telSolicitante}"/>
+                            <h:outputText value="#{atendimentosController.selected.telSolicitante}" title="#{pt_br.ViewAtendimentosTitle_telSolicitante}"/>
+                            <h:outputText value="#{pt_br.ViewAtendimentosLabel_descInicial}"/>
+                            <h:outputText value="#{atendimentosController.selected.descInicial}" title="#{pt_br.ViewAtendimentosTitle_descInicial}"/>
+                            <h:outputText value="#{pt_br.ViewAtendimentosLabel_descFinal}"/>
+                            <h:outputText value="#{atendimentosController.selected.descFinal}" title="#{pt_br.ViewAtendimentosTitle_descFinal}"/>
+                            <h:outputText value="#{pt_br.ViewAtendimentosLabel_dataConclusao}"/>
+                            <h:outputText value="#{atendimentosController.selected.dataConclusao}" title="#{pt_br.ViewAtendimentosTitle_dataConclusao}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                            <h:outputText value="#{pt_br.ViewAtendimentosLabel_horaConclusao}"/>
+                            <h:outputText value="#{atendimentosController.selected.horaConclusao}" title="#{pt_br.ViewAtendimentosTitle_horaConclusao}">
+                                <f:convertDateTime pattern="HH:mm:ss" />
+                            </h:outputText>
+                            <h:outputText value="#{pt_br.ViewAtendimentosLabel_observacao}"/>
+                            <h:outputText value="#{atendimentosController.selected.observacao}" title="#{pt_br.ViewAtendimentosTitle_observacao}"/>
+                            <h:outputText value="#{pt_br.ViewAtendimentosLabel_idEstatus}"/>
+                            <h:outputText value="#{atendimentosController.selected.idEstatus}" title="#{pt_br.ViewAtendimentosTitle_idEstatus}"/>
+                            <h:outputText value="#{pt_br.ViewAtendimentosLabel_idTipologia}"/>
+                            <h:outputText value="#{atendimentosController.selected.idTipologia}" title="#{pt_br.ViewAtendimentosTitle_idTipologia}"/>
+                            <h:outputText value="#{pt_br.ViewAtendimentosLabel_idSer}"/>
+                            <h:outputText value="#{atendimentosController.selected.idSer}" title="#{pt_br.ViewAtendimentosTitle_idSer}"/>
+                            <h:outputText value="#{pt_br.ViewAtendimentosLabel_idBairro}"/>
+                            <h:outputText value="#{atendimentosController.selected.idBairro}" title="#{pt_br.ViewAtendimentosTitle_idBairro}"/>
+
+                        </h:panelGrid>
+                        <br/>
+                        <h:panelGrid columns="4" cellpadding="4">
+                            <h:commandLink value="Imprimir">  
+                                <p:printer target="panelGridVisualizar" />  
+                            </h:commandLink>
+                            <h:commandLink action="Edit"
+                                           value="#{pt_br.ViewAtendimentosEditLink}"
+                                           style="color: green"
+                                           />
+
+                            <p:commandLink onclick="confirmation.show();" ajax="true" action="#{atendimentosController.destroy}"
+                                           update=":formTableAtendimentos:dataTableAtendimentos"
+                                           value="#{pt_br.ListAtendimentosDestroyLink}"
+                                           style="color: red"                                       
+                                           />
+                            <h:commandLink action="#{atendimentosController.prepareCreate}" 
+                                           value="#{pt_br.ViewAtendimentosCreateLink}"
+                                           style="blue"
+                                           />
+                        </h:panelGrid>
+
+                    </p:dialog>
+                </h:form>
+
+
+                <h:form id="formConfirmDialog" prependId="false"> 
+                    <p:confirmDialog id="confirmDialog" message="Tem certeza de que deseja excluir o atendimento selecionado?"  
+                                     header="Excluir atendimento" appendToBody="true" widgetVar="confirmation">  
+
+                        <p:commandButton id="confirm" value="Sim" styleClass="btn btn-success"
+                                         update=":formTableAtendimentos:messages, :formTableAtendimentos:dataTableAtendimentos" 
+                                         oncomplete="confirmation.hide()"  
+                                         process="@this"
+                                         action="#{atendimentosController.destroy}"/>  
+                        <p:commandButton id="decline"  value="Não" icon="ui-icon-cancel" onclick="confirmation.hide()" type="button" />   
+
+                    </p:confirmDialog>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

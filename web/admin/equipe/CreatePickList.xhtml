@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./../../ipe-template.xhtml">
+
+            <ui:define name="title">
+                Cadastrar equipe
+            </ui:define>
+
+            <ui:define name="header-body">
+                Cadastrar equipe
+            </ui:define>
+
+            <ui:define name="body">
+                <p:messages id="messages"/>
+                <div class="ui-grid ui-grid-responsive">
+                    
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-2">
+                            <h:outputLabel value="#{pt_br.CreateEquipeLabel_equipe}" 
+                                           for="equipe" />
+                        </div>
+                        <!--
+                        <div class="ui-grid-col-1">
+                            
+                            <p:inputText id="equipe" 
+                                         value="#{atendimentosController.selected.equipe}" 
+                                         title="#{bundle.CreateAtendimentosTitle_equipe}" 
+                                         required="true" 
+                                         requiredMessage="#{bundle.CreateAtendimentosRequiredMessage_equipe}"
+                                         style="min-width: 250px;"/>
+                            
+                        </div>
+                        -->
+                    </div>
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-2">
+                            <p:pickList id="PojoPickList" 
+                                        value="#{pickListView.agentes}" 
+                                        var="agente" 
+                                        itemValue="#{agente}" 
+                                        itemLabel="#{agente}" 
+                                        showSourceControls="false" 
+                                        showTargetControls="true" 
+                                        showCheckbox="true"
+                                        showSourceFilter="true" 
+                                        showTargetFilter="true" 
+                                        filterMatchMode="contains" >
+
+                                <f:facet name="sourceCaption">Agentes disponíveis</f:facet>
+                                <f:facet name="targetCaption">Equipe</f:facet>
+
+
+                                <p:column style="width:25%">
+                                    <h:outputText  />
+                                </p:column>
+
+                                <p:column style="width:75%;">
+                                    <h:outputText value="#{agente}" 
+                                                  binding="#{atendimentosController.hotAgentesEquipe}"/>
+                                </p:column>
+                            </p:pickList>
+
+                        </div>
+                    </div>
+                </div>
+                <br/>
+                
+
+                <br/>
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-1">
+                        <p:commandButton value="Salvar" action="#{atendimentosController.update}"
+                                         update="messages"
+                                         />
+                    </div>
+                </div>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

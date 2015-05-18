@@ -393,5 +393,41 @@ public class AtendimentosJpaController implements Serializable {
             em.close();
         }
     }
+    public List<Atendimentos> findAtendimentoByEquipe(String equipe) {
+        EntityManager em = getEntityManager();
+        try {
+            Query q = null;
+            try {
+                q = em.createNamedQuery("Atendimentos.findByEquipe",
+                        Atendimentos.class).
+                        setParameter("equipe", equipe);
+                System.out.println("Equipe: " + equipe);
+                System.out.println("Query em findAtendimentosByEquipe" + q.toString());
+            } catch (Exception ex) {
+                Logger.getLogger(AtendimentosJpaController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return q.getResultList();
+
+        } finally {
+            em.close();
+        }
+    }
+    public List<Atendimentos> findAtendimentosWhereEquipeIsNull() {
+        EntityManager em = getEntityManager();
+        try {
+            Query q = null;
+            try {
+                q = em.createNamedQuery("Atendimentos.findAtendimentosWhereEquipeIsNull",
+                        Atendimentos.class);
+                System.out.println("Query em findAtendimentosWhereEquipeIsNull" + q.toString());
+            } catch (Exception ex) {
+                Logger.getLogger(AtendimentosJpaController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return q.getResultList();
+
+        } finally {
+            em.close();
+        }
+    }
     
 }

@@ -52,7 +52,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Atendimentos.findByObservacao", query = "SELECT a FROM Atendimentos a WHERE a.observacao = :observacao"),
     @NamedQuery(name = "Atendimentos.findByDataAtendimento", query = "SELECT a FROM Atendimentos a WHERE a.dataSolicitacao = :dataSolicitacao"),
     @NamedQuery(name = "Atendimentos.findByBetweenDate1AndDate2", query = "SELECT a FROM Atendimentos a WHERE a.dataSolicitacao BETWEEN :data1 AND :data2"),
-    @NamedQuery(name = "Atendimentos.findAtendimentoLikeResponsavel", query = "SELECT a FROM Atendimentos a WHERE a.responsavel LIKE :responsavel ORDER BY a.responsavel")})
+    @NamedQuery(name = "Atendimentos.findAtendimentoLikeResponsavel", query = "SELECT a FROM Atendimentos a WHERE a.responsavel LIKE :responsavel ORDER BY a.responsavel"),
+    @NamedQuery(name = "Atendimentos.findByEquipe", query = "SELECT a FROM Atendimentos a WHERE a.equipe = :equipe"),
+    @NamedQuery(name = "Atendimentos.findAtendimentosWhereEquipeIsNull", query = "SELECT a FROM Atendimentos a WHERE a.equipe IS NULL")})
 public class Atendimentos implements Serializable {
 
     @Column(name = "num_casa")
