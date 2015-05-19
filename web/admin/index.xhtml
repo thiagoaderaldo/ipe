@@ -15,7 +15,90 @@
         </ui:define>
         <ui:define name="body">
             <h:form id="formDashboard">                
-                <p:growl id="growl"  showDetail="true" sticky="true"/>  
+                <p:growl id="growl"  showDetail="true" sticky="true"/> 
+                <div class="row">
+                    <div class="col-lg-2 col-xs-6">
+                        <!-- small box -->
+                        <div class="small-box bg-red">
+                            <div class="inner">
+                                <h3>
+                                    33
+                                </h3>
+                                <p>
+                                    Ocorrências sem equipes.
+                                </p>
+                            </div>
+                            <a href="#" class="small-box-footer">
+                                Mais informações... <i class="fa fa-arrow-circle-right"></i>
+                            </a>
+                        </div>
+                    </div><!-- ./col -->
+                    <div class="col-lg-2 col-xs-6">
+                        <!-- small box -->
+                        <div class="small-box bg-green">
+                            <div class="inner">
+                                <h3>
+                                    20<sup style="font-size: 20px"></sup>
+                                </h3>
+                                <p>
+                                    Ocorrências abertas hoje.
+                                </p>
+                            </div>
+                            <a href="#" class="small-box-footer">
+                                Mais informações... <i class="fa fa-arrow-circle-right"></i>
+                            </a>
+                        </div>
+                    </div><!-- ./col -->
+                    <div class="col-lg-2 col-xs-6">
+                        <!-- small box -->
+                        <div class="small-box bg-light-blue">
+                            <div class="inner">
+                                <h3>
+                                    7
+                                </h3>
+                                <p>
+                                    Ocorrências na Regional 6.
+                                </p>
+                            </div>
+                            <a href="#" class="small-box-footer">
+                                Mais informações... <i class="fa fa-arrow-circle-right"></i>
+                            </a>
+                        </div>
+                    </div><!-- ./col -->                    
+                    <div class="col-lg-2 col-xs-6">
+                        <!-- small box -->
+                        <div class="small-box bg-aqua">
+                            <div class="inner">
+                                <h3>
+                                    5
+                                </h3>
+                                <p>
+                                    Riscos de desabamento.
+                                </p>
+                            </div>
+                            <a href="#" class="small-box-footer">
+                                Mais informações... <i class="fa fa-arrow-circle-right"></i>
+                            </a>
+                        </div>
+                    </div><!-- ./col -->                    
+                    <div class="col-lg-2 col-xs-6">
+                        <!-- small box -->
+                        <div class="small-box bg-yellow">
+                            <div class="inner">
+                                <h3>
+                                    4
+                                </h3>
+                                <p>
+                                    Alagamentos.
+                                </p>
+                            </div>
+                            <a href="#" class="small-box-footer">
+                                Mais informações... <i class="fa fa-arrow-circle-right"></i>
+                            </a>
+                        </div>
+                    </div><!-- ./col -->                    
+                </div>
+
                 <p:dashboard id="board" style="min-height: 1000px" model="#{dashboardBean.model}">  
                     <p:ajax event="reorder" listener="#{dashboardBean.handleReorder}" update="growl" />  
                     <p:panel id="noticias" 
