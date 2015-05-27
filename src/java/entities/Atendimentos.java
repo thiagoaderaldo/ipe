@@ -56,6 +56,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Atendimentos.findByEquipe", query = "SELECT a FROM Atendimentos a WHERE a.equipe = :equipe"),
     @NamedQuery(name = "Atendimentos.findAtendimentosWhereEquipeIsNull", query = "SELECT a FROM Atendimentos a WHERE a.equipe IS NULL")})
 public class Atendimentos implements Serializable {
+    @Column(name = "latitude")
+    private String latitude;
+    @Column(name = "longitude")
+    private String longitude;
 
     @Column(name = "num_casa")
     private String numCasa;
@@ -404,5 +408,21 @@ public class Atendimentos implements Serializable {
 
     public void setQtdPessoasAtingidas(Integer qtdPessoasAtingidas) {
         this.qtdPessoasAtingidas = qtdPessoasAtingidas;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
     }
 }
