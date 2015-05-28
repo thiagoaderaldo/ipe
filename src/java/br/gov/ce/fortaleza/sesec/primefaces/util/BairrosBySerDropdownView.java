@@ -18,8 +18,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.persistence.Persistence;
-import jpa.controller.BairrosJpaController;
-import jpa.controller.SerJpaController;
+import br.gov.ce.fortaleza.sesec.jpa.controller.BairrosJpaController;
+import br.gov.ce.fortaleza.sesec.jpa.controller.SerJpaController;
 
 @ManagedBean
 @ViewScoped

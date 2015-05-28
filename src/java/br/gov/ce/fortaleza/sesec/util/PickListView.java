@@ -1,6 +1,6 @@
 package br.gov.ce.fortaleza.sesec.util;
 
-import controller.AgentesController;
+import br.gov.ce.fortaleza.sesec.controller.AgentesController;
 import br.gov.ce.fortaleza.sesec.entities.Agentes;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +8,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.persistence.Persistence;
-import jpa.controller.AgentesJpaController;
+import br.gov.ce.fortaleza.sesec.jpa.controller.AgentesJpaController;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.event.TransferEvent;
 import org.primefaces.event.UnselectEvent;
