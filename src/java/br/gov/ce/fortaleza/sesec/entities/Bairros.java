@@ -2,16 +2,19 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package entities;
+package br.gov.ce.fortaleza.sesec.entities;
 
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -24,35 +27,32 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author thiago
  */
 @Entity
-@Table(name = "tipologias")
+@Table(name = "bairros")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Tipologias.findAll", query = "SELECT t FROM Tipologias t"),
-    @NamedQuery(name = "Tipologias.findById", query = "SELECT t FROM Tipologias t WHERE t.id = :id"),
-    @NamedQuery(name = "Tipologias.findByNome", query = "SELECT t FROM Tipologias t WHERE t.nome = :nome")})
-public class Tipologias implements Serializable {
+    @NamedQuery(name = "Bairros.findAll", query = "SELECT b FROM Bairros b ORDER BY b.nome"),
+    @NamedQuery(name = "Bairros.findById", query = "SELECT b FROM Bairros b WHERE b.id = :id ORDER BY b.nome"),
+    @NamedQuery(name = "Bairros.findByNome", query = "SELECT b FROM Bairros b WHERE b.nome = :nome ORDER BY b.nome")})
+public class Bairros implements Serializable {
+    @JoinColumn(name = "id_ser", referencedColumnName = "id")
+    @ManyToOne
+    private Ser idSer;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Basic(optional = false)
     @Column(name = "nome")
     private String nome;
-    @OneToMany(mappedBy = "idTipologia")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idBairro")
     private Collection<Atendimentos> atendimentosCollection;
 
-    public Tipologias() {
+    public Bairros() {
     }
 
-    public Tipologias(Integer id) {
+    public Bairros(Integer id) {
         this.id = id;
-    }
-
-    public Tipologias(Integer id, String nome) {
-        this.id = id;
-        this.nome = nome;
     }
 
     public Integer getId() {
@@ -90,10 +90,10 @@ public class Tipologias implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Tipologias)) {
+        if (!(object instanceof Bairros)) {
             return false;
         }
-        Tipologias other = (Tipologias) object;
+        Bairros other = (Bairros) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -103,6 +103,14 @@ public class Tipologias implements Serializable {
     @Override
     public String toString() {
         return this.getNome();
+    }
+
+    public Ser getIdSer() {
+        return idSer;
+    }
+
+    public void setIdSer(Ser idSer) {
+        this.idSer = idSer;
     }
     
 }

@@ -4,7 +4,7 @@
  */
 package jpa.controller;
 
-import entities.Agentes;
+import br.gov.ce.fortaleza.sesec.entities.Agentes;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;

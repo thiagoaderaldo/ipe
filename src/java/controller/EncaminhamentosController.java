@@ -1,6 +1,6 @@
 package controller;
 
-import entities.Encaminhamentos;
+import br.gov.ce.fortaleza.sesec.entities.Encaminhamentos;
 import controller.util.JsfUtil;
 import controller.util.PaginationHelper;
 import jpa.controller.EncaminhamentosJpaController;

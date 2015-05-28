@@ -1,7 +1,7 @@
 package br.gov.ce.fortaleza.sesec.util;
 
 import controller.AgentesController;
-import entities.Agentes;
+import br.gov.ce.fortaleza.sesec.entities.Agentes;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.application.FacesMessage;

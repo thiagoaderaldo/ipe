@@ -1,6 +1,6 @@
 package controller;
 
-import entities.Bairros;
+import br.gov.ce.fortaleza.sesec.entities.Bairros;
 import controller.util.JsfUtil;
 import controller.util.PaginationHelper;
 import jpa.controller.BairrosJpaController;

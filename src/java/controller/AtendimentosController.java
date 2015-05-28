@@ -1,7 +1,7 @@
 package controller;
 
 import bean.Pesquisa;
-import entities.Atendimentos;
+import br.gov.ce.fortaleza.sesec.entities.Atendimentos;
 import controller.util.JsfUtil;
 import controller.util.PaginationHelper;
 import jpa.controller.AtendimentosJpaController;

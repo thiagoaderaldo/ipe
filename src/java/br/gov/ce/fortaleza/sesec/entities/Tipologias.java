@@ -2,12 +2,11 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package entities;
+package br.gov.ce.fortaleza.sesec.entities;
 
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,15 +24,13 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author thiago
  */
 @Entity
-@Table(name = "ser")
+@Table(name = "tipologias")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Ser.findAll", query = "SELECT s FROM Ser s"),
-    @NamedQuery(name = "Ser.findById", query = "SELECT s FROM Ser s WHERE s.id = :id"),
-    @NamedQuery(name = "Ser.findByNome", query = "SELECT s FROM Ser s WHERE s.nome = :nome")})
-public class Ser implements Serializable {
-    @OneToMany(mappedBy = "idSer")
-    private Collection<Bairros> bairrosCollection;
+    @NamedQuery(name = "Tipologias.findAll", query = "SELECT t FROM Tipologias t"),
+    @NamedQuery(name = "Tipologias.findById", query = "SELECT t FROM Tipologias t WHERE t.id = :id"),
+    @NamedQuery(name = "Tipologias.findByNome", query = "SELECT t FROM Tipologias t WHERE t.nome = :nome")})
+public class Tipologias implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,17 +40,17 @@ public class Ser implements Serializable {
     @Basic(optional = false)
     @Column(name = "nome")
     private String nome;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idSer")
+    @OneToMany(mappedBy = "idTipologia")
     private Collection<Atendimentos> atendimentosCollection;
 
-    public Ser() {
+    public Tipologias() {
     }
 
-    public Ser(Integer id) {
+    public Tipologias(Integer id) {
         this.id = id;
     }
 
-    public Ser(Integer id, String nome) {
+    public Tipologias(Integer id, String nome) {
         this.id = id;
         this.nome = nome;
     }
@@ -93,10 +90,10 @@ public class Ser implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Ser)) {
+        if (!(object instanceof Tipologias)) {
             return false;
         }
-        Ser other = (Ser) object;
+        Tipologias other = (Tipologias) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -106,15 +103,6 @@ public class Ser implements Serializable {
     @Override
     public String toString() {
         return this.getNome();
-    }
-
-    @XmlTransient
-    public Collection<Bairros> getBairrosCollection() {
-        return bairrosCollection;
-    }
-
-    public void setBairrosCollection(Collection<Bairros> bairrosCollection) {
-        this.bairrosCollection = bairrosCollection;
     }
     
 }

@@ -1,6 +1,6 @@
 package controller;
 
-import entities.Ser;
+import br.gov.ce.fortaleza.sesec.entities.Ser;
 import controller.util.JsfUtil;
 import controller.util.PaginationHelper;
 import jpa.controller.SerJpaController;

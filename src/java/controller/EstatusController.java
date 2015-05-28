@@ -1,6 +1,6 @@
 package controller;
 
-import entities.Estatus;
+import br.gov.ce.fortaleza.sesec.entities.Estatus;
 import controller.util.JsfUtil;
 import controller.util.PaginationHelper;
 import jpa.controller.EstatusJpaController;

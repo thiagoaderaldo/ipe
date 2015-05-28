@@ -4,17 +4,17 @@
  */
 package jpa.controller;
 
-import entities.Atendimentos;
+import br.gov.ce.fortaleza.sesec.entities.Atendimentos;
 import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import entities.Estatus;
-import entities.Tipologias;
-import entities.Ser;
-import entities.Bairros;
-import entities.Encaminhamentos;
+import br.gov.ce.fortaleza.sesec.entities.Estatus;
+import br.gov.ce.fortaleza.sesec.entities.Tipologias;
+import br.gov.ce.fortaleza.sesec.entities.Ser;
+import br.gov.ce.fortaleza.sesec.entities.Bairros;
+import br.gov.ce.fortaleza.sesec.entities.Encaminhamentos;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collection;

@@ -1,6 +1,6 @@
 package controller;
 
-import entities.Usuarios;
+import br.gov.ce.fortaleza.sesec.entities.Usuarios;
 import controller.util.JsfUtil;
 import controller.util.PaginationHelper;
 import jpa.controller.UsuariosJpaController;

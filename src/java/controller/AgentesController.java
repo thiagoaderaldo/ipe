@@ -1,6 +1,6 @@
 package controller;
 
-import entities.Agentes;
+import br.gov.ce.fortaleza.sesec.entities.Agentes;
 import controller.util.JsfUtil;
 import controller.util.PaginationHelper;
 import jpa.controller.AgentesJpaController;

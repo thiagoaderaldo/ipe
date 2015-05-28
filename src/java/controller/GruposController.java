@@ -1,6 +1,6 @@
 package controller;
 
-import entities.Grupos;
+import br.gov.ce.fortaleza.sesec.entities.Grupos;
 import controller.util.JsfUtil;
 import controller.util.PaginationHelper;
 import jpa.controller.GruposJpaController;

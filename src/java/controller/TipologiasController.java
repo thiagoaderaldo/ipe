@@ -1,6 +1,6 @@
 package controller;
 
-import entities.Tipologias;
+import br.gov.ce.fortaleza.sesec.entities.Tipologias;
 import controller.util.JsfUtil;
 import controller.util.PaginationHelper;
 import jpa.controller.TipologiasJpaController;

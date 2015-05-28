@@ -5,7 +5,7 @@
 package chart;
 
 import controller.AtendimentosController;
-import entities.Atendimentos;
+import br.gov.ce.fortaleza.sesec.entities.Atendimentos;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;

@@ -4,13 +4,13 @@
  */
 package jpa.controller;
 
-import entities.Grupos;
+import br.gov.ce.fortaleza.sesec.entities.Grupos;
 import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import entities.Usuarios;
+import br.gov.ce.fortaleza.sesec.entities.Usuarios;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;

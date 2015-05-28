@@ -8,7 +8,7 @@ import bean.Pesquisa;
 import controller.AtendimentosController;
 import controller.util.JsfUtil;
 import controller.util.PaginationHelper;
-import entities.Atendimentos;
+import br.gov.ce.fortaleza.sesec.entities.Atendimentos;
 import java.text.ParseException;
 import java.util.List;
 import java.util.ResourceBundle;

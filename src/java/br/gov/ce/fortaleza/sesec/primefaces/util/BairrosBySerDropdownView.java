@@ -4,8 +4,8 @@ package br.gov.ce.fortaleza.sesec.primefaces.util;
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-import entities.Bairros;
-import entities.Ser;
+import br.gov.ce.fortaleza.sesec.entities.Bairros;
+import br.gov.ce.fortaleza.sesec.entities.Ser;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;

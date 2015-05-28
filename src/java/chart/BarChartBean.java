@@ -18,7 +18,7 @@ package chart;
  * @author Primefaces
  */
 import controller.AtendimentosController;
-import entities.Atendimentos;
+import br.gov.ce.fortaleza.sesec.entities.Atendimentos;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
