@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListVwMaxAtdPorTplgCurrentDateTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListVwMaxAtdPorTplgCurrentDateEmpty}" rendered="#{vwMaxAtdPorTplgCurrentDateController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{vwMaxAtdPorTplgCurrentDateController.items.rowCount > 0}">
+                    <h:outputText value="#{vwMaxAtdPorTplgCurrentDateController.pagination.pageFirstItem + 1}..#{vwMaxAtdPorTplgCurrentDateController.pagination.pageLastItem + 1}/#{vwMaxAtdPorTplgCurrentDateController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{vwMaxAtdPorTplgCurrentDateController.previous}" value="#{bundle.Previous} #{vwMaxAtdPorTplgCurrentDateController.pagination.pageSize}" rendered="#{vwMaxAtdPorTplgCurrentDateController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{vwMaxAtdPorTplgCurrentDateController.next}" value="#{bundle.Next} #{vwMaxAtdPorTplgCurrentDateController.pagination.pageSize}" rendered="#{vwMaxAtdPorTplgCurrentDateController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{vwMaxAtdPorTplgCurrentDateController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVwMaxAtdPorTplgCurrentDateTitle_idTipologia}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idTipologia}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVwMaxAtdPorTplgCurrentDateTitle_nome}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nome}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVwMaxAtdPorTplgCurrentDateTitle_qtdAtd}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.qtdAtd}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{vwMaxAtdPorTplgCurrentDateController.prepareView}" value="#{bundle.ListVwMaxAtdPorTplgCurrentDateViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{vwMaxAtdPorTplgCurrentDateController.prepareEdit}" value="#{bundle.ListVwMaxAtdPorTplgCurrentDateEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{vwMaxAtdPorTplgCurrentDateController.destroy}" value="#{bundle.ListVwMaxAtdPorTplgCurrentDateDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{vwMaxAtdPorTplgCurrentDateController.prepareCreate}" value="#{bundle.ListVwMaxAtdPorTplgCurrentDateCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListVwMaxAtdPorTplgCurrentDateIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

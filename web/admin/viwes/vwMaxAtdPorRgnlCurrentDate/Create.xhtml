@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateVwMaxAtdPorRgnlCurrentDateTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateVwMaxAtdPorRgnlCurrentDateLabel_idSer}" for="idSer" />
+                    <h:inputText id="idSer" value="#{vwMaxAtdPorRgnlCurrentDateController.selected.idSer}" title="#{bundle.CreateVwMaxAtdPorRgnlCurrentDateTitle_idSer}" />
+                    <h:outputLabel value="#{bundle.CreateVwMaxAtdPorRgnlCurrentDateLabel_nome}" for="nome" />
+                    <h:inputText id="nome" value="#{vwMaxAtdPorRgnlCurrentDateController.selected.nome}" title="#{bundle.CreateVwMaxAtdPorRgnlCurrentDateTitle_nome}" required="true" requiredMessage="#{bundle.CreateVwMaxAtdPorRgnlCurrentDateRequiredMessage_nome}"/>
+                    <h:outputLabel value="#{bundle.CreateVwMaxAtdPorRgnlCurrentDateLabel_qtdAtd}" for="qtdAtd" />
+                    <h:inputText id="qtdAtd" value="#{vwMaxAtdPorRgnlCurrentDateController.selected.qtdAtd}" title="#{bundle.CreateVwMaxAtdPorRgnlCurrentDateTitle_qtdAtd}" required="true" requiredMessage="#{bundle.CreateVwMaxAtdPorRgnlCurrentDateRequiredMessage_qtdAtd}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{vwMaxAtdPorRgnlCurrentDateController.create}" value="#{bundle.CreateVwMaxAtdPorRgnlCurrentDateSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{vwMaxAtdPorRgnlCurrentDateController.prepareList}" value="#{bundle.CreateVwMaxAtdPorRgnlCurrentDateShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateVwMaxAtdPorRgnlCurrentDateIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
