@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="68" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="37" width="355" height="14"/>
+				<imageExpression class="java.lang.String"><![CDATA["/imagens/barra_cabecalho.png"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="396" y="0" width="159" height="50"/>
+				<imageExpression class="java.lang.String"><![CDATA["/imagens/logo_sesec_300x102_RGB.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="35"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="24"/>
+				</textElement>
+				<text><![CDATA[Título do Documento]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="166" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="85" splitType="Stretch">
+			<image scaleImage="FillFrame">
+				<reportElement x="0" y="0" width="34" height="54"/>
+				<imageExpression class="java.lang.String"><![CDATA["/imagens/barra_inferior_esquerda.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="54" y="6" width="396" height="20"/>
+				<textElement/>
+				<text><![CDATA[Rua Delmiro de Farias,1900 - Rodolfo Teófilo - 60.430 170 Fortaleza,Ceará,Brasil]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="54" y="26" width="70" height="20"/>
+				<textElement/>
+				<text><![CDATA[85 3281 8660]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="54" y="46" width="58" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="112" y="46" width="42" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<image scaleImage="FillFrame">
+				<reportElement x="472" y="0" width="83" height="54"/>
+				<imageExpression class="java.lang.String"><![CDATA["/imagens/barra_inferior_direita.png"]]></imageExpression>
+			</image>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
