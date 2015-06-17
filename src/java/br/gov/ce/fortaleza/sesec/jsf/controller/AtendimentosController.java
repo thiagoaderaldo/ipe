@@ -1,9 +1,9 @@
-package br.gov.ce.fortaleza.sesec.controller;
+package br.gov.ce.fortaleza.sesec.jsf.controller;
 
 import br.gov.ce.fortaleza.sesec.bean.Pesquisa;
 import br.gov.ce.fortaleza.sesec.entities.Atendimentos;
-import br.gov.ce.fortaleza.sesec.controller.util.JsfUtil;
-import br.gov.ce.fortaleza.sesec.controller.util.PaginationHelper;
+import br.gov.ce.fortaleza.sesec.jsf.controller.util.JsfUtil;
+import br.gov.ce.fortaleza.sesec.jsf.controller.util.PaginationHelper;
 import br.gov.ce.fortaleza.sesec.jpa.controller.AtendimentosJpaController;
 
 import java.io.Serializable;
@@ -48,9 +48,9 @@ public class AtendimentosController implements Serializable {
     private Pesquisa pesquisa;
     List searchedList;
     private Calendar searchDate1, searchDate2;
-    private HtmlInputText hitEstatus, hitResponsavel, hitEquipamento;
+    private HtmlInputText hitEstatus, hitResponsavel, hitEquipamento, hitSearchProtocolo;
     private SelectOneMenu SOMBairros, SOMSer;
-    String estatus, responsavel, equipamento, equipe;
+    String estatus, responsavel, equipamento, equipe, protocolo;
     private BairrosJpaController bjc = null;
     private SerJpaController sjc = null;
     private HtmlOutputText hotAgentesEquipe;
@@ -183,9 +183,26 @@ public class AtendimentosController implements Serializable {
         this.equipe = equipe;
     }
 
+    public HtmlInputText getHitSearchProtocolo() {
+        return hitSearchProtocolo;
+    }
+
+    public void setHitSearchProtocolo(HtmlInputText hitSearchProtocolo) {
+        this.hitSearchProtocolo = hitSearchProtocolo;
+    }
+
+    public String getProtocolo() {
+        return protocolo;
+    }
+
+    public void setProtocolo(String protocolo) {
+        this.protocolo = protocolo;
+    }
+
     public AtendimentosController() {
         this.pesquisa = new Pesquisa();
         this.pesquisa.setOpcao(1);
+        //hitProtocolo = new HtmlInputText();
     }
 
     public Atendimentos getSelected() {
@@ -271,6 +288,17 @@ public class AtendimentosController implements Serializable {
             getJpaController().edit(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/pt_br").getString("AtendimentosUpdated"));
             return "View";
+        } catch (Exception e) {
+            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/pt_br").getString("PersistenceErrorOccured") + " Descrição do erro: " + e.getMessage());
+            return null;
+        }
+    }
+    
+    public String updateEquipe() {
+        try {
+            getJpaController().edit(current);
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/pt_br").getString("AtendimentosUpdated"));
+            return "null";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/pt_br").getString("PersistenceErrorOccured") + " Descrição do erro: " + e.getMessage());
             return null;
@@ -684,4 +712,58 @@ public class AtendimentosController implements Serializable {
 
         return searchedListAtendimentoByEquipe();
     }
+        
+        /**
+     * *************************************************************************
+     * Os métodos abaixo permitem a busca pelo PROTOCOLO do atendimento.
+     * *************************************************************************
+     */
+    public List<Atendimentos> getAtendimentoByProtocolo(String protocolo) {
+
+        System.out.println("Valor de protocolo em getAtendimentoByProtocolo: " + protocolo);
+        return getJpaController().findAtendimentoByProtocolo(protocolo);
+    }
+
+    public String searchedAtendimentoByProtocolo() {
+        recreateModel();
+        //return "/atendimentos/searchedatendimentosbyestatus.xhtml?faces-redirect=true";
+        return "null";
+        //return "/admin/atendimentos/searched_atendimento_by_protocolo";
+    }
+
+    public PaginationHelper getSearchedAtendimentoByProtocoloPagination() {
+        if (pagination == null) {
+            pagination = new PaginationHelper(10) {
+                @Override
+                public int getItemsCount() {
+                    return getJpaController().getAtendimentosCount();
+                }
+
+                @Override
+                public DataModel createPageDataModel() {
+                    System.out.println("Valor de protocolo: " + protocolo);
+                    return new ListDataModel(getAtendimentoByProtocolo(hitSearchProtocolo.getValue().toString()));
+                }
+            };
+        }
+        return pagination;
+    }
+
+    public DataModel getSearchedItemsByProtocolo() {
+        if (items == null) {
+            items = getSearchedAtendimentoByProtocoloPagination().createPageDataModel();
+        }
+        return items;
+    }
+    
+    public String encerrarOcorrencia(){
+        current = new Atendimentos();
+        return "/admin/atendimentos/encerrar_ocorrencia";
+    }
+    
+    public String cadastrarOcorrencia(){
+        current = new Atendimentos();
+        return "/admin/atendimentos/Create";
+    }
+    
 }

@@ -1,9 +1,9 @@
-package br.gov.ce.fortaleza.sesec.controller;
+package br.gov.ce.fortaleza.sesec.jsf.controller;
 
-import br.gov.ce.fortaleza.sesec.entities.Encaminhamentos;
-import br.gov.ce.fortaleza.sesec.controller.util.JsfUtil;
-import br.gov.ce.fortaleza.sesec.controller.util.PaginationHelper;
-import br.gov.ce.fortaleza.sesec.jpa.controller.EncaminhamentosJpaController;
+import br.gov.ce.fortaleza.sesec.entities.VwDshbrdIndic;
+import br.gov.ce.fortaleza.sesec.jsf.controller.util.JsfUtil;
+import br.gov.ce.fortaleza.sesec.jsf.controller.util.PaginationHelper;
+import br.gov.ce.fortaleza.sesec.jpa.controller.VwDshbrdIndicJpaController;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
@@ -18,30 +18,30 @@ import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 import javax.persistence.Persistence;
 
-@ManagedBean(name = "encaminhamentosController")
+@ManagedBean(name = "vwDshbrdIndicController")
 @SessionScoped
-public class EncaminhamentosController implements Serializable {
+public class VwDshbrdIndicController implements Serializable {
 
-    private Encaminhamentos current;
+    private VwDshbrdIndic current;
     private DataModel items = null;
-    private EncaminhamentosJpaController jpaController = null;
+    private VwDshbrdIndicJpaController jpaController = null;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
-    public EncaminhamentosController() {
+    public VwDshbrdIndicController() {
     }
 
-    public Encaminhamentos getSelected() {
+    public VwDshbrdIndic getSelected() {
         if (current == null) {
-            current = new Encaminhamentos();
+            current = new VwDshbrdIndic();
             selectedItemIndex = -1;
         }
         return current;
     }
 
-    private EncaminhamentosJpaController getJpaController() {
+    private VwDshbrdIndicJpaController getJpaController() {
         if (jpaController == null) {
-            jpaController = new EncaminhamentosJpaController(Persistence.createEntityManagerFactory("ipePU"));
+            jpaController = new VwDshbrdIndicJpaController(Persistence.createEntityManagerFactory("ipePU"));
         }
         return jpaController;
     }
@@ -51,12 +51,12 @@ public class EncaminhamentosController implements Serializable {
             pagination = new PaginationHelper(10) {
                 @Override
                 public int getItemsCount() {
-                    return getJpaController().getEncaminhamentosCount();
+                    return getJpaController().getVwDshbrdIndicCount();
                 }
 
                 @Override
                 public DataModel createPageDataModel() {
-                    return new ListDataModel(getJpaController().findEncaminhamentosEntities(getPageSize(), getPageFirstItem()));
+                    return new ListDataModel(getJpaController().findVwDshbrdIndicEntities(getPageSize(), getPageFirstItem()));
                 }
             };
         }
@@ -69,13 +69,13 @@ public class EncaminhamentosController implements Serializable {
     }
 
     public String prepareView() {
-        current = (Encaminhamentos) getItems().getRowData();
+        current = (VwDshbrdIndic) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
 
     public String prepareCreate() {
-        current = new Encaminhamentos();
+        current = new VwDshbrdIndic();
         selectedItemIndex = -1;
         return "Create";
     }
@@ -83,16 +83,16 @@ public class EncaminhamentosController implements Serializable {
     public String create() {
         try {
             getJpaController().create(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/pt_br").getString("EncaminhamentosCreated"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle-views").getString("VwDshbrdIndicCreated"));
             return prepareCreate();
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/pt_br").getString("PersistenceErrorOccured"));
+            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle-views").getString("PersistenceErrorOccured"));
             return null;
         }
     }
 
     public String prepareEdit() {
-        current = (Encaminhamentos) getItems().getRowData();
+        current = (VwDshbrdIndic) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
@@ -100,16 +100,16 @@ public class EncaminhamentosController implements Serializable {
     public String update() {
         try {
             getJpaController().edit(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/pt_br").getString("EncaminhamentosUpdated"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle-views").getString("VwDshbrdIndicUpdated"));
             return "View";
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/pt_br").getString("PersistenceErrorOccured"));
+            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle-views").getString("PersistenceErrorOccured"));
             return null;
         }
     }
 
     public String destroy() {
-        current = (Encaminhamentos) getItems().getRowData();
+        current = (VwDshbrdIndic) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
@@ -132,15 +132,15 @@ public class EncaminhamentosController implements Serializable {
 
     private void performDestroy() {
         try {
-            getJpaController().destroy(current.getId());
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/pt_br").getString("EncaminhamentosDeleted"));
+            getJpaController().destroy(current.getIdTipologia());
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle-views").getString("VwDshbrdIndicDeleted"));
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/pt_br").getString("PersistenceErrorOccured"));
+            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle-views").getString("PersistenceErrorOccured"));
         }
     }
 
     private void updateCurrentItem() {
-        int count = getJpaController().getEncaminhamentosCount();
+        int count = getJpaController().getVwDshbrdIndicCount();
         if (selectedItemIndex >= count) {
             // selected index cannot be bigger than number of items:
             selectedItemIndex = count - 1;
@@ -150,7 +150,7 @@ public class EncaminhamentosController implements Serializable {
             }
         }
         if (selectedItemIndex >= 0) {
-            current = getJpaController().findEncaminhamentosEntities(1, selectedItemIndex).get(0);
+            current = getJpaController().findVwDshbrdIndicEntities(1, selectedItemIndex).get(0);
         }
     }
 
@@ -182,23 +182,23 @@ public class EncaminhamentosController implements Serializable {
     }
 
     public SelectItem[] getItemsAvailableSelectMany() {
-        return JsfUtil.getSelectItems(getJpaController().findEncaminhamentosEntities(), false);
+        return JsfUtil.getSelectItems(getJpaController().findVwDshbrdIndicEntities(), false);
     }
 
     public SelectItem[] getItemsAvailableSelectOne() {
-        return JsfUtil.getSelectItems(getJpaController().findEncaminhamentosEntities(), true);
+        return JsfUtil.getSelectItems(getJpaController().findVwDshbrdIndicEntities(), true);
     }
 
-    @FacesConverter(forClass = Encaminhamentos.class)
-    public static class EncaminhamentosControllerConverter implements Converter {
+    @FacesConverter(forClass = VwDshbrdIndic.class)
+    public static class VwDshbrdIndicControllerConverter implements Converter {
 
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            EncaminhamentosController controller = (EncaminhamentosController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "encaminhamentosController");
-            return controller.getJpaController().findEncaminhamentos(getKey(value));
+            VwDshbrdIndicController controller = (VwDshbrdIndicController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "vwDshbrdIndicController");
+            return controller.getJpaController().findVwDshbrdIndic(getKey(value));
         }
 
         java.lang.Integer getKey(String value) {
@@ -217,12 +217,17 @@ public class EncaminhamentosController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Encaminhamentos) {
-                Encaminhamentos o = (Encaminhamentos) object;
-                return getStringKey(o.getId());
+            if (object instanceof VwDshbrdIndic) {
+                VwDshbrdIndic o = (VwDshbrdIndic) object;
+                return getStringKey(o.getIdTipologia());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Encaminhamentos.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + VwDshbrdIndic.class.getName());
             }
         }
+    }
+    
+    public String prepareViewForDashbrd() {
+        current = getJpaController().findVwDshbrdIndicEntities().get(0);
+        return "null";
     }
 }

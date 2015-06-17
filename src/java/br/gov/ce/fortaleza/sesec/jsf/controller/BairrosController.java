@@ -1,9 +1,9 @@
-package br.gov.ce.fortaleza.sesec.controller;
+package br.gov.ce.fortaleza.sesec.jsf.controller;
 
-import br.gov.ce.fortaleza.sesec.entities.Ser;
-import br.gov.ce.fortaleza.sesec.controller.util.JsfUtil;
-import br.gov.ce.fortaleza.sesec.controller.util.PaginationHelper;
-import br.gov.ce.fortaleza.sesec.jpa.controller.SerJpaController;
+import br.gov.ce.fortaleza.sesec.entities.Bairros;
+import br.gov.ce.fortaleza.sesec.jsf.controller.util.JsfUtil;
+import br.gov.ce.fortaleza.sesec.jsf.controller.util.PaginationHelper;
+import br.gov.ce.fortaleza.sesec.jpa.controller.BairrosJpaController;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
@@ -19,31 +19,31 @@ import javax.faces.model.SelectItem;
 import javax.persistence.Persistence;
 
 
-@ManagedBean(name="serController")
+@ManagedBean(name="bairrosController")
 @SessionScoped
-public class SerController implements Serializable {
+public class BairrosController implements Serializable {
 
 
-    private Ser current;
+    private Bairros current;
     private DataModel items = null;
-    private SerJpaController jpaController = null;
+    private BairrosJpaController jpaController = null;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
-    public SerController() {
+    public BairrosController() {
     }
 
-    public Ser getSelected() {
+    public Bairros getSelected() {
         if (current == null) {
-            current = new Ser();
+            current = new Bairros();
             selectedItemIndex = -1;
         }
         return current;
     }
 
-    private SerJpaController getJpaController() {
+    private BairrosJpaController getJpaController() {
         if (jpaController == null) {
-            jpaController = new SerJpaController(Persistence.createEntityManagerFactory("ipePU"));
+            jpaController = new BairrosJpaController(Persistence.createEntityManagerFactory("ipePU"));
         }
         return jpaController;
     }
@@ -53,12 +53,12 @@ public class SerController implements Serializable {
 
                 @Override
                 public int getItemsCount() {
-                    return getJpaController().getSerCount();
+                    return getJpaController().getBairrosCount();
                 }
 
                 @Override
                 public DataModel createPageDataModel() {
-                     return new ListDataModel(getJpaController().findSerEntities(getPageSize(), getPageFirstItem() ));
+                     return new ListDataModel(getJpaController().findBairrosEntities(getPageSize(), getPageFirstItem() ));
                 }
             };
         }
@@ -71,13 +71,13 @@ public class SerController implements Serializable {
     }
 
     public String prepareView() {
-        current = (Ser)getItems().getRowData();
+        current = (Bairros)getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
 
     public String prepareCreate() {
-        current = new Ser();
+        current = new Bairros();
         selectedItemIndex = -1;
         return "Create";
     }
@@ -85,7 +85,7 @@ public class SerController implements Serializable {
     public String create() {
         try {
             getJpaController().create(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("SerCreated"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("BairrosCreated"));
             return prepareCreate();
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
@@ -94,7 +94,7 @@ public class SerController implements Serializable {
     }
 
     public String prepareEdit() {
-        current = (Ser)getItems().getRowData();
+        current = (Bairros)getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
@@ -102,7 +102,7 @@ public class SerController implements Serializable {
     public String update() {
         try {
             getJpaController().edit(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("SerUpdated"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("BairrosUpdated"));
             return "View";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
@@ -111,7 +111,7 @@ public class SerController implements Serializable {
     }
 
     public String destroy() {
-        current = (Ser)getItems().getRowData();
+        current = (Bairros)getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
@@ -135,14 +135,14 @@ public class SerController implements Serializable {
     private void performDestroy() {
         try {
             getJpaController().destroy(current.getId());
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("SerDeleted"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("BairrosDeleted"));
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
         }
     }
 
     private void updateCurrentItem() {
-        int count = getJpaController().getSerCount();
+        int count = getJpaController().getBairrosCount();
         if (selectedItemIndex >= count) {
             // selected index cannot be bigger than number of items:
             selectedItemIndex = count-1;
@@ -152,7 +152,7 @@ public class SerController implements Serializable {
             }
         }
         if (selectedItemIndex >= 0) {
-            current = getJpaController().findSerEntities(1, selectedItemIndex).get(0);
+            current = getJpaController().findBairrosEntities(1, selectedItemIndex).get(0);
         }
     }
 
@@ -184,23 +184,23 @@ public class SerController implements Serializable {
     }
 
     public SelectItem[] getItemsAvailableSelectMany() {
-        return JsfUtil.getSelectItems(getJpaController().findSerEntities(), false);
+        return JsfUtil.getSelectItems(getJpaController().findBairrosEntities(), false);
     }
 
     public SelectItem[] getItemsAvailableSelectOne() {
-        return JsfUtil.getSelectItems(getJpaController().findSerEntities(), true);
+        return JsfUtil.getSelectItems(getJpaController().findBairrosEntities(), true);
     }
 
-    @FacesConverter(forClass=Ser.class)
-    public static class SerControllerConverter implements Converter {
+    @FacesConverter(forClass=Bairros.class)
+    public static class BairrosControllerConverter implements Converter {
 
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            SerController controller = (SerController)facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "serController");
-            return controller.getJpaController().findSer(getKey(value));
+            BairrosController controller = (BairrosController)facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "bairrosController");
+            return controller.getJpaController().findBairros(getKey(value));
         }
 
         java.lang.Integer getKey(String value) {
@@ -219,11 +219,11 @@ public class SerController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Ser) {
-                Ser o = (Ser) object;
+            if (object instanceof Bairros) {
+                Bairros o = (Bairros) object;
                 return getStringKey(o.getId());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: "+Ser.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: "+Bairros.class.getName());
             }
         }
 

@@ -1,0 +1,522 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ipe_atendimento_report" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isFloatColumnFooter="true">
+	<parameter name="QUERY_PARAMETER" class="java.lang.String" isForPrompting="false"/>
+	<queryString>
+		<![CDATA[SELECT
+     atendimentos.`protocolo` AS atendimentos_protocolo,
+     atendimentos.`titulo` AS atendimentos_titulo,
+     atendimentos.`procedencia` AS atendimentos_procedencia,
+     atendimentos.`prot_procedencia` AS atendimentos_prot_procedencia,
+     atendimentos.`data_solicitacao` AS atendimentos_data_solicitacao,
+     atendimentos.`hora_solicitacao` AS atendimentos_hora_solicitacao,
+     atendimentos.`localizacao` AS atendimentos_localizacao,
+     atendimentos.`num_casa` AS atendimentos_num_casa,
+     atendimentos.`ponto_referencia` AS atendimentos_ponto_referencia,
+     atendimentos.`id_ser` AS atendimentos_id_ser,
+     atendimentos.`id_bairro` AS atendimentos_id_bairro,
+     atendimentos.`solicitante` AS atendimentos_solicitante,
+     atendimentos.`tel_solicitante` AS atendimentos_tel_solicitante,
+     atendimentos.`desc_inicial` AS atendimentos_desc_inicial,
+     atendimentos.`id_estatus` AS atendimentos_id_estatus,
+     atendimentos.`desc_final` AS atendimentos_desc_final,
+     atendimentos.`id_tipologia` AS atendimentos_id_tipologia,
+     atendimentos.`data_conclusao` AS atendimentos_data_conclusao,
+     atendimentos.`observacao` AS atendimentos_observacao,
+     atendimentos.`hora_conclusao` AS atendimentos_hora_conclusao,
+     atendimentos.`equipe` AS atendimentos_equipe,
+     atendimentos.`responsavel` AS atendimentos_responsavel,
+     atendimentos.`vtr` AS atendimentos_vtr,
+     atendimentos.`proprietario_residencia` AS atendimentos_proprietario_residencia,
+     atendimentos.`qtd_comodos_casa` AS atendimentos_qtd_comodos_casa,
+     atendimentos.`qtd_pessoas_atingidas` AS atendimentos_qtd_pessoas_atingidas,
+     t.nome as nome_tipologia,
+     s.nome as nome_ser,
+     b.nome as nome_bairro
+FROM
+     `atendimentos` atendimentos
+INNER JOIN
+      tipologias t
+ON 
+      atendimentos.id_tipologia = t.id
+INNER JOIN
+      ser s
+ON
+      atendimentos.id_ser = s.id
+INNER JOIN
+      bairros b
+ON 
+      atendimentos.id_bairro = b.id
+WHERE 
+atendimentos.protocolo = $P{QUERY_PARAMETER}]]>
+	</queryString>
+	<field name="atendimentos_protocolo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="atendimentos_titulo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="atendimentos_procedencia" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="atendimentos_prot_procedencia" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="atendimentos_data_solicitacao" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="atendimentos_hora_solicitacao" class="java.sql.Time">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="atendimentos_localizacao" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="atendimentos_num_casa" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="atendimentos_ponto_referencia" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="atendimentos_id_ser" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="atendimentos_id_bairro" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="atendimentos_solicitante" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="atendimentos_tel_solicitante" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="atendimentos_desc_inicial" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="atendimentos_id_estatus" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="atendimentos_desc_final" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="atendimentos_id_tipologia" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="atendimentos_data_conclusao" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="atendimentos_observacao" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="atendimentos_hora_conclusao" class="java.sql.Time">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="atendimentos_equipe" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="atendimentos_responsavel" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="atendimentos_vtr" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="atendimentos_proprietario_residencia" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="atendimentos_qtd_comodos_casa" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="atendimentos_qtd_pessoas_atingidas" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nome_tipologia" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nome_ser" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nome_bairro" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="52" splitType="Stretch">
+			<image>
+				<reportElement x="364" y="0" width="191" height="52"/>
+				<imageExpression class="java.lang.String"><![CDATA["/home/thiago/NetBeansProjects/ipe/web/admin/relatorios/imagens/logo_sesec_300x102_RGB.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="45" splitType="Stretch">
+			<staticText>
+				<reportElement x="1" y="3" width="551" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Relatório de Ocorrência]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="23" width="550" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Secretaria Municipal de Segurança Cidadã
+Coordenadoria Municipal de Proteção e Defesa Civil]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="626" splitType="Stretch">
+			<rectangle>
+				<reportElement x="234" y="21" width="141" height="17"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="9" y="21" width="225" height="17"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="375" y="21" width="177" height="17"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="9" y="38" width="543" height="16"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="9" y="54" width="156" height="16"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="165" y="54" width="387" height="16"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="9" y="70" width="330" height="16"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="339" y="70" width="213" height="16"/>
+			</rectangle>
+			<staticText>
+				<reportElement positionType="Float" x="236" y="21" width="65" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Procedência:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="377" y="21" width="103" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Prot. de procedência:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="14" y="54" width="92" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data da solicitação:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="170" y="54" width="92" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hora da solicitação:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="15" y="70" width="38" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Local:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="344" y="70" width="79" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Número da casa:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="158" y="103" width="44" height="16" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Bairro:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="9" y="103" width="36" height="16" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SER:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="9" y="86" width="131" height="16" isPrintWhenDetailOverflows="true"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ponto de referência:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="140" y="21" width="94" height="16" forecolor="#FF0000"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{atendimentos_protocolo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="9" y="0" width="543" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[DADOS DA OCORRÊNCIA:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="9" y="21" width="131" height="16"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Protocolo de atendimento:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="140" y="38" width="412" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{atendimentos_titulo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="302" y="21" width="44" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{atendimentos_procedencia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="481" y="21" width="60" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{atendimentos_prot_procedencia}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="107" y="54" width="57" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{atendimentos_data_solicitacao}]]></textFieldExpression>
+			</textField>
+			<textField pattern="HH:mm">
+				<reportElement x="262" y="54" width="51" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.sql.Time"><![CDATA[$F{atendimentos_hora_solicitacao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="51" y="70" width="288" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{atendimentos_localizacao}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="424" y="70" width="94" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{atendimentos_num_casa}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="142" y="86" width="238" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{atendimentos_ponto_referencia}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="9" y="169" width="117" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Solicitante:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="126" y="169" width="426" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{atendimentos_solicitante}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="9" y="185" width="117" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Telefone do Solicitante:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="9" y="149" width="543" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DADOS DO SOLICITANTE:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="9" y="133" width="149" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descrição inicial da ocorrência:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="158" y="133" width="394" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{atendimentos_desc_inicial}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="126" y="185" width="426" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{atendimentos_tel_solicitante}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="9" y="119" width="38" height="14"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Equipe:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="51" y="119" width="159" height="14"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{atendimentos_equipe}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="9" y="250" width="543" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RELATÓRIO TÉCNICO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="9" y="201" width="543" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TIPOLOGIA:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="9" y="221" width="543" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nome_tipologia}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="9" y="244" width="543" height="1"/>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement positionType="Float" x="14" y="38" width="117" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Título do atendimento:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="45" y="103" width="100" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nome_ser}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="202" y="103" width="100" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nome_bairro}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="53" splitType="Stretch">
+			<staticText>
+				<reportElement x="47" y="7" width="347" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Coordenadoria Municipal de Proteção e Defesa Civil]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="47" y="23" width="347" height="10"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Rua Delmiro Farias, 1900 • Rodolfo Teófilo • CEP 60.430-170 Fortaleza, Ceará, Brasil]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="47" y="33" width="198" height="10" forecolor="#009999"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Fone: 85 3281-8660; Fax: 85 3281-8398.]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="26" splitType="Stretch">
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement key="textField" x="494" y="6" width="58" height="19" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" de " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement key="textField" x="324" y="6" width="170" height="19" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Página " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy" isBlankWhenNull="false">
+				<reportElement key="textField" x="1" y="6" width="209" height="19" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

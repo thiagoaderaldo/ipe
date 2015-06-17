@@ -1,9 +1,9 @@
-package br.gov.ce.fortaleza.sesec.controller;
+package br.gov.ce.fortaleza.sesec.jsf.controller;
 
-import br.gov.ce.fortaleza.sesec.entities.Agentes;
-import br.gov.ce.fortaleza.sesec.controller.util.JsfUtil;
-import br.gov.ce.fortaleza.sesec.controller.util.PaginationHelper;
-import br.gov.ce.fortaleza.sesec.jpa.controller.AgentesJpaController;
+import br.gov.ce.fortaleza.sesec.entities.VwMaxAtdPorTplgCurrentDate;
+import br.gov.ce.fortaleza.sesec.jsf.controller.util.JsfUtil;
+import br.gov.ce.fortaleza.sesec.jsf.controller.util.PaginationHelper;
+import br.gov.ce.fortaleza.sesec.jpa.controller.VwMaxAtdPorTplgCurrentDateJpaController;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
@@ -18,30 +18,30 @@ import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 import javax.persistence.Persistence;
 
-@ManagedBean(name = "agentesController")
+@ManagedBean(name = "vwMaxAtdPorTplgCurrentDateController")
 @SessionScoped
-public class AgentesController implements Serializable {
+public class VwMaxAtdPorTplgCurrentDateController implements Serializable {
 
-    private Agentes current;
+    private VwMaxAtdPorTplgCurrentDate current;
     private DataModel items = null;
-    private AgentesJpaController jpaController = null;
+    private VwMaxAtdPorTplgCurrentDateJpaController jpaController = null;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
-    public AgentesController() {
+    public VwMaxAtdPorTplgCurrentDateController() {
     }
 
-    public Agentes getSelected() {
+    public VwMaxAtdPorTplgCurrentDate getSelected() {
         if (current == null) {
-            current = new Agentes();
+            current = new VwMaxAtdPorTplgCurrentDate();
             selectedItemIndex = -1;
         }
         return current;
     }
 
-    private AgentesJpaController getJpaController() {
+    private VwMaxAtdPorTplgCurrentDateJpaController getJpaController() {
         if (jpaController == null) {
-            jpaController = new AgentesJpaController(Persistence.createEntityManagerFactory("ipePU"));
+            jpaController = new VwMaxAtdPorTplgCurrentDateJpaController(Persistence.createEntityManagerFactory("ipePU"));
         }
         return jpaController;
     }
@@ -51,12 +51,12 @@ public class AgentesController implements Serializable {
             pagination = new PaginationHelper(10) {
                 @Override
                 public int getItemsCount() {
-                    return getJpaController().getAgentesCount();
+                    return getJpaController().getVwMaxAtdPorTplgCurrentDateCount();
                 }
 
                 @Override
                 public DataModel createPageDataModel() {
-                    return new ListDataModel(getJpaController().findAgentesEntities(getPageSize(), getPageFirstItem()));
+                    return new ListDataModel(getJpaController().findVwMaxAtdPorTplgCurrentDateEntities(getPageSize(), getPageFirstItem()));
                 }
             };
         }
@@ -69,13 +69,13 @@ public class AgentesController implements Serializable {
     }
 
     public String prepareView() {
-        current = (Agentes) getItems().getRowData();
+        current = (VwMaxAtdPorTplgCurrentDate) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
 
     public String prepareCreate() {
-        current = new Agentes();
+        current = new VwMaxAtdPorTplgCurrentDate();
         selectedItemIndex = -1;
         return "Create";
     }
@@ -83,16 +83,16 @@ public class AgentesController implements Serializable {
     public String create() {
         try {
             getJpaController().create(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/pt_br").getString("AgentesCreated"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle-views").getString("VwMaxAtdPorTplgCurrentDateCreated"));
             return prepareCreate();
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/pt_br").getString("PersistenceErrorOccured"));
+            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle-views").getString("PersistenceErrorOccured"));
             return null;
         }
     }
 
     public String prepareEdit() {
-        current = (Agentes) getItems().getRowData();
+        current = (VwMaxAtdPorTplgCurrentDate) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
@@ -100,16 +100,16 @@ public class AgentesController implements Serializable {
     public String update() {
         try {
             getJpaController().edit(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/pt_br").getString("AgentesUpdated"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle-views").getString("VwMaxAtdPorTplgCurrentDateUpdated"));
             return "View";
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/pt_br").getString("PersistenceErrorOccured"));
+            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle-views").getString("PersistenceErrorOccured"));
             return null;
         }
     }
 
     public String destroy() {
-        current = (Agentes) getItems().getRowData();
+        current = (VwMaxAtdPorTplgCurrentDate) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
@@ -132,15 +132,15 @@ public class AgentesController implements Serializable {
 
     private void performDestroy() {
         try {
-            getJpaController().destroy(current.getId());
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/pt_br").getString("AgentesDeleted"));
+            getJpaController().destroy(current.getIdTipologia());
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle-views").getString("VwMaxAtdPorTplgCurrentDateDeleted"));
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/pt_br").getString("PersistenceErrorOccured"));
+            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle-views").getString("PersistenceErrorOccured"));
         }
     }
 
     private void updateCurrentItem() {
-        int count = getJpaController().getAgentesCount();
+        int count = getJpaController().getVwMaxAtdPorTplgCurrentDateCount();
         if (selectedItemIndex >= count) {
             // selected index cannot be bigger than number of items:
             selectedItemIndex = count - 1;
@@ -150,7 +150,7 @@ public class AgentesController implements Serializable {
             }
         }
         if (selectedItemIndex >= 0) {
-            current = getJpaController().findAgentesEntities(1, selectedItemIndex).get(0);
+            current = getJpaController().findVwMaxAtdPorTplgCurrentDateEntities(1, selectedItemIndex).get(0);
         }
     }
 
@@ -182,24 +182,23 @@ public class AgentesController implements Serializable {
     }
 
     public SelectItem[] getItemsAvailableSelectMany() {
-        return JsfUtil.getSelectItems(getJpaController().findAgentesEntities(), false);
+        return JsfUtil.getSelectItems(getJpaController().findVwMaxAtdPorTplgCurrentDateEntities(), false);
     }
 
     public SelectItem[] getItemsAvailableSelectOne() {
-        return JsfUtil.getSelectItems(getJpaController().findAgentesEntities(), true);
+        return JsfUtil.getSelectItems(getJpaController().findVwMaxAtdPorTplgCurrentDateEntities(), true);
     }
 
-    @FacesConverter(forClass = Agentes.class)
-    public static class AgentesControllerConverter implements Converter {
+    @FacesConverter(forClass = VwMaxAtdPorTplgCurrentDate.class)
+    public static class VwMaxAtdPorTplgCurrentDateControllerConverter implements Converter {
 
-        @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            AgentesController controller = (AgentesController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "agentesController");
-            return controller.getJpaController().findAgentes(getKey(value));
+            VwMaxAtdPorTplgCurrentDateController controller = (VwMaxAtdPorTplgCurrentDateController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "vwMaxAtdPorTplgCurrentDateController");
+            return controller.getJpaController().findVwMaxAtdPorTplgCurrentDate(getKey(value));
         }
 
         java.lang.Integer getKey(String value) {
@@ -209,21 +208,20 @@ public class AgentesController implements Serializable {
         }
 
         String getStringKey(java.lang.Integer value) {
-            StringBuilder sb = new StringBuilder();
+            StringBuffer sb = new StringBuffer();
             sb.append(value);
             return sb.toString();
         }
 
-        @Override
         public String getAsString(FacesContext facesContext, UIComponent component, Object object) {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Agentes) {
-                Agentes o = (Agentes) object;
-                return getStringKey(o.getId());
+            if (object instanceof VwMaxAtdPorTplgCurrentDate) {
+                VwMaxAtdPorTplgCurrentDate o = (VwMaxAtdPorTplgCurrentDate) object;
+                return getStringKey(o.getIdTipologia());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Agentes.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + VwMaxAtdPorTplgCurrentDate.class.getName());
             }
         }
     }

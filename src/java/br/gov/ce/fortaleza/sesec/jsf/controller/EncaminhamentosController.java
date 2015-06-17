@@ -1,9 +1,9 @@
-package br.gov.ce.fortaleza.sesec.controller;
+package br.gov.ce.fortaleza.sesec.jsf.controller;
 
-import br.gov.ce.fortaleza.sesec.entities.Estatus;
-import br.gov.ce.fortaleza.sesec.controller.util.JsfUtil;
-import br.gov.ce.fortaleza.sesec.controller.util.PaginationHelper;
-import br.gov.ce.fortaleza.sesec.jpa.controller.EstatusJpaController;
+import br.gov.ce.fortaleza.sesec.entities.Encaminhamentos;
+import br.gov.ce.fortaleza.sesec.jsf.controller.util.JsfUtil;
+import br.gov.ce.fortaleza.sesec.jsf.controller.util.PaginationHelper;
+import br.gov.ce.fortaleza.sesec.jpa.controller.EncaminhamentosJpaController;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
@@ -18,47 +18,45 @@ import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 import javax.persistence.Persistence;
 
-
-@ManagedBean(name="estatusController")
+@ManagedBean(name = "encaminhamentosController")
 @SessionScoped
-public class EstatusController implements Serializable {
+public class EncaminhamentosController implements Serializable {
 
-
-    private Estatus current;
+    private Encaminhamentos current;
     private DataModel items = null;
-    private EstatusJpaController jpaController = null;
+    private EncaminhamentosJpaController jpaController = null;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
-    public EstatusController() {
+    public EncaminhamentosController() {
     }
 
-    public Estatus getSelected() {
+    public Encaminhamentos getSelected() {
         if (current == null) {
-            current = new Estatus();
+            current = new Encaminhamentos();
             selectedItemIndex = -1;
         }
         return current;
     }
 
-    private EstatusJpaController getJpaController() {
+    private EncaminhamentosJpaController getJpaController() {
         if (jpaController == null) {
-            jpaController = new EstatusJpaController(Persistence.createEntityManagerFactory("ipePU"));
+            jpaController = new EncaminhamentosJpaController(Persistence.createEntityManagerFactory("ipePU"));
         }
         return jpaController;
     }
+
     public PaginationHelper getPagination() {
         if (pagination == null) {
             pagination = new PaginationHelper(10) {
-
                 @Override
                 public int getItemsCount() {
-                    return getJpaController().getEstatusCount();
+                    return getJpaController().getEncaminhamentosCount();
                 }
 
                 @Override
                 public DataModel createPageDataModel() {
-                     return new ListDataModel(getJpaController().findEstatusEntities(getPageSize(), getPageFirstItem() ));
+                    return new ListDataModel(getJpaController().findEncaminhamentosEntities(getPageSize(), getPageFirstItem()));
                 }
             };
         }
@@ -71,13 +69,13 @@ public class EstatusController implements Serializable {
     }
 
     public String prepareView() {
-        current = (Estatus)getItems().getRowData();
+        current = (Encaminhamentos) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
 
     public String prepareCreate() {
-        current = new Estatus();
+        current = new Encaminhamentos();
         selectedItemIndex = -1;
         return "Create";
     }
@@ -85,16 +83,16 @@ public class EstatusController implements Serializable {
     public String create() {
         try {
             getJpaController().create(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("EstatusCreated"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/pt_br").getString("EncaminhamentosCreated"));
             return prepareCreate();
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/pt_br").getString("PersistenceErrorOccured"));
             return null;
         }
     }
 
     public String prepareEdit() {
-        current = (Estatus)getItems().getRowData();
+        current = (Encaminhamentos) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
@@ -102,16 +100,16 @@ public class EstatusController implements Serializable {
     public String update() {
         try {
             getJpaController().edit(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("EstatusUpdated"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/pt_br").getString("EncaminhamentosUpdated"));
             return "View";
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/pt_br").getString("PersistenceErrorOccured"));
             return null;
         }
     }
 
     public String destroy() {
-        current = (Estatus)getItems().getRowData();
+        current = (Encaminhamentos) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
@@ -135,24 +133,24 @@ public class EstatusController implements Serializable {
     private void performDestroy() {
         try {
             getJpaController().destroy(current.getId());
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("EstatusDeleted"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/pt_br").getString("EncaminhamentosDeleted"));
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/pt_br").getString("PersistenceErrorOccured"));
         }
     }
 
     private void updateCurrentItem() {
-        int count = getJpaController().getEstatusCount();
+        int count = getJpaController().getEncaminhamentosCount();
         if (selectedItemIndex >= count) {
             // selected index cannot be bigger than number of items:
-            selectedItemIndex = count-1;
+            selectedItemIndex = count - 1;
             // go to previous page if last page disappeared:
             if (pagination.getPageFirstItem() >= count) {
                 pagination.previousPage();
             }
         }
         if (selectedItemIndex >= 0) {
-            current = getJpaController().findEstatusEntities(1, selectedItemIndex).get(0);
+            current = getJpaController().findEncaminhamentosEntities(1, selectedItemIndex).get(0);
         }
     }
 
@@ -184,23 +182,23 @@ public class EstatusController implements Serializable {
     }
 
     public SelectItem[] getItemsAvailableSelectMany() {
-        return JsfUtil.getSelectItems(getJpaController().findEstatusEntities(), false);
+        return JsfUtil.getSelectItems(getJpaController().findEncaminhamentosEntities(), false);
     }
 
     public SelectItem[] getItemsAvailableSelectOne() {
-        return JsfUtil.getSelectItems(getJpaController().findEstatusEntities(), true);
+        return JsfUtil.getSelectItems(getJpaController().findEncaminhamentosEntities(), true);
     }
 
-    @FacesConverter(forClass=Estatus.class)
-    public static class EstatusControllerConverter implements Converter {
+    @FacesConverter(forClass = Encaminhamentos.class)
+    public static class EncaminhamentosControllerConverter implements Converter {
 
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            EstatusController controller = (EstatusController)facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "estatusController");
-            return controller.getJpaController().findEstatus(getKey(value));
+            EncaminhamentosController controller = (EncaminhamentosController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "encaminhamentosController");
+            return controller.getJpaController().findEncaminhamentos(getKey(value));
         }
 
         java.lang.Integer getKey(String value) {
@@ -219,14 +217,12 @@ public class EstatusController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Estatus) {
-                Estatus o = (Estatus) object;
+            if (object instanceof Encaminhamentos) {
+                Encaminhamentos o = (Encaminhamentos) object;
                 return getStringKey(o.getId());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: "+Estatus.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Encaminhamentos.class.getName());
             }
         }
-
     }
-
 }

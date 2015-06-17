@@ -22,12 +22,11 @@ public class DashboardBean implements Serializable {
         model = new DefaultDashboardModel();  
         DashboardColumn column1 = new DefaultDashboardColumn();  
         DashboardColumn column2 = new DefaultDashboardColumn();  
-        DashboardColumn column3 = new DefaultDashboardColumn();  
+        //DashboardColumn column3 = new DefaultDashboardColumn();  
         
-        column1.addWidget("resumo");
         column1.addWidget("noticias");  
         column2.addWidget("gmapsearch");  
-        column2.addWidget("dados");  
+        column1.addWidget("dados");  
         column2.addWidget("riscos");  
         
         model.addColumn(column1);  

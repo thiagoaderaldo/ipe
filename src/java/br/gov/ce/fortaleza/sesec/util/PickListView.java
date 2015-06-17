@@ -1,6 +1,6 @@
 package br.gov.ce.fortaleza.sesec.util;
 
-import br.gov.ce.fortaleza.sesec.controller.AgentesController;
+import br.gov.ce.fortaleza.sesec.jsf.controller.AgentesController;
 import br.gov.ce.fortaleza.sesec.entities.Agentes;
 import java.util.ArrayList;
 import java.util.List;

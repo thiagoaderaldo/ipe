@@ -17,7 +17,7 @@ package br.gov.ce.fortaleza.sesec.chart;
  *
  * @author Primefaces
  */
-import br.gov.ce.fortaleza.sesec.controller.AtendimentosController;
+import br.gov.ce.fortaleza.sesec.jsf.controller.AtendimentosController;
 import br.gov.ce.fortaleza.sesec.entities.Atendimentos;
 import java.io.Serializable;
 import java.util.ArrayList;

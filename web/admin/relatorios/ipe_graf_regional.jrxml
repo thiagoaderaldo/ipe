@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<queryString>
+		<![CDATA[SELECT id_ser,nome,COUNT(*) FROM atendimentos inner join ser 
+ON id_ser = ser.id
+WHERE data_solicitacao = CURRENT_DATE 
+GROUP BY id_ser ORDER BY  COUNT(id_ser)  DESC;]]>
+	</queryString>
+	<field name="id_ser" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nome" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="COUNT(*)" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="62" splitType="Stretch">
+			<image>
+				<reportElement x="394" y="2" width="161" height="60"/>
+				<imageExpression class="java.lang.String"><![CDATA["/home/thiago/NetBeansProjects/ipe/web/admin/relatorios/imagens/logo_sesec_300x102_RGB.jpg"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="-2" y="41" width="370" height="8"/>
+				<imageExpression class="java.lang.String"><![CDATA["/home/thiago/NetBeansProjects/ipe/web/admin/relatorios/imagens/barra_cabecalho.png"]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="350" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="8" width="555" height="35"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="24"/>
+				</textElement>
+				<text><![CDATA[Gráfico de ocorrência por regional]]></text>
+			</staticText>
+			<pie3DChart>
+				<chart evaluationTime="Report" renderType="draw" theme="default">
+					<reportElement x="58" y="100" width="438" height="209" isPrintInFirstWholeBand="true"/>
+					<chartTitle position="Right"/>
+					<chartSubtitle/>
+					<chartLegend position="Right"/>
+				</chart>
+				<pieDataset>
+					<keyExpression><![CDATA[$F{nome}]]></keyExpression>
+					<valueExpression><![CDATA[$F{COUNT(*)}]]></valueExpression>
+					<labelExpression><![CDATA[$F{COUNT(*)}.toString()]]></labelExpression>
+				</pieDataset>
+				<pie3DPlot>
+					<plot/>
+				</pie3DPlot>
+			</pie3DChart>
+			<textField pattern="EEEEE&apos;,&apos; dd &apos;de&apos; MMMMM &apos;de&apos; yyyy">
+				<reportElement x="76" y="44" width="214" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="54" splitType="Stretch">
+			<image scaleImage="FillFrame">
+				<reportElement x="482" y="3" width="70" height="45"/>
+				<imageExpression class="java.lang.String"><![CDATA["/home/thiago/NetBeansProjects/ipe/web/admin/relatorios/imagens/barra_inferior_direita.png"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="0" y="4" width="47" height="47"/>
+				<imageExpression class="java.lang.String"><![CDATA["/home/thiago/NetBeansProjects/ipe/web/admin/relatorios/imagens/barra_inferior_esquerda.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="45" y="23" width="347" height="10"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Rua Delmiro Farias, 1900 • Rodolfo Teófilo • CEP 60.430-170 Fortaleza, Ceará, Brasil]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="45" y="7" width="347" height="16"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Coordenadoria Municipal de Proteção e Defesa Civil]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="45" y="33" width="198" height="10" forecolor="#009999"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Fone: 85 3281-8660; Fax: 85 3281-8398.]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="17" splitType="Stretch">
+			<textField evaluationTime="Report" pattern="" isBlankWhenNull="false">
+				<reportElement key="textField" x="496" y="0" width="58" height="17" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" de " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE, dd MMMMM yyyy" isBlankWhenNull="false">
+				<reportElement key="textField" x="11" y="0" width="209" height="17" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement key="textField" x="326" y="0" width="170" height="17" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Página " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

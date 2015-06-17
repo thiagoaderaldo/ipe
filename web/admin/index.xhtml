@@ -16,6 +16,82 @@
         <ui:define name="body">
             <h:form id="formDashboard">                
                 <p:growl id="growl"  showDetail="true" sticky="true"/> 
+                <h:form styleClass="jsfcrud_list_form">
+                    <h:panelGroup id="messagePanel" layout="block">
+                        <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                    </h:panelGroup>
+                    <h:outputText escape="false" value="#{bundle.ListVwDshbrdIndicEmpty}" rendered="#{vwDshbrdIndicController.items.rowCount == 0}"/>
+                    <h:panelGroup rendered="#{vwDshbrdIndicController.items.rowCount > 0}">
+                        <h:outputText value="#{vwDshbrdIndicController.pagination.pageFirstItem + 1}..#{vwDshbrdIndicController.pagination.pageLastItem + 1}/#{vwDshbrdIndicController.pagination.itemsCount}"/>&nbsp;
+                        <h:commandLink action="#{vwDshbrdIndicController.previous}" value="#{bundle.Previous} #{vwDshbrdIndicController.pagination.pageSize}" rendered="#{vwDshbrdIndicController.pagination.hasPreviousPage}"/>&nbsp;
+                        <h:commandLink action="#{vwDshbrdIndicController.next}" value="#{bundle.Next} #{vwDshbrdIndicController.pagination.pageSize}" rendered="#{vwDshbrdIndicController.pagination.hasNextPage}"/>&nbsp;
+                        <h:dataTable value="#{vwDshbrdIndicController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListVwDshbrdIndicTitle_qtdAtdSemEquipe}"/>
+                                </f:facet>
+
+                                <div class="row">
+                                    <div class="col-lg-2 col-xs-6">
+                                        <!-- small box -->
+                                        <div class="small-box bg-red">
+                                            <div class="inner">
+                                                <h3>
+                                                    <h:outputText value="#{item.qtdAtdSemEquipe}"/>
+                                                </h3>
+                                                <p>
+                                                    Ocorrências sem equipes.
+                                                </p>
+                                            </div>
+                                            <a href="#" class="small-box-footer">
+                                                Mais informações... <i class="fa fa-arrow-circle-right"></i>
+                                            </a>
+                                        </div>
+                                    </div><!-- ./col -->
+                                </div>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListVwDshbrdIndicTitle_qtdDeOcrrAbertas}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.qtdDeOcrrAbertas}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListVwDshbrdIndicTitle_idTipologia}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.idTipologia}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListVwDshbrdIndicTitle_nome}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.nome}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListVwDshbrdIndicTitle_qtdTplMaiorOcrr}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.qtdTplMaiorOcrr}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="&nbsp;"/>
+                                </f:facet>
+                                <h:commandLink action="#{vwDshbrdIndicController.prepareView}" value="#{bundle.ListVwDshbrdIndicViewLink}"/>
+                                <h:outputText value=" "/>
+                                <h:commandLink action="#{vwDshbrdIndicController.prepareEdit}" value="#{bundle.ListVwDshbrdIndicEditLink}"/>
+                                <h:outputText value=" "/>
+                                <h:commandLink action="#{vwDshbrdIndicController.destroy}" value="#{bundle.ListVwDshbrdIndicDestroyLink}"/>
+                            </h:column>
+                        </h:dataTable>
+                    </h:panelGroup>
+                    <br />
+                    <h:commandLink action="#{vwDshbrdIndicController.prepareCreate}" value="#{bundle.ListVwDshbrdIndicCreateLink}"/>
+                    <br />
+                    <br />
+                    <h:link outcome="/index" value="#{bundle.ListVwDshbrdIndicIndexLink}"/>
+                </h:form>
                 <div class="row">
                     <div class="col-lg-2 col-xs-6">
                         <!-- small box -->
@@ -142,39 +218,6 @@
                             </table>
                         </p>  
                     </p:panel>  
-
-
-
-                    <p:panel id="resumo"  
-                             header="Resumo das Atividades" 
-                             toggleable="true" 
-                             toggleTitle="Recolher painel de resumo das atividades."
-                             styleClass="ui-panel-info"
-                             >
-                        <h:panelGrid columns="2">
-                            <h:outputText value="Horário:"/>
-                            <p:clock pattern="dd/MM/yyy - HH:mm:ss" mode="server"/>
-                        </h:panelGrid>
-                        <h:panelGrid columns="2">
-                            <h:outputText value="Pendências:"/>
-                            <h:outputText value="5" style="color: red; font-weight: bold"/>
-                            <h:outputText value="Qtd. Solic. Dia:"/>
-                            <h:outputText value="10" style="color: green; font-weight: bold"/> 
-                            <p:button value="Primary" styleClass="BlueButton"/>
-                            <br/>
-                            <p:button value="Success" styleClass="ui-button-success"/>
-                            <br/>
-                            <p:button value="Info" styleClass="ui-button-info"/>
-                            <br/>
-                            <p:button value="Warning" styleClass="ui-button-warning"/>
-                            <br/>
-                            <p:button value="Danger" styleClass="ui-button-danger"/>
-                            <br/>
-                        </h:panelGrid>
-
-                    </p:panel>  
-
-
                     <p:panel id="gmapsearch"  
                              header="Google Maps" 
                              toggleable="true" 

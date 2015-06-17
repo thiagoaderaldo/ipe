@@ -17,19 +17,7 @@
                             <h:outputText value="#{pt_br.Relatorios_Advice}"/>
                         </p>
                         <p>
-                            <h:commandLink value="#{pt_br.Relatorios_DailyReport}" actionListener="#{reportController.dailyReport}">
-                            </h:commandLink>
-                            <br></br>
-                            <br></br>
-                            <h:commandLink value="#{pt_br.Relatorios_WeeklyReport}" actionListener="#{reportController.weeklyReport}">
-                            </h:commandLink>
-                            <br></br>
-                            <br></br>
-                            <h:commandLink value="#{pt_br.Relatorios_MonthReport}" actionListener="#{reportController.monthReport}">
-                            </h:commandLink>
-                            <br></br>
-                            <br></br>
-                            <h:commandLink value="#{pt_br.Relatorios_YearReport}" actionListener="#{reportController.yearReport}">
+                            <h:commandLink value="Relatório do Dia - Ocorrências x Regional" actionListener="#{reportController.relatorioOcrrRglCurrentDate}">
                             </h:commandLink>
                         </p>
                     </h:form>

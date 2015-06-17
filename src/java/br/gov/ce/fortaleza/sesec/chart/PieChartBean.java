@@ -4,7 +4,7 @@
  */
 package br.gov.ce.fortaleza.sesec.chart;
 
-import br.gov.ce.fortaleza.sesec.controller.AtendimentosController;
+import br.gov.ce.fortaleza.sesec.jsf.controller.AtendimentosController;
 import br.gov.ce.fortaleza.sesec.entities.Atendimentos;
 import java.util.ArrayList;
 import java.util.List;

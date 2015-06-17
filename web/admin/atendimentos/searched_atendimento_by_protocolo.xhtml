@@ -1,0 +1,133 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../../ipe-template.xhtml">
+
+            <ui:define name="title">
+                title
+            </ui:define>
+
+            <ui:define name="header-body">
+                header-body
+            </ui:define>
+
+            <ui:define name="body">
+                <h:form id="formTableAtendimentos" 
+                                rendered="#{atendimentosController.searchedItemsByProtocolo.rowCount != 0}">
+                            <div class="box-header">
+                                <div class="box-title">
+                                    Teste.
+                                </div>
+                            </div>
+                            <h:panelGroup id="messagePanel" 
+                                          layout="block">
+                                <p:messages id="messages"/>
+                            </h:panelGroup>
+                            <h:outputText escape="false" 
+                                          value="#{pt_br.ListBairrosEmpty}" 
+                                          rendered="#{searchedItemsByProtocolo.items.rowCount == 0}"/>
+                            <h:outputText escape="false" 
+                                          value="#{pt_br.ListAtendimentosEmpty}" 
+                                          rendered="#{atendimentosController.searchedItemsByProtocolo.rowCount == 0}"/>
+                            <h:panelGroup id="panelGroupDataTableAtendimentos" rendered="#{atendimentosController.searchedItems.rowCount > 0}">
+
+                                <p:dataTable id="dataTableAtendimentos"
+                                             value="#{atendimentosController.items}"
+                                             var="item"
+                                             paginator="true" rows="10"  
+                                             paginatorTemplate="{CurrentPageReport}  
+                                             {FirstPageLink} {PreviousPageLink} {PageLinks}
+                                             {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                                             rowsPerPageTemplate="5,10,20,50,100"
+                                             reflow="true"
+                                             >
+
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="#{pt_br.ListAtendimentosTitle_protocolo}"/>
+                                        </f:facet>
+                                        <h:outputText style="color: red" value="#{item.protocolo}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="#{pt_br.ListAtendimentosTitle_titulo}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.titulo}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="#{pt_br.ListAtendimentosTitle_procedencia}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.procedencia}"/>
+                                    </p:column>                       
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="#{pt_br.ListAtendimentosTitle_dataSolicitacao}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.dataSolicitacao}">
+                                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                                        </h:outputText>
+                                    </p:column>
+
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="#{pt_br.ListAtendimentosTitle_localizacao}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.localizacao}"/>
+                                    </p:column>
+
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="#{pt_br.ListAtendimentosTitle_responsavel}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.responsavel}"/>
+                                    </p:column>
+
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText  value="#{pt_br.ListAtendimentosTitle_descInicial}"/>
+                                        </f:facet>
+                                        <h:outputText style="text-align: center; text-wrap: normal; white-space: normal" value="#{item.descInicial}"/>
+                                    </p:column>
+
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="#{pt_br.ListAtendimentosTitle_idEstatus}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.idEstatus.nome}"/>
+                                    </p:column>
+
+
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="#{pt_br.ListAtendimentosTitle_idBairro}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.idBairro.nome}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="&nbsp;"/>
+                                        </f:facet>
+                                        <h:commandLink action="#{atendimentosController.prepareView}" 
+                                                       value="#{pt_br.ListAtendimentosViewLink}"/>
+                                        <br/>                                
+                                        <h:commandLink action="#{atendimentosController.prepareEditEquipe}" 
+                                                       value="#{pt_br.ListAtendimentosEditEquipeLink}"/>
+                                    </p:column>
+                                </p:dataTable>
+
+                            </h:panelGroup>
+                        </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

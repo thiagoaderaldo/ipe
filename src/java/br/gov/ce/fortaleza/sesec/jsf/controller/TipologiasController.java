@@ -1,8 +1,8 @@
-package br.gov.ce.fortaleza.sesec.controller;
+package br.gov.ce.fortaleza.sesec.jsf.controller;
 
 import br.gov.ce.fortaleza.sesec.entities.Tipologias;
-import br.gov.ce.fortaleza.sesec.controller.util.JsfUtil;
-import br.gov.ce.fortaleza.sesec.controller.util.PaginationHelper;
+import br.gov.ce.fortaleza.sesec.jsf.controller.util.JsfUtil;
+import br.gov.ce.fortaleza.sesec.jsf.controller.util.PaginationHelper;
 import br.gov.ce.fortaleza.sesec.jpa.controller.TipologiasJpaController;
 
 import java.io.Serializable;

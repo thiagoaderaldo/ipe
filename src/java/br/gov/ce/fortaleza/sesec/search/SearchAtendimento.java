@@ -5,9 +5,9 @@
 package br.gov.ce.fortaleza.sesec.search;
 
 import br.gov.ce.fortaleza.sesec.bean.Pesquisa;
-import br.gov.ce.fortaleza.sesec.controller.AtendimentosController;
-import br.gov.ce.fortaleza.sesec.controller.util.JsfUtil;
-import br.gov.ce.fortaleza.sesec.controller.util.PaginationHelper;
+import br.gov.ce.fortaleza.sesec.jsf.controller.AtendimentosController;
+import br.gov.ce.fortaleza.sesec.jsf.controller.util.JsfUtil;
+import br.gov.ce.fortaleza.sesec.jsf.controller.util.PaginationHelper;
 import br.gov.ce.fortaleza.sesec.entities.Atendimentos;
 import java.text.ParseException;
 import java.util.List;

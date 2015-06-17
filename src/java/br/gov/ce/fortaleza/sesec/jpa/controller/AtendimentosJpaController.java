@@ -401,8 +401,6 @@ public class AtendimentosJpaController implements Serializable {
                 q = em.createNamedQuery("Atendimentos.findByEquipe",
                         Atendimentos.class).
                         setParameter("equipe", equipe);
-                System.out.println("Equipe: " + equipe);
-                System.out.println("Query em findAtendimentosByEquipe" + q.toString());
             } catch (Exception ex) {
                 Logger.getLogger(AtendimentosJpaController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -423,6 +421,26 @@ public class AtendimentosJpaController implements Serializable {
             } catch (Exception ex) {
                 Logger.getLogger(AtendimentosJpaController.class.getName()).log(Level.SEVERE, null, ex);
             }
+            return q.getResultList();
+
+        } finally {
+            em.close();
+        }
+    }
+
+    public List<Atendimentos> findAtendimentoByProtocolo(String protocolo) {
+        EntityManager em = getEntityManager();
+        try {
+            Query q = null;
+            try {
+                q = em.createNamedQuery("Atendimentos.findByProtocolo",
+                        Atendimentos.class).
+                        setParameter("protocolo", protocolo);                
+            } catch (Exception ex) {
+                Logger.getLogger(AtendimentosJpaController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            List<Atendimentos> list = (List <Atendimentos>) q.getResultList();
+            System.out.println("ResultList: " + list.get(0).getDescInicial());
             return q.getResultList();
 
         } finally {

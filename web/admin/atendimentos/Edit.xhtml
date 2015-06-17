@@ -29,7 +29,7 @@
                               >
                         <p:tab id="personal" title="Dados Técnicos">
                             <p:panel 
-                                     >
+                                >
                                 <div class="ui-grid ui-grid-responsive">
                                     <div class="ui-grid-row">
                                         <div class="ui-grid-col-1">
@@ -236,7 +236,7 @@
                                     <br/>
                                     <div class="ui-grid-row">
                                         <div class="ui-grid-col-1">
-                                            <h:outputLabel value="#{bundle.CreateAtendimentosLabel_numCasa}" 
+                                            <h:outputLabel value="#{pt_br.CreateAtendimentosLabel_numCasa}" 
                                                            for="numCasa" />
                                         </div>
                                     </div>
@@ -244,14 +244,14 @@
                                         <div class="ui-grid-col-1">
                                             <p:inputText id="numCasa" 
                                                          value="#{atendimentosController.selected.numCasa}" 
-                                                         title="#{bundle.CreateAtendimentosTitle_numCasa}"
+                                                         title="#{pt_br.CreateAtendimentosTitle_numCasa}"
                                                          style="min-width: 250px;"/>
 
                                         </div>
                                     </div>
                                     <div class="ui-grid-row">
                                         <div class="ui-grid-col-1">
-                                            <h:outputLabel value="#{bundle.CreateAtendimentosLabel_pontoReferencia}" 
+                                            <h:outputLabel value="#{pt_br.CreateAtendimentosLabel_pontoReferencia}" 
                                                            for="pontoReferencia" 
                                                            />
                                         </div>
@@ -260,7 +260,7 @@
                                         <div class="ui-grid-col-1">
                                             <p:inputText id="pontoReferencia" 
                                                          value="#{atendimentosController.selected.pontoReferencia}"
-                                                         title="#{bundle.CreateAtendimentosTitle_pontoReferencia}"
+                                                         title="#{pt_br.CreateAtendimentosTitle_pontoReferencia}"
                                                          style="min-width: 250px;"/>
                                         </div>
                                     </div>
@@ -321,7 +321,7 @@
                                     </div>
                                     <div class="ui-grid-row">
                                         <div class="ui-grid-col-1">
-                                            <h:outputLabel value="#{bundle.CreateAtendimentosLabel_equipe}" 
+                                            <h:outputLabel value="#{pt_br.CreateAtendimentosLabel_equipe}" 
                                                            for="equipe" />
                                         </div>
                                     </div>
@@ -329,15 +329,15 @@
                                         <div class="ui-grid-col-1">
                                             <p:inputText id="equipe" 
                                                          value="#{atendimentosController.selected.equipe}" 
-                                                         title="#{bundle.CreateAtendimentosTitle_equipe}" 
+                                                         title="#{pt_br.CreateAtendimentosTitle_equipe}" 
                                                          required="true" 
-                                                         requiredMessage="#{bundle.CreateAtendimentosRequiredMessage_equipe}"
+                                                         requiredMessage="#{pt_br.CreateAtendimentosRequiredMessage_equipe}"
                                                          style="min-width: 250px;"/>
                                         </div>
                                     </div>
                                     <div class="ui-grid-row">
                                         <div class="ui-grid-col-1">
-                                            <h:outputLabel value="#{bundle.CreateAtendimentosLabel_vtr}" 
+                                            <h:outputLabel value="#{pt_br.CreateAtendimentosLabel_vtr}" 
                                                            for="vtr" />
                                         </div>
                                     </div>
@@ -345,7 +345,7 @@
                                         <div class="ui-grid-col-1">
                                             <p:inputText id="vtr" 
                                                          value="#{atendimentosController.selected.vtr}" 
-                                                         title="#{bundle.CreateAtendimentosTitle_vtr}" 
+                                                         title="#{pt_br.CreateAtendimentosTitle_vtr}" 
                                                          style="min-width: 250px;"/>
                                         </div>
                                     </div>
@@ -356,7 +356,7 @@
                             <p:panel>
                                 <div class="ui-grid-row">
                                     <div class="ui-grid-col-1">
-                                        <h:outputLabel value="#{bundle.CreateAtendimentosLabel_proprietarioResidencia}" 
+                                        <h:outputLabel value="#{pt_br.CreateAtendimentosLabel_proprietarioResidencia}" 
                                                        for="proprietarioResidencia" />
                                     </div>
                                 </div>
@@ -364,27 +364,27 @@
                                     <div class="ui-grid-col-1">
                                         <p:inputText id="proprietarioResidencia" 
                                                      value="#{atendimentosController.selected.proprietarioResidencia}" 
-                                                     title="#{bundle.CreateAtendimentosTitle_proprietarioResidencia}" 
+                                                     title="#{pt_br.CreateAtendimentosTitle_proprietarioResidencia}" 
                                                      style="min-width: 250px;"/>
                                     </div>
                                 </div>
                                 <div class="ui-grid-row">
                                     <div class="ui-grid-col-1">
-                                        <h:outputLabel value="#{bundle.CreateAtendimentosLabel_qtdComodosCasa}" 
+                                        <h:outputLabel value="#{pt_br.CreateAtendimentosLabel_qtdComodosCasa}" 
                                                        for="qtdComodosCasa" />
                                     </div>
                                 </div>
                                 <div class="ui-grid-row">
                                     <div class="ui-grid-col-1">
                                         <p:spinner id="qtdComodosCasa" 
-                                                     value="#{atendimentosController.selected.qtdComodosCasa}" 
-                                                     title="#{bundle.CreateAtendimentosTitle_qtdComodosCasa}" 
-                                                     />
+                                                   value="#{atendimentosController.selected.qtdComodosCasa}" 
+                                                   title="#{pt_br.CreateAtendimentosTitle_qtdComodosCasa}" 
+                                                   />
                                     </div>
                                 </div>
                                 <div class="ui-grid-row">
                                     <div class="ui-grid-col-1">
-                                        <h:outputLabel value="#{bundle.CreateAtendimentosLabel_qtdPessoasAtingidas}" 
+                                        <h:outputLabel value="#{pt_br.CreateAtendimentosLabel_qtdPessoasAtingidas}" 
                                                        for="qtdPessoasAtingidas" />
 
                                     </div>
@@ -392,9 +392,9 @@
                                 <div class="ui-grid-row">
                                     <div class="ui-grid-col-1">
                                         <p:spinner id="qtdPessoasAtingidas" 
-                                                     value="#{atendimentosController.selected.qtdPessoasAtingidas}" 
-                                                     title="#{bundle.CreateAtendimentosTitle_qtdPessoasAtingidas}" 
-                                                    />
+                                                   value="#{atendimentosController.selected.qtdPessoasAtingidas}" 
+                                                   title="#{pt_br.CreateAtendimentosTitle_qtdPessoasAtingidas}" 
+                                                   />
                                     </div>
                                 </div>
 
@@ -436,56 +436,166 @@
                                                          style="min-width: 250px;"/>
                                     </div>
                                 </div>
-                                <div class="ui-grid-row">
-                                    <div class="ui-grid-col-1">
-                                        <h:outputLabel value="SPU*:" 
-                                                       for="" />
-
-                                    </div>
-                                </div>
-                                <div class="ui-grid-row">
-                                    <div class="ui-grid-col-1">
-                                        <p:inputText id="piptSPU" 
-                                                     value="Nº SPU" 
-                                                     title=""
-                                                     required="true"
-                                                     style="min-width: 250px;"/>
-                                    </div>
-                                </div>
-                                <br/>
-                                <div class="ui-grid-row">
-                                    <div class="ui-grid-col-2">
-                                        <a id="aSPU"
-                                           target="_blank"
-                                           href="http://spuevolucao.fortaleza.ce.gov.br" 
-                                           style="color: #00ABA5; font-size: large; font-family: sans-serif;font-style: oblique"
-                                           >
-                                            <u>
-                                                SPU Evolução
-                                            </u>
-                                        </a>
-                                    </div>
-                                </div>
                             </p:panel>
                         </p:tab>
                         <p:tab id="confirm" title="Confirmação">
                             <p:panel>
                                 <div class="ui-grid-row">
                                     <div class="ui-grid-col-4">
-                                        <h3>Dados Técnicos</h3>
+                                        <h3>
+                                            <h:outputLabel value="#{pt_br.EditAtendimentosLabel_protocolo}" 
+                                                           />
+                                        </h3>
                                         <span/>
+                                        <h3>
+                                            <h:outputText id="hotconfimprotocolo"
+                                                          value="#{atendimentosController.selected.protocolo}" 
+                                                          title="#{pt_br.EditAtendimentosTitle_protocolo}"
+                                                          style="color: red"/>
+                                        </h3>
                                     </div>
                                 </div>
                                 <div class="ui-grid-row">
                                     <div class="ui-grid-col-4">
-                                        <h:outputLabel value="#{pt_br.EditAtendimentosLabel_protocolo}" 
-                                                       />
+                                        <h3>Relatório Técnico</h3>
+                                    </div>
+                                </div>
+                                <div class="ui-grid-row">
+                                    <div class="ui-grid-col-4">
+                                        <h:outputLabel value="#{pt_br.CreateAtendimentosLabel_descFinal}"  />
                                         <span/>
-                                        <h:outputText id="hotconfimprotocolo"
-                                                      value="#{atendimentosController.selected.protocolo}" 
-                                                      title="#{pt_br.EditAtendimentosTitle_protocolo}"/>
+                                        <h:outputText value="#{atendimentosController.selected.descFinal}"  styleClass="outputLabel"/>
+
 
                                     </div>
+                                </div>
+                                <div class="ui-grid-row">
+                                    <div class="ui-grid-col-4">
+                                        <h:outputLabel value="#{pt_br.CreateAtendimentosLabel_dataConclusao}"  />
+                                        <span/>
+                                        <h:outputText value="#{atendimentosController.selected.dataConclusao}"  styleClass="outputLabel">
+                                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                        </h:outputText>
+
+
+                                    </div>
+                                </div>
+                                <div class="ui-grid-row">
+                                    <div class="ui-grid-col-4">
+                                        <h:outputLabel value="#{pt_br.CreateAtendimentosLabel_horaConclusao}"  />
+                                        <span/>
+                                        <h:outputText   id="hotConfirmHoraConclusao"
+                                                        value="#{atendimentosController.selected.horaConclusao}"  
+                                                        title="#{pt_br.EditAtendimentosLabel_horaConclusao}"
+                                                        >
+                                            <f:convertDateTime pattern="hh:mm"/>
+                                        </h:outputText>
+                                    </div>
+                                </div>
+                                <div class="box-footer clearfix"></div>
+                                <div class="ui-grid-row">
+                                    <div class="ui-grid-col-4">
+                                        <h3>Localização</h3>
+                                    </div>
+                                </div>
+                                <div class="ui-grid-row">
+                                    <div class="ui-grid-col-4">
+                                        <h:outputLabel value="#{pt_br.CreateAtendimentosLabel_localizacao}"  />
+                                        <span/>
+                                        <h:outputText   id="hotConfirmLocalizacao"
+                                                        value="#{atendimentosController.selected.localizacao}"
+                                                        title="#{pt_br.EditAtendimentosLabel_localizacao}"
+                                                        />
+
+                                    </div>
+                                </div>
+                                <div class="ui-grid-row">
+                                    <div class="ui-grid-col-4">
+                                        <h:outputLabel value="#{pt_br.CreateAtendimentosLabel_numCasa}"  />
+                                        <span/>
+                                        <h:outputText   id="hotConfirmNumCasa"
+                                                        value="#{atendimentosController.selected.numCasa}"  
+                                                        title="#{pt_br.EditAtendimentosLabel_numCasa}"
+                                                        />
+
+                                    </div>
+                                </div>
+                                <div class="ui-grid-row">
+                                    <div class="ui-grid-col-4">
+                                        <h:outputLabel value="#{pt_br.CreateAtendimentosLabel_pontoReferencia}"  />
+                                        <span/>
+                                        <h:outputText   id="hotConfirmPontoReferencia"
+                                                        value="#{atendimentosController.selected.pontoReferencia}" 
+                                                        title="#{pt_br.EditAtendimentosLabel_pontoReferencia}"
+                                                        />
+
+                                    </div>
+                                </div>
+                                <div class="ui-grid-row">
+                                    <div class="ui-grid-col-4">
+                                        <h:outputLabel value="#{pt_br.CreateAtendimentosLabel_idBairro}"  />
+                                        <span/>
+                                        <h:outputText   id="hotConfirmIdBairro"
+                                                        value="#{atendimentosController.selected.idBairro.nome}"  
+                                                        title="#{pt_br.EditAtendimentosLabel_idBairro}"
+                                                        />
+
+                                    </div>
+                                </div>
+                                <div class="ui-grid-row">
+                                    <div class="ui-grid-col-4">
+                                        <h:outputLabel value="#{pt_br.CreateAtendimentosLabel_idSer}"  />
+                                        <span/>
+                                        <h:outputText   id="hotConfirmIdSer"
+                                                        value="#{atendimentosController.selected.idSer.nome}"  
+                                                        title="#{pt_br.EditAtendimentosLabel_idSer}"
+                                                        />
+                                    </div>
+                                </div>
+                                <div class="box-footer clearfix"></div>
+                                <div class="ui-grid-row">
+                                    <div class="ui-grid-col-4">
+                                        <h3>Dados da Residência</h3>
+                                    </div>
+                                </div> 
+                                <div class="ui-grid-row">
+                                    <div class="ui-grid-col-4">
+                                        <h:outputLabel value="#{pt_br.CreateAtendimentosLabel_proprietarioResidencia}"  />
+                                        <span/>
+                                        <h:outputText id="hotConfirmProprietarioResidencia"
+                                                      value="#{atendimentosController.selected.proprietarioResidencia}"  
+                                                      title="#{pt_br.EditAtendimentosLabel_proprietarioResidencia}"
+                                                      />
+                                    </div>
+                                </div>
+                                <div class="ui-grid-row">
+                                    <div class="ui-grid-col-4">
+                                        <h:outputLabel value="#{pt_br.CreateAtendimentosLabel_qtdComodosCasa}"  />
+                                        <span/>
+                                        <h:outputText id="hotConfirmQtdComodosCasa"
+                                                      value="#{atendimentosController.selected.qtdComodosCasa}"  
+                                                      title="#{pt_br.EditAtendimentosLabel_qtdComodosCasa}"
+                                                      />
+                                    </div>
+                                </div>
+                                <div class="ui-grid-row">
+                                    <div class="ui-grid-col-4">
+                                        <h:outputLabel value="#{pt_br.CreateAtendimentosLabel_qtdPessoasAtingidas}"  />
+                                        <span/>
+                                        <h:outputText id="hotConfirmQtdPessoasAtingidas"
+                                                      value="#{atendimentosController.selected.qtdPessoasAtingidas}"  
+                                                      title="#{pt_br.EditAtendimentosLabel_qtdPessoasAtingidas}"
+                                                      />
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="box-footer clearfix">
+                                    <br />
+                                    <h:commandButton action="#{atendimentosController.update}" 
+                                                     value="#{pt_br.EditAtendimentosSaveLink}" 
+                                                     styleClass="btn btn-success btn-lg">
+                                        <p:message style="font-size: large" for="atdMessages" />
+                                    </h:commandButton>
                                 </div>
                                 <br />
                             </p:panel>
@@ -654,9 +764,7 @@
                 </p:panel>
                 <br/>
                 <br />
-                <h:commandLink action="#{atendimentosController.update}" 
-                               value="#{pt_br.EditAtendimentosSaveLink}" 
-                               styleClass="btn btn-success btn-lg"/>
+
                 <br />
                 <br />
                 <h:commandLink action="#{atendimentosController.prepareList}" value="#{pt_br.EditAtendimentosShowAllLink}" immediate="true"/>

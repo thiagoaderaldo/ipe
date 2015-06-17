@@ -1,4 +1,4 @@
-package br.gov.ce.fortaleza.sesec.controller.util;
+package br.gov.ce.fortaleza.sesec.jsf.controller.util;
 
 import javax.faces.model.DataModel;
 

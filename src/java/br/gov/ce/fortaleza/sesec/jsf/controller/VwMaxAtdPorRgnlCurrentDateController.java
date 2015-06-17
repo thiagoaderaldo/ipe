@@ -1,9 +1,9 @@
-package br.gov.ce.fortaleza.sesec.controller;
+package br.gov.ce.fortaleza.sesec.jsf.controller;
 
-import br.gov.ce.fortaleza.sesec.entities.VwDshbrdIndic;
-import br.gov.ce.fortaleza.sesec.controller.util.JsfUtil;
-import br.gov.ce.fortaleza.sesec.controller.util.PaginationHelper;
-import br.gov.ce.fortaleza.sesec.jpa.controller.VwDshbrdIndicJpaController;
+import br.gov.ce.fortaleza.sesec.entities.VwMaxAtdPorRgnlCurrentDate;
+import br.gov.ce.fortaleza.sesec.jsf.controller.util.JsfUtil;
+import br.gov.ce.fortaleza.sesec.jsf.controller.util.PaginationHelper;
+import br.gov.ce.fortaleza.sesec.jpa.controller.VwMaxAtdPorRgnlCurrentDateJpaController;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
@@ -18,30 +18,30 @@ import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 import javax.persistence.Persistence;
 
-@ManagedBean(name = "vwDshbrdIndicController")
+@ManagedBean(name = "vwMaxAtdPorRgnlCurrentDateController")
 @SessionScoped
-public class VwDshbrdIndicController implements Serializable {
+public class VwMaxAtdPorRgnlCurrentDateController implements Serializable {
 
-    private VwDshbrdIndic current;
+    private VwMaxAtdPorRgnlCurrentDate current;
     private DataModel items = null;
-    private VwDshbrdIndicJpaController jpaController = null;
+    private VwMaxAtdPorRgnlCurrentDateJpaController jpaController = null;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
-    public VwDshbrdIndicController() {
+    public VwMaxAtdPorRgnlCurrentDateController() {
     }
 
-    public VwDshbrdIndic getSelected() {
+    public VwMaxAtdPorRgnlCurrentDate getSelected() {
         if (current == null) {
-            current = new VwDshbrdIndic();
+            current = new VwMaxAtdPorRgnlCurrentDate();
             selectedItemIndex = -1;
         }
         return current;
     }
 
-    private VwDshbrdIndicJpaController getJpaController() {
+    private VwMaxAtdPorRgnlCurrentDateJpaController getJpaController() {
         if (jpaController == null) {
-            jpaController = new VwDshbrdIndicJpaController(Persistence.createEntityManagerFactory("ipePU"));
+            jpaController = new VwMaxAtdPorRgnlCurrentDateJpaController(Persistence.createEntityManagerFactory("ipePU"));
         }
         return jpaController;
     }
@@ -51,12 +51,12 @@ public class VwDshbrdIndicController implements Serializable {
             pagination = new PaginationHelper(10) {
                 @Override
                 public int getItemsCount() {
-                    return getJpaController().getVwDshbrdIndicCount();
+                    return getJpaController().getVwMaxAtdPorRgnlCurrentDateCount();
                 }
 
                 @Override
                 public DataModel createPageDataModel() {
-                    return new ListDataModel(getJpaController().findVwDshbrdIndicEntities(getPageSize(), getPageFirstItem()));
+                    return new ListDataModel(getJpaController().findVwMaxAtdPorRgnlCurrentDateEntities(getPageSize(), getPageFirstItem()));
                 }
             };
         }
@@ -69,13 +69,13 @@ public class VwDshbrdIndicController implements Serializable {
     }
 
     public String prepareView() {
-        current = (VwDshbrdIndic) getItems().getRowData();
+        current = (VwMaxAtdPorRgnlCurrentDate) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
 
     public String prepareCreate() {
-        current = new VwDshbrdIndic();
+        current = new VwMaxAtdPorRgnlCurrentDate();
         selectedItemIndex = -1;
         return "Create";
     }
@@ -83,7 +83,7 @@ public class VwDshbrdIndicController implements Serializable {
     public String create() {
         try {
             getJpaController().create(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle-views").getString("VwDshbrdIndicCreated"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle-views").getString("VwMaxAtdPorRgnlCurrentDateCreated"));
             return prepareCreate();
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle-views").getString("PersistenceErrorOccured"));
@@ -92,7 +92,7 @@ public class VwDshbrdIndicController implements Serializable {
     }
 
     public String prepareEdit() {
-        current = (VwDshbrdIndic) getItems().getRowData();
+        current = (VwMaxAtdPorRgnlCurrentDate) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
@@ -100,7 +100,7 @@ public class VwDshbrdIndicController implements Serializable {
     public String update() {
         try {
             getJpaController().edit(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle-views").getString("VwDshbrdIndicUpdated"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle-views").getString("VwMaxAtdPorRgnlCurrentDateUpdated"));
             return "View";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle-views").getString("PersistenceErrorOccured"));
@@ -109,7 +109,7 @@ public class VwDshbrdIndicController implements Serializable {
     }
 
     public String destroy() {
-        current = (VwDshbrdIndic) getItems().getRowData();
+        current = (VwMaxAtdPorRgnlCurrentDate) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
@@ -132,15 +132,15 @@ public class VwDshbrdIndicController implements Serializable {
 
     private void performDestroy() {
         try {
-            getJpaController().destroy(current.getIdTipologia());
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle-views").getString("VwDshbrdIndicDeleted"));
+            getJpaController().destroy(current.getIdSer());
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle-views").getString("VwMaxAtdPorRgnlCurrentDateDeleted"));
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle-views").getString("PersistenceErrorOccured"));
         }
     }
 
     private void updateCurrentItem() {
-        int count = getJpaController().getVwDshbrdIndicCount();
+        int count = getJpaController().getVwMaxAtdPorRgnlCurrentDateCount();
         if (selectedItemIndex >= count) {
             // selected index cannot be bigger than number of items:
             selectedItemIndex = count - 1;
@@ -150,7 +150,7 @@ public class VwDshbrdIndicController implements Serializable {
             }
         }
         if (selectedItemIndex >= 0) {
-            current = getJpaController().findVwDshbrdIndicEntities(1, selectedItemIndex).get(0);
+            current = getJpaController().findVwMaxAtdPorRgnlCurrentDateEntities(1, selectedItemIndex).get(0);
         }
     }
 
@@ -182,23 +182,23 @@ public class VwDshbrdIndicController implements Serializable {
     }
 
     public SelectItem[] getItemsAvailableSelectMany() {
-        return JsfUtil.getSelectItems(getJpaController().findVwDshbrdIndicEntities(), false);
+        return JsfUtil.getSelectItems(getJpaController().findVwMaxAtdPorRgnlCurrentDateEntities(), false);
     }
 
     public SelectItem[] getItemsAvailableSelectOne() {
-        return JsfUtil.getSelectItems(getJpaController().findVwDshbrdIndicEntities(), true);
+        return JsfUtil.getSelectItems(getJpaController().findVwMaxAtdPorRgnlCurrentDateEntities(), true);
     }
 
-    @FacesConverter(forClass = VwDshbrdIndic.class)
-    public static class VwDshbrdIndicControllerConverter implements Converter {
+    @FacesConverter(forClass = VwMaxAtdPorRgnlCurrentDate.class)
+    public static class VwMaxAtdPorRgnlCurrentDateControllerConverter implements Converter {
 
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            VwDshbrdIndicController controller = (VwDshbrdIndicController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "vwDshbrdIndicController");
-            return controller.getJpaController().findVwDshbrdIndic(getKey(value));
+            VwMaxAtdPorRgnlCurrentDateController controller = (VwMaxAtdPorRgnlCurrentDateController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "vwMaxAtdPorRgnlCurrentDateController");
+            return controller.getJpaController().findVwMaxAtdPorRgnlCurrentDate(getKey(value));
         }
 
         java.lang.Integer getKey(String value) {
@@ -217,11 +217,11 @@ public class VwDshbrdIndicController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof VwDshbrdIndic) {
-                VwDshbrdIndic o = (VwDshbrdIndic) object;
-                return getStringKey(o.getIdTipologia());
+            if (object instanceof VwMaxAtdPorRgnlCurrentDate) {
+                VwMaxAtdPorRgnlCurrentDate o = (VwMaxAtdPorRgnlCurrentDate) object;
+                return getStringKey(o.getIdSer());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + VwDshbrdIndic.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + VwMaxAtdPorRgnlCurrentDate.class.getName());
             }
         }
     }

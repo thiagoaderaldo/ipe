@@ -1,9 +1,9 @@
-package br.gov.ce.fortaleza.sesec.controller;
+package br.gov.ce.fortaleza.sesec.jsf.controller;
 
-import br.gov.ce.fortaleza.sesec.entities.Grupos;
-import br.gov.ce.fortaleza.sesec.controller.util.JsfUtil;
-import br.gov.ce.fortaleza.sesec.controller.util.PaginationHelper;
-import br.gov.ce.fortaleza.sesec.jpa.controller.GruposJpaController;
+import br.gov.ce.fortaleza.sesec.entities.Ser;
+import br.gov.ce.fortaleza.sesec.jsf.controller.util.JsfUtil;
+import br.gov.ce.fortaleza.sesec.jsf.controller.util.PaginationHelper;
+import br.gov.ce.fortaleza.sesec.jpa.controller.SerJpaController;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
@@ -18,45 +18,47 @@ import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 import javax.persistence.Persistence;
 
-@ManagedBean(name = "gruposController")
-@SessionScoped
-public class GruposController implements Serializable {
 
-    private Grupos current;
+@ManagedBean(name="serController")
+@SessionScoped
+public class SerController implements Serializable {
+
+
+    private Ser current;
     private DataModel items = null;
-    private GruposJpaController jpaController = null;
+    private SerJpaController jpaController = null;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
-    public GruposController() {
+    public SerController() {
     }
 
-    public Grupos getSelected() {
+    public Ser getSelected() {
         if (current == null) {
-            current = new Grupos();
+            current = new Ser();
             selectedItemIndex = -1;
         }
         return current;
     }
 
-    private GruposJpaController getJpaController() {
+    private SerJpaController getJpaController() {
         if (jpaController == null) {
-            jpaController = new GruposJpaController(Persistence.createEntityManagerFactory("ipePU"));
+            jpaController = new SerJpaController(Persistence.createEntityManagerFactory("ipePU"));
         }
         return jpaController;
     }
-
     public PaginationHelper getPagination() {
         if (pagination == null) {
             pagination = new PaginationHelper(10) {
+
                 @Override
                 public int getItemsCount() {
-                    return getJpaController().getGruposCount();
+                    return getJpaController().getSerCount();
                 }
 
                 @Override
                 public DataModel createPageDataModel() {
-                    return new ListDataModel(getJpaController().findGruposEntities(getPageSize(), getPageFirstItem()));
+                     return new ListDataModel(getJpaController().findSerEntities(getPageSize(), getPageFirstItem() ));
                 }
             };
         }
@@ -69,13 +71,13 @@ public class GruposController implements Serializable {
     }
 
     public String prepareView() {
-        current = (Grupos) getItems().getRowData();
+        current = (Ser)getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
 
     public String prepareCreate() {
-        current = new Grupos();
+        current = new Ser();
         selectedItemIndex = -1;
         return "Create";
     }
@@ -83,16 +85,16 @@ public class GruposController implements Serializable {
     public String create() {
         try {
             getJpaController().create(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/pt_br").getString("GruposCreated"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("SerCreated"));
             return prepareCreate();
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/pt_br").getString("PersistenceErrorOccured"));
+            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
         }
     }
 
     public String prepareEdit() {
-        current = (Grupos) getItems().getRowData();
+        current = (Ser)getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
@@ -100,16 +102,16 @@ public class GruposController implements Serializable {
     public String update() {
         try {
             getJpaController().edit(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/pt_br").getString("GruposUpdated"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("SerUpdated"));
             return "View";
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/pt_br").getString("PersistenceErrorOccured"));
+            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
         }
     }
 
     public String destroy() {
-        current = (Grupos) getItems().getRowData();
+        current = (Ser)getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
@@ -132,25 +134,25 @@ public class GruposController implements Serializable {
 
     private void performDestroy() {
         try {
-            getJpaController().destroy(current.getGrupoId());
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/pt_br").getString("GruposDeleted"));
+            getJpaController().destroy(current.getId());
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("SerDeleted"));
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/pt_br").getString("PersistenceErrorOccured"));
+            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
         }
     }
 
     private void updateCurrentItem() {
-        int count = getJpaController().getGruposCount();
+        int count = getJpaController().getSerCount();
         if (selectedItemIndex >= count) {
             // selected index cannot be bigger than number of items:
-            selectedItemIndex = count - 1;
+            selectedItemIndex = count-1;
             // go to previous page if last page disappeared:
             if (pagination.getPageFirstItem() >= count) {
                 pagination.previousPage();
             }
         }
         if (selectedItemIndex >= 0) {
-            current = getJpaController().findGruposEntities(1, selectedItemIndex).get(0);
+            current = getJpaController().findSerEntities(1, selectedItemIndex).get(0);
         }
     }
 
@@ -182,32 +184,32 @@ public class GruposController implements Serializable {
     }
 
     public SelectItem[] getItemsAvailableSelectMany() {
-        return JsfUtil.getSelectItems(getJpaController().findGruposEntities(), false);
+        return JsfUtil.getSelectItems(getJpaController().findSerEntities(), false);
     }
 
     public SelectItem[] getItemsAvailableSelectOne() {
-        return JsfUtil.getSelectItems(getJpaController().findGruposEntities(), true);
+        return JsfUtil.getSelectItems(getJpaController().findSerEntities(), true);
     }
 
-    @FacesConverter(forClass = Grupos.class)
-    public static class GruposControllerConverter implements Converter {
+    @FacesConverter(forClass=Ser.class)
+    public static class SerControllerConverter implements Converter {
 
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            GruposController controller = (GruposController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "gruposController");
-            return controller.getJpaController().findGrupos(getKey(value));
+            SerController controller = (SerController)facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "serController");
+            return controller.getJpaController().findSer(getKey(value));
         }
 
-        java.lang.String getKey(String value) {
-            java.lang.String key;
-            key = value;
+        java.lang.Integer getKey(String value) {
+            java.lang.Integer key;
+            key = Integer.valueOf(value);
             return key;
         }
 
-        String getStringKey(java.lang.String value) {
+        String getStringKey(java.lang.Integer value) {
             StringBuffer sb = new StringBuffer();
             sb.append(value);
             return sb.toString();
@@ -217,12 +219,14 @@ public class GruposController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Grupos) {
-                Grupos o = (Grupos) object;
-                return getStringKey(o.getGrupoId());
+            if (object instanceof Ser) {
+                Ser o = (Ser) object;
+                return getStringKey(o.getId());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Grupos.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: "+Ser.class.getName());
             }
         }
+
     }
+
 }

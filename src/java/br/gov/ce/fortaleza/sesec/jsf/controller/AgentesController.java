@@ -1,9 +1,9 @@
-package br.gov.ce.fortaleza.sesec.controller;
+package br.gov.ce.fortaleza.sesec.jsf.controller;
 
-import br.gov.ce.fortaleza.sesec.entities.Bairros;
-import br.gov.ce.fortaleza.sesec.controller.util.JsfUtil;
-import br.gov.ce.fortaleza.sesec.controller.util.PaginationHelper;
-import br.gov.ce.fortaleza.sesec.jpa.controller.BairrosJpaController;
+import br.gov.ce.fortaleza.sesec.entities.Agentes;
+import br.gov.ce.fortaleza.sesec.jsf.controller.util.JsfUtil;
+import br.gov.ce.fortaleza.sesec.jsf.controller.util.PaginationHelper;
+import br.gov.ce.fortaleza.sesec.jpa.controller.AgentesJpaController;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
@@ -18,47 +18,45 @@ import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 import javax.persistence.Persistence;
 
-
-@ManagedBean(name="bairrosController")
+@ManagedBean(name = "agentesController")
 @SessionScoped
-public class BairrosController implements Serializable {
+public class AgentesController implements Serializable {
 
-
-    private Bairros current;
+    private Agentes current;
     private DataModel items = null;
-    private BairrosJpaController jpaController = null;
+    private AgentesJpaController jpaController = null;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
-    public BairrosController() {
+    public AgentesController() {
     }
 
-    public Bairros getSelected() {
+    public Agentes getSelected() {
         if (current == null) {
-            current = new Bairros();
+            current = new Agentes();
             selectedItemIndex = -1;
         }
         return current;
     }
 
-    private BairrosJpaController getJpaController() {
+    private AgentesJpaController getJpaController() {
         if (jpaController == null) {
-            jpaController = new BairrosJpaController(Persistence.createEntityManagerFactory("ipePU"));
+            jpaController = new AgentesJpaController(Persistence.createEntityManagerFactory("ipePU"));
         }
         return jpaController;
     }
+
     public PaginationHelper getPagination() {
         if (pagination == null) {
             pagination = new PaginationHelper(10) {
-
                 @Override
                 public int getItemsCount() {
-                    return getJpaController().getBairrosCount();
+                    return getJpaController().getAgentesCount();
                 }
 
                 @Override
                 public DataModel createPageDataModel() {
-                     return new ListDataModel(getJpaController().findBairrosEntities(getPageSize(), getPageFirstItem() ));
+                    return new ListDataModel(getJpaController().findAgentesEntities(getPageSize(), getPageFirstItem()));
                 }
             };
         }
@@ -71,13 +69,13 @@ public class BairrosController implements Serializable {
     }
 
     public String prepareView() {
-        current = (Bairros)getItems().getRowData();
+        current = (Agentes) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
 
     public String prepareCreate() {
-        current = new Bairros();
+        current = new Agentes();
         selectedItemIndex = -1;
         return "Create";
     }
@@ -85,16 +83,16 @@ public class BairrosController implements Serializable {
     public String create() {
         try {
             getJpaController().create(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("BairrosCreated"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/pt_br").getString("AgentesCreated"));
             return prepareCreate();
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/pt_br").getString("PersistenceErrorOccured"));
             return null;
         }
     }
 
     public String prepareEdit() {
-        current = (Bairros)getItems().getRowData();
+        current = (Agentes) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
@@ -102,16 +100,16 @@ public class BairrosController implements Serializable {
     public String update() {
         try {
             getJpaController().edit(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("BairrosUpdated"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/pt_br").getString("AgentesUpdated"));
             return "View";
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/pt_br").getString("PersistenceErrorOccured"));
             return null;
         }
     }
 
     public String destroy() {
-        current = (Bairros)getItems().getRowData();
+        current = (Agentes) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
@@ -135,24 +133,24 @@ public class BairrosController implements Serializable {
     private void performDestroy() {
         try {
             getJpaController().destroy(current.getId());
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("BairrosDeleted"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/pt_br").getString("AgentesDeleted"));
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/pt_br").getString("PersistenceErrorOccured"));
         }
     }
 
     private void updateCurrentItem() {
-        int count = getJpaController().getBairrosCount();
+        int count = getJpaController().getAgentesCount();
         if (selectedItemIndex >= count) {
             // selected index cannot be bigger than number of items:
-            selectedItemIndex = count-1;
+            selectedItemIndex = count - 1;
             // go to previous page if last page disappeared:
             if (pagination.getPageFirstItem() >= count) {
                 pagination.previousPage();
             }
         }
         if (selectedItemIndex >= 0) {
-            current = getJpaController().findBairrosEntities(1, selectedItemIndex).get(0);
+            current = getJpaController().findAgentesEntities(1, selectedItemIndex).get(0);
         }
     }
 
@@ -184,23 +182,24 @@ public class BairrosController implements Serializable {
     }
 
     public SelectItem[] getItemsAvailableSelectMany() {
-        return JsfUtil.getSelectItems(getJpaController().findBairrosEntities(), false);
+        return JsfUtil.getSelectItems(getJpaController().findAgentesEntities(), false);
     }
 
     public SelectItem[] getItemsAvailableSelectOne() {
-        return JsfUtil.getSelectItems(getJpaController().findBairrosEntities(), true);
+        return JsfUtil.getSelectItems(getJpaController().findAgentesEntities(), true);
     }
 
-    @FacesConverter(forClass=Bairros.class)
-    public static class BairrosControllerConverter implements Converter {
+    @FacesConverter(forClass = Agentes.class)
+    public static class AgentesControllerConverter implements Converter {
 
+        @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            BairrosController controller = (BairrosController)facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "bairrosController");
-            return controller.getJpaController().findBairros(getKey(value));
+            AgentesController controller = (AgentesController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "agentesController");
+            return controller.getJpaController().findAgentes(getKey(value));
         }
 
         java.lang.Integer getKey(String value) {
@@ -210,23 +209,22 @@ public class BairrosController implements Serializable {
         }
 
         String getStringKey(java.lang.Integer value) {
-            StringBuffer sb = new StringBuffer();
+            StringBuilder sb = new StringBuilder();
             sb.append(value);
             return sb.toString();
         }
 
+        @Override
         public String getAsString(FacesContext facesContext, UIComponent component, Object object) {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Bairros) {
-                Bairros o = (Bairros) object;
+            if (object instanceof Agentes) {
+                Agentes o = (Agentes) object;
                 return getStringKey(o.getId());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: "+Bairros.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Agentes.class.getName());
             }
         }
-
     }
-
 }

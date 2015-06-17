@@ -1,4 +1,4 @@
-package br.gov.ce.fortaleza.sesec.controller.util;
+package br.gov.ce.fortaleza.sesec.jsf.controller.util;
 
 import java.util.List;
 import javax.faces.application.FacesMessage;

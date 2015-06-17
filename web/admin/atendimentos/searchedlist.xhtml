@@ -15,7 +15,7 @@
         </ui:define>
         <ui:define name="body">
 
-            <h:form id="formTableAtendimentos" styleClass="horizontaldataTable">
+            <h:form id="formTableAtendimentos">
                 <h:panelGroup id="messagePanel" 
                               layout="block">
                     <p:messages id="messages"/>
@@ -33,7 +33,7 @@
                                  {FirstPageLink} {PreviousPageLink} {PageLinks}
                                  {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
                                  rowsPerPageTemplate="5,10,20,50,100"
-                                 
+                                 reflow="true"
                                  >
 
                         <p:column>

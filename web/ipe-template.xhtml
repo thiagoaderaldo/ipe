@@ -330,7 +330,7 @@
                                         <i class="fa fa-angle-double-right"></i>
                                         <h:commandLink class="treeview"
                                                        value="Ocorrência"
-                                                       action="/admin/atendimentos/Create"
+                                                       action="#{atendimentosController.cadastrarOcorrencia}"
                                                        immediate="true"
                                                        style="height: 30px; padding-left: 15px"/>
                                     </h:form>
@@ -379,7 +379,7 @@
                                         <i class="fa fa-angle-double-right"></i>
                                         <h:commandLink class="treeview"
                                                        value="Ocorrência"                                                      
-                                                       action="/admin/atendimento/Close"
+                                                       action="#{atendimentosController.encerrarOcorrencia}"
                                                        immediate="true"
                                                        style="height: 30px; padding-left: 15px"/>
                                     </h:form>
