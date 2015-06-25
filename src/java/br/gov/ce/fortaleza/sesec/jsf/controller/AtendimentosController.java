@@ -245,7 +245,7 @@ public class AtendimentosController implements Serializable {
     public String prepareView() {
         current = (Atendimentos) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
-        return "View";
+        return "null";
     }
 
     public String prepareCreate() {
