@@ -45,6 +45,17 @@
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>*.jsf</url-pattern>
     </servlet-mapping>
+    
+    <!--JAX-RS - jersey-->
+    <servlet>
+        <servlet-name>service.ApplicationJAXRS</servlet-name>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>service.ApplicationJAXRS</servlet-name>
+        <url-pattern>/service/*</url-pattern>
+    </servlet-mapping>
+    
     <!-- Corrige imagens dos arquivos HTML do IReport
     <servlet>
         <servlet-name>ImageServlet</servlet-name>
