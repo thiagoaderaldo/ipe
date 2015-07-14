@@ -1267,6 +1267,12 @@ body > .header .logo .icon {
 .box.box-info {
   border-top-color: #00c0ef;
 }
+.box.box-brown {
+  border-top-color: #6D4C41;
+}
+.box.box-purple {
+  border-top-color: #8E24AA;
+}
 .box.box-danger {
   border-top-color: #f56954;
 }
@@ -1436,7 +1442,23 @@ body > .header .logo .icon {
   background: #00c0ef;
   background-color: #00c0ef;
 }
+.box.box-solid.box-brown > .box-header {
+  color: #fff;
+  background: #6D4C41;
+  background-color: #6D4C41;
+}
+.box.box-solid.box-purple > .box-header {
+  color: #fff;
+  background: #8E24AA;
+  background-color: #8E24AA;
+}
 .box.box-solid.box-info > .box-header a {
+  color: #444;
+}
+.box.box-solid.box-brown > .box-header a {
+  color: #444;
+}
+.box.box-solid.box-purple > .box-header a {
   color: #444;
 }
 .box.box-solid.box-danger > .box-header {
@@ -1939,8 +1961,8 @@ Component: timeline
   border-color: #dFb5b4;
 }
 .callout.callout-warning {
-  background-color: #fefbed;
-  border-color: #f1e7bc;
+  background-color: #FFF7D1;
+  border-color: #C09853;
 }
 .callout.callout-info {
   background-color: #f0f7fd;
