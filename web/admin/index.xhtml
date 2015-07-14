@@ -5,7 +5,6 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://java.sun.com/jsf/core">
-
     <ui:composition template="/ipe-template.xhtml">
         <ui:define name="title">
             <h:outputText value="Benvindo."></h:outputText>
@@ -20,77 +19,6 @@
                     <h:panelGroup id="messagePanel" layout="block">
                         <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
                     </h:panelGroup>
-                    <h:outputText escape="false" value="#{bundle.ListVwDshbrdIndicEmpty}" rendered="#{vwDshbrdIndicController.items.rowCount == 0}"/>
-                    <h:panelGroup rendered="#{vwDshbrdIndicController.items.rowCount > 0}">
-                        <h:outputText value="#{vwDshbrdIndicController.pagination.pageFirstItem + 1}..#{vwDshbrdIndicController.pagination.pageLastItem + 1}/#{vwDshbrdIndicController.pagination.itemsCount}"/>&nbsp;
-                        <h:commandLink action="#{vwDshbrdIndicController.previous}" value="#{bundle.Previous} #{vwDshbrdIndicController.pagination.pageSize}" rendered="#{vwDshbrdIndicController.pagination.hasPreviousPage}"/>&nbsp;
-                        <h:commandLink action="#{vwDshbrdIndicController.next}" value="#{bundle.Next} #{vwDshbrdIndicController.pagination.pageSize}" rendered="#{vwDshbrdIndicController.pagination.hasNextPage}"/>&nbsp;
-                        <h:dataTable value="#{vwDshbrdIndicController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="#{bundle.ListVwDshbrdIndicTitle_qtdAtdSemEquipe}"/>
-                                </f:facet>
-
-                                <div class="row">
-                                    <div class="col-lg-2 col-xs-6">
-                                        <!-- small box -->
-                                        <div class="small-box bg-red">
-                                            <div class="inner">
-                                                <h3>
-                                                    <h:outputText value="#{item.qtdAtdSemEquipe}"/>
-                                                </h3>
-                                                <p>
-                                                    Ocorrências sem equipes.
-                                                </p>
-                                            </div>
-                                            <a href="#" class="small-box-footer">
-                                                Mais informações... <i class="fa fa-arrow-circle-right"></i>
-                                            </a>
-                                        </div>
-                                    </div><!-- ./col -->
-                                </div>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="#{bundle.ListVwDshbrdIndicTitle_qtdDeOcrrAbertas}"/>
-                                </f:facet>
-                                <h:outputText value="#{item.qtdDeOcrrAbertas}"/>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="#{bundle.ListVwDshbrdIndicTitle_idTipologia}"/>
-                                </f:facet>
-                                <h:outputText value="#{item.idTipologia}"/>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="#{bundle.ListVwDshbrdIndicTitle_nome}"/>
-                                </f:facet>
-                                <h:outputText value="#{item.nome}"/>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="#{bundle.ListVwDshbrdIndicTitle_qtdTplMaiorOcrr}"/>
-                                </f:facet>
-                                <h:outputText value="#{item.qtdTplMaiorOcrr}"/>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="&nbsp;"/>
-                                </f:facet>
-                                <h:commandLink action="#{vwDshbrdIndicController.prepareView}" value="#{bundle.ListVwDshbrdIndicViewLink}"/>
-                                <h:outputText value=" "/>
-                                <h:commandLink action="#{vwDshbrdIndicController.prepareEdit}" value="#{bundle.ListVwDshbrdIndicEditLink}"/>
-                                <h:outputText value=" "/>
-                                <h:commandLink action="#{vwDshbrdIndicController.destroy}" value="#{bundle.ListVwDshbrdIndicDestroyLink}"/>
-                            </h:column>
-                        </h:dataTable>
-                    </h:panelGroup>
-                    <br />
-                    <h:commandLink action="#{vwDshbrdIndicController.prepareCreate}" value="#{bundle.ListVwDshbrdIndicCreateLink}"/>
-                    <br />
-                    <br />
-                    <h:link outcome="/index" value="#{bundle.ListVwDshbrdIndicIndexLink}"/>
                 </h:form>
                 <div class="row">
                     <div class="col-lg-2 col-xs-6">
@@ -245,10 +173,9 @@
                                 <p:inputText id="address" />
 
                                 <p:commandButton value="Pesquisar" 
-                                                 icon="ui-icon-search" 
+                                                 icon="fa fa-search" 
                                                  onclick="geocode()" 
-                                                 type="button" 
-                                                 style="height: 40px"
+                                                 styleClass="CyanButton"
                                                  />
                             </h:panelGrid>
                             <br/>
@@ -258,7 +185,7 @@
                                     model="#{geocodeView.geoModel}"
                                     zoom="11" 
                                     type="ROADMAP"  
-                                    style="width:580px;height:400px" 
+                                    style="width:480px;height:400px" 
                                     streetView="true"
                                     >
                                 <p:ajax event="geocode" listener="#{geocodeView.onGeocode}" update="@this" />
