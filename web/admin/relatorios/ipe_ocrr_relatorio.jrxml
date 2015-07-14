@@ -2,6 +2,10 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ipe_relatorio_ocrr" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isFloatColumnFooter="true">
 	<style name="Crosstab Data Text" isDefault="false" hAlign="Center"/>
 	<parameter name="QUERY_PARAMETER" class="java.lang.String"/>
+	<parameter name="logo" class="java.lang.Object"/>
+	<parameter name="barra_cabecalho" class="java.lang.Object"/>
+	<parameter name="barra_inferior_esquerda" class="java.lang.Object"/>
+	<parameter name="barra_inferior_direita" class="java.lang.Object"/>
 	<queryString>
 		<![CDATA[SELECT
      atendimentos.`protocolo` AS atendimentos_protocolo,
@@ -11,9 +15,7 @@
      atendimentos.`data_solicitacao` AS atendimentos_data_solicitacao,
      atendimentos.`hora_solicitacao` AS atendimentos_hora_solicitacao,
      atendimentos.`localizacao` AS atendimentos_localizacao,
-     atendimentos.`num_casa` AS atendimentos_num_casa,
      atendimentos.`ponto_referencia` AS atendimentos_ponto_referencia,
-     atendimentos.`id_ser` AS atendimentos_id_ser,
      atendimentos.`id_bairro` AS atendimentos_id_bairro,
      atendimentos.`solicitante` AS atendimentos_solicitante,
      atendimentos.`tel_solicitante` AS atendimentos_tel_solicitante,
@@ -40,13 +42,13 @@ INNER JOIN
 ON 
       atendimentos.id_tipologia = t.id
 INNER JOIN
-      ser s
-ON
-      atendimentos.id_ser = s.id
-INNER JOIN
       bairros b
 ON 
       atendimentos.id_bairro = b.id
+INNER JOIN
+      ser s
+ON
+      b.id_ser = s.id
 WHERE 
 atendimentos.protocolo = $P{QUERY_PARAMETER}]]>
 	</queryString>
@@ -71,13 +73,7 @@ atendimentos.protocolo = $P{QUERY_PARAMETER}]]>
 	<field name="atendimentos_localizacao" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="atendimentos_num_casa" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
 	<field name="atendimentos_ponto_referencia" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="atendimentos_id_ser" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="atendimentos_id_bairro" class="java.lang.Integer">
@@ -145,13 +141,13 @@ atendimentos.protocolo = $P{QUERY_PARAMETER}]]>
 	</title>
 	<pageHeader>
 		<band height="51" splitType="Stretch">
-			<image>
-				<reportElement x="394" y="0" width="160" height="51"/>
-				<imageExpression class="java.lang.String"><![CDATA["/home/thiago/NetBeansProjects/ipe/web/admin/relatorios/imagens/logo_sesec_300x102_RGB.jpg"]]></imageExpression>
+			<image scaleImage="RetainShape">
+				<reportElement x="397" y="0" width="158" height="51"/>
+				<imageExpression class="java.awt.Image"><![CDATA[$P{logo}]]></imageExpression>
 			</image>
-			<image vAlign="Bottom">
-				<reportElement x="0" y="29" width="377" height="18"/>
-				<imageExpression class="java.lang.String"><![CDATA["/home/thiago/NetBeansProjects/ipe/web/admin/relatorios/imagens/barra_cabecalho.png"]]></imageExpression>
+			<image scaleImage="FillFrame">
+				<reportElement x="9" y="43" width="364" height="3"/>
+				<imageExpression class="java.awt.Image"><![CDATA[$P{barra_cabecalho}]]></imageExpression>
 			</image>
 		</band>
 	</pageHeader>
@@ -195,19 +191,16 @@ Coordenadoria Municipal de Proteção e Defesa Civil]]></text>
 				<reportElement x="165" y="49" width="387" height="16"/>
 			</rectangle>
 			<rectangle>
-				<reportElement x="9" y="65" width="330" height="16"/>
-			</rectangle>
-			<rectangle>
-				<reportElement x="339" y="65" width="213" height="16"/>
+				<reportElement x="9" y="65" width="543" height="16"/>
 			</rectangle>
 			<rectangle>
 				<reportElement x="9" y="81" width="543" height="17"/>
 			</rectangle>
 			<rectangle>
-				<reportElement x="9" y="98" width="149" height="16"/>
+				<reportElement x="9" y="98" width="184" height="16"/>
 			</rectangle>
 			<rectangle>
-				<reportElement x="158" y="98" width="394" height="16"/>
+				<reportElement x="193" y="98" width="359" height="16"/>
 			</rectangle>
 			<rectangle>
 				<reportElement x="9" y="114" width="543" height="14"/>
@@ -290,21 +283,14 @@ Coordenadoria Municipal de Proteção e Defesa Civil]]></text>
 				<text><![CDATA[Local:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="340" y="65" width="70" height="16"/>
-				<textElement verticalAlignment="Middle">
-					<font size="7" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Número da casa:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement positionType="Float" x="161" y="98" width="44" height="16" isPrintWhenDetailOverflows="true"/>
+				<reportElement positionType="Float" x="10" y="98" width="44" height="16" isPrintWhenDetailOverflows="true"/>
 				<textElement verticalAlignment="Middle">
 					<font size="7" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Bairro:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="10" y="98" width="36" height="16" isPrintWhenDetailOverflows="true"/>
+				<reportElement positionType="Float" x="194" y="97" width="36" height="16" isPrintWhenDetailOverflows="true"/>
 				<textElement verticalAlignment="Middle">
 					<font size="7" isBold="true"/>
 				</textElement>
@@ -374,18 +360,11 @@ Coordenadoria Municipal de Proteção e Defesa Civil]]></text>
 				<textFieldExpression class="java.sql.Time"><![CDATA[$F{atendimentos_hora_solicitacao}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="41" y="65" width="281" height="16"/>
+				<reportElement x="41" y="65" width="500" height="16"/>
 				<textElement verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{atendimentos_localizacao}]]></textFieldExpression>
-			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement x="409" y="65" width="94" height="16"/>
-				<textElement verticalAlignment="Middle">
-					<font size="7"/>
-				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{atendimentos_num_casa}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="104" y="81" width="437" height="16"/>
@@ -479,14 +458,14 @@ Coordenadoria Municipal de Proteção e Defesa Civil]]></text>
 				<text><![CDATA[Título do atendimento:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="47" y="98" width="100" height="16"/>
+				<reportElement x="231" y="97" width="163" height="16"/>
 				<textElement verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{nome_ser}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="205" y="98" width="209" height="16"/>
+				<reportElement x="54" y="98" width="139" height="16"/>
 				<textElement verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
@@ -730,13 +709,13 @@ Coordenadoria Municipal de Proteção e Defesa Civil]]></text>
 				</textElement>
 				<text><![CDATA[Fone: 85 3281-8660; Fax: 85 3281-8398.]]></text>
 			</staticText>
-			<image>
-				<reportElement x="0" y="7" width="47" height="43"/>
-				<imageExpression class="java.lang.String"><![CDATA["/home/thiago/NetBeansProjects/ipe/web/admin/relatorios/imagens/barra_inferior_esquerda.png"]]></imageExpression>
+			<image scaleImage="FillFrame">
+				<reportElement x="2" y="0" width="37" height="54"/>
+				<imageExpression class="java.awt.Image"><![CDATA[$P{barra_inferior_esquerda}]]></imageExpression>
 			</image>
-			<image>
-				<reportElement x="482" y="7" width="70" height="45"/>
-				<imageExpression class="java.lang.String"><![CDATA["/home/thiago/NetBeansProjects/ipe/web/admin/relatorios/imagens/barra_inferior_direita.png"]]></imageExpression>
+			<image scaleImage="FillFrame">
+				<reportElement x="477" y="0" width="78" height="54"/>
+				<imageExpression class="java.awt.Image"><![CDATA[$P{barra_inferior_direita}]]></imageExpression>
 			</image>
 		</band>
 	</columnFooter>
