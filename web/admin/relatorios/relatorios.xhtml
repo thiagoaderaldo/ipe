@@ -5,23 +5,179 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core">
 
-        
-        <ui:composition template="/ipe-template.xhtml">
-            <ui:define name="title">
-                <h:outputText value="#{pt_br.Relatorios_Title}"></h:outputText>
-            </ui:define>
-            <ui:define name="body">
-                <h:outputText value="#{pt_br.Report}" style="font-weight: bold;font-size: large"/>
-                    <h:form>
-                        <p>
-                            <h:outputText value="#{pt_br.Relatorios_Advice}"/>
-                        </p>
-                        <p>
-                            <h:commandLink value="Relatório do Dia - Ocorrências x Regional" actionListener="#{reportController.relatorioOcrrRglCurrentDate}">
-                            </h:commandLink>
-                        </p>
-                    </h:form>
-            </ui:define>
-            
-        </ui:composition>
+
+    <ui:composition template="/ipe-template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{pt_br.Relatorios_Title}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h2><h:outputText value="#{pt_br.Report}"/></h2>
+            <h:form>
+                <p>
+                    <h:outputText value="#{pt_br.Relatorios_Advice}"/>
+                </p>
+
+
+                <div class="callout callout-warning">                            
+                    <h4><i class="fa fa-bullhorn"></i> AVISO</h4>
+                    <p align="justify">
+                        Relatórios em branco significam ausência de dados naquele período.
+                        <br/>
+                        <br/>
+                        Todos os relatórios abaixo são do ano corrente. Para relatórios de períodos específicos clique em Relatórios > Avançados
+                        <br/>
+                        no menu.
+                    </p>
+                </div>
+
+
+                <p>
+                    <div class="row">
+                        <section class="col-md-3">
+                            <div class="box box-solid box-warning">
+                                <div class="box-header">
+                                    <div class="box-title">
+                                        Relatórios do dia.
+                                    </div>
+                                </div>
+                                <div class="box-body">
+                                    <h3>Ocorrências x Regional</h3>
+                                    <u style="color:#00ABA5"><h:commandLink value="Relatório do Dia" actionListener="#"/></u>
+                                </div>
+                            </div>
+                        </section>
+                        <section class="col-md-4">
+                            <div class="box box-solid box-info">
+                                <div class="box-header">
+                                    <div class="box-title">
+                                        Relatórios do mês.
+                                    </div>
+                                </div>
+                                <div class="box-body">
+                                    <h3>Ocorrências x Regional</h3>
+                                    <u style="color:#00ABA5"><h:commandLink value="Relatório do mês" actionListener="#{reportController.report_QTD_ATD_x_RGL_MES}"/></u>
+                                    <br/>
+                                    <br/>
+                                    <div class="box-footer clearfix"></div>
+                                    <h3>Ocorrências x Tipologia</h3>
+                                    <u style="color:#00ABA5"><h:commandLink value="Relatório do mês" actionListener="#{reportController.report_QTD_ATD_x_TPL_MES}"/></u>
+                                    <br/>
+
+                                </div>
+                            </div>
+                        </section>
+                        <section class="col-md-4">
+                            <div class="box box-solid box-brown">
+                                <div class="box-header">
+                                    <div class="box-title">
+                                        Relatórios por Trimestre.
+                                    </div>
+                                </div>
+                                <div class="box-body">
+                                    <h3>Ocorrências x Regional</h3>
+                                    <u style="color:#00ABA5"><h:commandLink value="1º Trimestre" actionListener="#{reportController.reportQtdAtdXRgl1T}"/></u>
+                                    <br/>
+                                    <u style="color:#00ABA5"><h:commandLink value="2º Trimestre" actionListener="#{reportController.reportQtdAtdXRgl2T}"/></u>
+                                    <br/>
+                                    <u style="color:#00ABA5"><h:commandLink value="3º Trimestre" actionListener="#{reportController.reportQtdAtdXRgl3T}"/></u>
+                                    <br/>
+                                    <u style="color:#00ABA5"><h:commandLink value="4º Trimestre" actionListener="#{reportController.reportQtdAtdXRgl4T}"/></u>
+                                    <br/>
+                                    <br/>
+                                    <div class="box-footer clearfix"></div>
+                                    <h3>Ocorrências x Tipologia</h3>
+                                    <u style="color:#00ABA5"><h:commandLink value="1º Trimestre" actionListener="#{reportController.report_QTD_ATD_x_TPL_1T}"/></u>
+                                    <br/>
+                                    <u style="color:#00ABA5"><h:commandLink value="2º Trimestre" actionListener="#{reportController.report_QTD_ATD_x_TPL_2T}"/></u>
+                                    <br/>
+                                    <u style="color:#00ABA5"><h:commandLink value="3º Trimestre" actionListener="#{reportController.report_QTD_ATD_x_TPL_3T}"/></u>
+                                    <br/>
+                                    <u style="color:#00ABA5"><h:commandLink value="4º Trimestre" actionListener="#{reportController.report_QTD_ATD_x_TPL_4T}"/></u>
+
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="box box-solid box-primary">
+                                <div class="box-header">
+                                    <div class="box-title">
+                                        Relatórios por Semestre.
+                                    </div>
+                                </div>
+                                <div class="box-body">
+                                    <h3>Ocorrências x Regional</h3>
+                                    <u style="color:#00ABA5"><h:commandLink value="1º semestre" actionListener="#{reportController.reportQtdAtdXRgl1S}"/></u>
+                                    <br/>
+                                    <u style="color:#00ABA5"><h:commandLink value="2º semestre" actionListener="#{reportController.reportQtdAtdXRgl2S}"/></u>
+                                    <br/>
+                                    <br/>
+                                    <div class="box-footer clearfix"></div>
+                                    <h3>Ocorrências x Tipologia</h3>
+                                    <u style="color:#00ABA5"><h:commandLink value="1º semestre" actionListener="#{reportController.report_QTD_ATD_x_TPL_1S}"/></u>
+                                    <br/>
+                                    <u style="color:#00ABA5"><h:commandLink value="2º semestre" actionListener="#{reportController.report_QTD_ATD_x_TPL_2S}"/></u>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="box box-solid box-danger">
+                                <div class="box-header">
+                                    <div class="box-title">
+                                        De todo o ano.
+                                    </div>
+                                </div>
+                                <div class="box-body">
+                                    <h3>Ocorrências x Regional</h3>
+                                    <u style="color:#00ABA5"><h:commandLink value="Relatório do ano" actionListener="#{reportController.report_qtd_ATD_x_RGL_Y}"/></u>
+                                    <br/>
+                                    <br/>
+                                    <div class="box-footer clearfix"></div>
+                                    <h3>Ocorrências x Tipologia</h3>
+                                    <u style="color:#00ABA5"><h:commandLink value="Relatório do ano" actionListener="#{reportController.report_qtd_ATD_x_TPL_Y}"/></u>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="box box-solid box-purple">
+                                <div class="box-header">
+                                    <div class="box-title">
+                                        Relatórios por Estação do Ano.
+                                    </div>
+                                </div>
+                                <div class="box-body">
+                                    <h3>Ocorrências x Regional</h3>
+                                    <u style="color:#00ABA5"><h:commandLink value="Primavera" actionListener="#"/></u>
+                                    <br/>
+                                    <u style="color:#00ABA5"><h:commandLink value="Verão" actionListener="#"/></u>
+                                    <br/>
+                                    <u style="color:#00ABA5"><h:commandLink value="Outono" actionListener="#"/></u>
+                                    <br/>
+                                    <u style="color:#00ABA5"><h:commandLink value="Inverno" actionListener="#"/></u>
+                                    <br/>
+                                    <br/>
+                                    <div class="box-footer clearfix"></div>
+                                    <h3>Ocorrências x Tipologia</h3>
+                                    <u style="color:#00ABA5"><h:commandLink value="Primavera" actionListener="#"/></u>
+                                    <br/>
+                                    <u style="color:#00ABA5"><h:commandLink value="Verão" actionListener="#"/></u>
+                                    <br/>
+                                    <u style="color:#00ABA5"><h:commandLink value="Outono" actionListener="#"/></u>
+                                    <br/>
+                                    <u style="color:#00ABA5"><h:commandLink value="Inverno" actionListener="#"/></u>
+                                    <br/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <br/>
+
+                </p>
+            </h:form>
+        </ui:define>
+
+    </ui:composition>
 </html>
