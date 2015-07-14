@@ -11,6 +11,7 @@ Tecnologias utlizadas:
  - Primefaces 5.2;
  - MySQL 5.5;
  - MySQL Workbench 6.1;
+ - Template: AdminLTE-master
  - Kubuntu 15.04.
 
 
