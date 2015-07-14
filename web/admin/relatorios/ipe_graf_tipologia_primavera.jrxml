@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<parameter name="logo" class="java.lang.Object"/>
+	<parameter name="barra_cabecalho" class="java.lang.Object"/>
+	<parameter name="barra_inferior_direita" class="java.lang.Object"/>
+	<parameter name="barra_inferior_esquerda" class="java.lang.Object"/>
+	<queryString>
+		<![CDATA[SELECT id_tipologia,nome,COUNT(*) as qtd_por_tipologia FROM atendimentos inner join tipologias
+ON id_tipologia = tipologias.id
+WHERE YEAR(data_solicitacao) = EXTRACT(YEAR FROM CURRENT_DATE)
+AND
+RIGHT(data_solicitacao,5) BETWEEN '09-21' AND '12-20'
+GROUP BY id_tipologia ORDER BY COUNT(id_tipologia) DESC;]]>
+	</queryString>
+	<field name="id_tipologia" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nome" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="qtd_tipologia" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="62" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="37" width="355" height="14"/>
+				<imageExpression class="java.awt.Image"><![CDATA[$P{barra_cabecalho}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="396" y="0" width="159" height="50"/>
+				<imageExpression class="java.awt.Image"><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="350" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="8" width="555" height="35"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="24"/>
+				</textElement>
+				<text><![CDATA[Gráfico de ocorrência por tipologia(primavera)]]></text>
+			</staticText>
+			<pie3DChart>
+				<chart evaluationTime="Report" renderType="draw" theme="default">
+					<reportElement x="58" y="100" width="438" height="209" isPrintInFirstWholeBand="true"/>
+					<chartTitle position="Right"/>
+					<chartSubtitle/>
+					<chartLegend position="Right"/>
+				</chart>
+				<pieDataset>
+					<keyExpression><![CDATA[$F{nome}]]></keyExpression>
+					<valueExpression><![CDATA[$F{qtd_tipologia}]]></valueExpression>
+					<labelExpression><![CDATA[$F{qtd_tipologia}.toString()]]></labelExpression>
+				</pieDataset>
+				<pie3DPlot>
+					<plot/>
+				</pie3DPlot>
+			</pie3DChart>
+		</band>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="70" splitType="Stretch">
+			<image scaleImage="FillFrame">
+				<reportElement x="0" y="0" width="34" height="54"/>
+				<imageExpression class="java.awt.Image"><![CDATA[$P{barra_inferior_esquerda}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="54" y="6" width="396" height="20"/>
+				<textElement/>
+				<text><![CDATA[Rua Delmiro de Farias,1900 - Rodolfo Teófilo - 60.430 170 Fortaleza,Ceará,Brasil]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="54" y="26" width="70" height="20"/>
+				<textElement/>
+				<text><![CDATA[85 3281 8660]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="54" y="46" width="58" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="112" y="46" width="42" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<image scaleImage="FillFrame">
+				<reportElement x="472" y="0" width="83" height="54"/>
+				<imageExpression class="java.awt.Image"><![CDATA[$P{barra_inferior_direita}]]></imageExpression>
+			</image>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
