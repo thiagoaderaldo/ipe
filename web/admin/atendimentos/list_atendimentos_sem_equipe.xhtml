@@ -100,7 +100,7 @@
                                                oncomplete="PF('detalhesDialog').show();" 
                                                title="Detalhes"
                                                value="#{pt_br.ListAtendimentosViewLink}"
-                                               action="#{atendimentosController.prepareView}"
+                                               action="#{atendimentosController.prepareDetail}"
                                                />  
                                 <br/>                                
                                 <h:commandLink action="#{atendimentosController.prepareEditEquipe}" 
@@ -165,7 +165,7 @@
                             <h:outputText value="#{pt_br.ViewAtendimentosLabel_idTipologia}" style="font-weight: bold"/>
                             <h:outputText value="#{atendimentosController.selected.idTipologia.nome}" title="#{pt_br.ViewAtendimentosTitle_idTipologia}"/>
                             <h:outputText value="#{pt_br.ViewAtendimentosLabel_idSer}" style="font-weight: bold"/>
-                            <h:outputText value="#{atendimentosController.selected.idSer.nome}" title="#{pt_br.ViewAtendimentosTitle_idSer}"/>
+                            <h:outputText value="#{atendimentosController.selected.idBairro.idSer.nome}" title="#{pt_br.ViewAtendimentosTitle_idSer}"/>
                             <h:outputText value="#{pt_br.ViewAtendimentosLabel_idBairro}" style="font-weight: bold"/>
                             <h:outputText value="#{atendimentosController.selected.idBairro.nome}" title="#{pt_br.ViewAtendimentosTitle_idBairro}"/>
 

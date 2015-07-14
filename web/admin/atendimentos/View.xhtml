@@ -29,7 +29,7 @@
                                         <span/>
                                         <h:commandLink
                                             value="Imprimir relatório" 
-                                            action="#{reportController.relatorioOcorrencia(atendimentosController.selected.protocolo)}"/>
+                                            action="#{atendimentosController.relatorioOcorrencia}"/>
                                     </h5>
                                 </smal>
 
@@ -111,7 +111,7 @@
                             <b>
                                 <h:outputText value="#{pt_br.ViewAtendimentosLabel_idSer}"/>
                             </b>
-                            <h:outputText value="#{atendimentosController.selected.idSer.nome}" 
+                            <h:outputText value="#{atendimentosController.selected.idBairro.idSer.nome}" 
                                           title="#{pt_br.ViewAtendimentosTitle_idSer}"/>
                             <br/>
                             <b>
@@ -242,7 +242,7 @@
                             <span/>
                             <h:commandLink
                                 value="Imprimir relatório" 
-                                action="#{reportController.relatorioOcorrencia(atendimentosController.selected.protocolo)}"/>
+                                action="#{atendimentosController.relatorioOcorrencia}"/>
                         </h4>
                     </div>
                 </section>
