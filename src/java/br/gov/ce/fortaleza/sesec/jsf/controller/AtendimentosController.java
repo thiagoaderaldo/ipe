@@ -26,6 +26,7 @@ import javax.faces.model.SelectItem;
 import javax.persistence.Persistence;
 import br.gov.ce.fortaleza.sesec.jpa.controller.BairrosJpaController;
 import br.gov.ce.fortaleza.sesec.jpa.controller.SerJpaController;
+import br.gov.ce.fortaleza.sesec.report.ReportController;
 import org.primefaces.component.calendar.Calendar;
 import org.primefaces.component.inputtext.InputText;
 import org.primefaces.component.selectonemenu.SelectOneMenu;
@@ -245,6 +246,12 @@ public class AtendimentosController implements Serializable {
     public String prepareView() {
         current = (Atendimentos) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        return "View";
+    }
+
+    public String prepareDetail() {
+        current = (Atendimentos) getItems().getRowData();
+        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "null";
     }
 
@@ -260,7 +267,6 @@ public class AtendimentosController implements Serializable {
             bjc = new BairrosJpaController(Persistence.createEntityManagerFactory("ipePU"));
             current.setIdBairro(bjc.findBairrosByNome(getSOMBairros().getValue().toString()));
             sjc = new SerJpaController(Persistence.createEntityManagerFactory("ipePU"));
-            current.setIdSer(sjc.findSerByNome(getSOMSer().getValue().toString()));
             getJpaController().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/pt_br").getString("AtendimentosCreated"));
             JsfUtil.addWarnMessage("Protocolo gerado: " + current.getProtocolo());
@@ -293,7 +299,7 @@ public class AtendimentosController implements Serializable {
             return null;
         }
     }
-    
+
     public String updateEquipe() {
         try {
             getJpaController().edit(current);
@@ -335,8 +341,6 @@ public class AtendimentosController implements Serializable {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/pt_br").getString("PersistenceErrorOccured"));
         }
     }
-
-
 
     private void updateCurrentItem() {
         int count = getJpaController().getAtendimentosCount();
@@ -671,7 +675,7 @@ public class AtendimentosController implements Serializable {
 
         return getJpaController().findAtendimentoByEquipe(equipe);
     }
-    
+
     public List<Atendimentos> getAtendimentosWhereEquipeIsNull() {
 
         return getJpaController().findAtendimentosWhereEquipeIsNull();
@@ -706,14 +710,14 @@ public class AtendimentosController implements Serializable {
         }
         return items;
     }
-    
-        public String equipeVoid() {
+
+    public String equipeVoid() {
         searchedList = getAtendimentosWhereEquipeIsNull();
 
         return searchedListAtendimentoByEquipe();
     }
-        
-        /**
+
+    /**
      * *************************************************************************
      * Os métodos abaixo permitem a busca pelo PROTOCOLO do atendimento.
      * *************************************************************************
@@ -755,15 +759,34 @@ public class AtendimentosController implements Serializable {
         }
         return items;
     }
-    
-    public String encerrarOcorrencia(){
+
+    public String encerrarOcorrencia() {
         current = new Atendimentos();
         return "/admin/atendimentos/encerrar_ocorrencia";
     }
-    
-    public String cadastrarOcorrencia(){
+
+    public String cadastrarOcorrencia() {
         current = new Atendimentos();
         return "/admin/atendimentos/Create";
     }
-    
+
+    public String fichaCampo() {
+        ReportController rc = new ReportController();
+        try {
+            rc.reportOcrrFichaCampo(current.getProtocolo());
+        } catch (ParseException ex) {
+            Logger.getLogger(AtendimentosController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(AtendimentosController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public String relatorioOcorrencia() {
+        
+        ReportController rc = new ReportController();
+        rc.relatorioOcorrencia(current.getProtocolo());
+
+        return null;
+    }
 }

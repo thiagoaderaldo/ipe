@@ -43,8 +43,7 @@ public class Ser implements Serializable {
     @Basic(optional = false)
     @Column(name = "nome")
     private String nome;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idSer")
-    private Collection<Atendimentos> atendimentosCollection;
+    
 
     public Ser() {
     }
@@ -72,15 +71,6 @@ public class Ser implements Serializable {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    @XmlTransient
-    public Collection<Atendimentos> getAtendimentosCollection() {
-        return atendimentosCollection;
-    }
-
-    public void setAtendimentosCollection(Collection<Atendimentos> atendimentosCollection) {
-        this.atendimentosCollection = atendimentosCollection;
     }
 
     @Override

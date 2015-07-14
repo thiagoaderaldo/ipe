@@ -38,27 +38,27 @@ public class SerJpaController implements Serializable {
     }
 
     public void create(Ser ser) {
-        if (ser.getAtendimentosCollection() == null) {
-            ser.setAtendimentosCollection(new ArrayList<Atendimentos>());
+        if (ser.getBairrosCollection() == null) {
+            ser.setBairrosCollection(new ArrayList<Bairros>());
         }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Collection<Atendimentos> attachedAtendimentosCollection = new ArrayList<Atendimentos>();
-            for (Atendimentos atendimentosCollectionAtendimentosToAttach : ser.getAtendimentosCollection()) {
-                atendimentosCollectionAtendimentosToAttach = em.getReference(atendimentosCollectionAtendimentosToAttach.getClass(), atendimentosCollectionAtendimentosToAttach.getId());
-                attachedAtendimentosCollection.add(atendimentosCollectionAtendimentosToAttach);
+            Collection<Bairros> attachedBairrosCollection = new ArrayList<Bairros>();
+            for (Bairros bairrosCollectionBairrosToAttach : ser.getBairrosCollection()) {
+                bairrosCollectionBairrosToAttach = em.getReference(bairrosCollectionBairrosToAttach.getClass(), bairrosCollectionBairrosToAttach.getId());
+                attachedBairrosCollection.add(bairrosCollectionBairrosToAttach);
             }
-            ser.setAtendimentosCollection(attachedAtendimentosCollection);
+            ser.setBairrosCollection(attachedBairrosCollection);
             em.persist(ser);
-            for (Atendimentos atendimentosCollectionAtendimentos : ser.getAtendimentosCollection()) {
-                Ser oldIdSerOfAtendimentosCollectionAtendimentos = atendimentosCollectionAtendimentos.getIdSer();
-                atendimentosCollectionAtendimentos.setIdSer(ser);
-                atendimentosCollectionAtendimentos = em.merge(atendimentosCollectionAtendimentos);
-                if (oldIdSerOfAtendimentosCollectionAtendimentos != null) {
-                    oldIdSerOfAtendimentosCollectionAtendimentos.getAtendimentosCollection().remove(atendimentosCollectionAtendimentos);
-                    oldIdSerOfAtendimentosCollectionAtendimentos = em.merge(oldIdSerOfAtendimentosCollectionAtendimentos);
+            for (Bairros bairrosCollectionBairros : ser.getBairrosCollection()) {
+                Ser oldIdSerOfBairrosCollectionBairros = bairrosCollectionBairros.getIdSer();
+                bairrosCollectionBairros.setIdSer(ser);
+                bairrosCollectionBairros = em.merge(bairrosCollectionBairros);
+                if (oldIdSerOfBairrosCollectionBairros != null) {
+                    oldIdSerOfBairrosCollectionBairros.getBairrosCollection().remove(bairrosCollectionBairros);
+                    oldIdSerOfBairrosCollectionBairros = em.merge(oldIdSerOfBairrosCollectionBairros);
                 }
             }
             em.getTransaction().commit();
@@ -69,42 +69,36 @@ public class SerJpaController implements Serializable {
         }
     }
 
-    public void edit(Ser ser) throws IllegalOrphanException, NonexistentEntityException, Exception {
+    public void edit(Ser ser) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
             Ser persistentSer = em.find(Ser.class, ser.getId());
-            Collection<Atendimentos> atendimentosCollectionOld = persistentSer.getAtendimentosCollection();
-            Collection<Atendimentos> atendimentosCollectionNew = ser.getAtendimentosCollection();
-            List<String> illegalOrphanMessages = null;
-            for (Atendimentos atendimentosCollectionOldAtendimentos : atendimentosCollectionOld) {
-                if (!atendimentosCollectionNew.contains(atendimentosCollectionOldAtendimentos)) {
-                    if (illegalOrphanMessages == null) {
-                        illegalOrphanMessages = new ArrayList<String>();
-                    }
-                    illegalOrphanMessages.add("You must retain Atendimentos " + atendimentosCollectionOldAtendimentos + " since its idSer field is not nullable.");
+            Collection<Bairros> bairrosCollectionOld = persistentSer.getBairrosCollection();
+            Collection<Bairros> bairrosCollectionNew = ser.getBairrosCollection();
+            Collection<Bairros> attachedBairrosCollectionNew = new ArrayList<Bairros>();
+            for (Bairros bairrosCollectionNewBairrosToAttach : bairrosCollectionNew) {
+                bairrosCollectionNewBairrosToAttach = em.getReference(bairrosCollectionNewBairrosToAttach.getClass(), bairrosCollectionNewBairrosToAttach.getId());
+                attachedBairrosCollectionNew.add(bairrosCollectionNewBairrosToAttach);
+            }
+            bairrosCollectionNew = attachedBairrosCollectionNew;
+            ser.setBairrosCollection(bairrosCollectionNew);
+            ser = em.merge(ser);
+            for (Bairros bairrosCollectionOldBairros : bairrosCollectionOld) {
+                if (!bairrosCollectionNew.contains(bairrosCollectionOldBairros)) {
+                    bairrosCollectionOldBairros.setIdSer(null);
+                    bairrosCollectionOldBairros = em.merge(bairrosCollectionOldBairros);
                 }
             }
-            if (illegalOrphanMessages != null) {
-                throw new IllegalOrphanException(illegalOrphanMessages);
-            }
-            Collection<Atendimentos> attachedAtendimentosCollectionNew = new ArrayList<Atendimentos>();
-            for (Atendimentos atendimentosCollectionNewAtendimentosToAttach : atendimentosCollectionNew) {
-                atendimentosCollectionNewAtendimentosToAttach = em.getReference(atendimentosCollectionNewAtendimentosToAttach.getClass(), atendimentosCollectionNewAtendimentosToAttach.getId());
-                attachedAtendimentosCollectionNew.add(atendimentosCollectionNewAtendimentosToAttach);
-            }
-            atendimentosCollectionNew = attachedAtendimentosCollectionNew;
-            ser.setAtendimentosCollection(atendimentosCollectionNew);
-            ser = em.merge(ser);
-            for (Atendimentos atendimentosCollectionNewAtendimentos : atendimentosCollectionNew) {
-                if (!atendimentosCollectionOld.contains(atendimentosCollectionNewAtendimentos)) {
-                    Ser oldIdSerOfAtendimentosCollectionNewAtendimentos = atendimentosCollectionNewAtendimentos.getIdSer();
-                    atendimentosCollectionNewAtendimentos.setIdSer(ser);
-                    atendimentosCollectionNewAtendimentos = em.merge(atendimentosCollectionNewAtendimentos);
-                    if (oldIdSerOfAtendimentosCollectionNewAtendimentos != null && !oldIdSerOfAtendimentosCollectionNewAtendimentos.equals(ser)) {
-                        oldIdSerOfAtendimentosCollectionNewAtendimentos.getAtendimentosCollection().remove(atendimentosCollectionNewAtendimentos);
-                        oldIdSerOfAtendimentosCollectionNewAtendimentos = em.merge(oldIdSerOfAtendimentosCollectionNewAtendimentos);
+            for (Bairros bairrosCollectionNewBairros : bairrosCollectionNew) {
+                if (!bairrosCollectionOld.contains(bairrosCollectionNewBairros)) {
+                    Ser oldIdSerOfBairrosCollectionNewBairros = bairrosCollectionNewBairros.getIdSer();
+                    bairrosCollectionNewBairros.setIdSer(ser);
+                    bairrosCollectionNewBairros = em.merge(bairrosCollectionNewBairros);
+                    if (oldIdSerOfBairrosCollectionNewBairros != null && !oldIdSerOfBairrosCollectionNewBairros.equals(ser)) {
+                        oldIdSerOfBairrosCollectionNewBairros.getBairrosCollection().remove(bairrosCollectionNewBairros);
+                        oldIdSerOfBairrosCollectionNewBairros = em.merge(oldIdSerOfBairrosCollectionNewBairros);
                     }
                 }
             }
@@ -125,7 +119,7 @@ public class SerJpaController implements Serializable {
         }
     }
 
-    public void destroy(Integer id) throws IllegalOrphanException, NonexistentEntityException {
+    public void destroy(Integer id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -137,16 +131,10 @@ public class SerJpaController implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The ser with id " + id + " no longer exists.", enfe);
             }
-            List<String> illegalOrphanMessages = null;
-            Collection<Atendimentos> atendimentosCollectionOrphanCheck = ser.getAtendimentosCollection();
-            for (Atendimentos atendimentosCollectionOrphanCheckAtendimentos : atendimentosCollectionOrphanCheck) {
-                if (illegalOrphanMessages == null) {
-                    illegalOrphanMessages = new ArrayList<String>();
-                }
-                illegalOrphanMessages.add("This Ser (" + ser + ") cannot be destroyed since the Atendimentos " + atendimentosCollectionOrphanCheckAtendimentos + " in its atendimentosCollection field has a non-nullable idSer field.");
-            }
-            if (illegalOrphanMessages != null) {
-                throw new IllegalOrphanException(illegalOrphanMessages);
+            Collection<Bairros> bairrosCollection = ser.getBairrosCollection();
+            for (Bairros bairrosCollectionBairros : bairrosCollection) {
+                bairrosCollectionBairros.setIdSer(null);
+                bairrosCollectionBairros = em.merge(bairrosCollectionBairros);
             }
             em.remove(ser);
             em.getTransaction().commit();

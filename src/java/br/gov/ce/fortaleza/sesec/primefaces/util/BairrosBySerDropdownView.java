@@ -37,6 +37,48 @@ public class BairrosBySerDropdownView implements Serializable {
     //private Map[] mapSER;
     private Map<String, String>[] mapSER;
 
+//    @PostConstruct
+//    public void init() {
+//        bairros = new HashMap<String, String>();
+//        bjc = new BairrosJpaController(Persistence.createEntityManagerFactory("ipePU"));
+//        b = bjc.findBairrosEntities(); 
+//        for (int i = 0; i <= b.size() - 1; i++) {
+//            bairros.put(b.get(i).getNome(), b.get(i).getNome());
+//            mapSER[i] = new HashMap<String, String>();
+//            mapSER[i].put(b.get(i).getIdSer().getNome(), b.get(i).getIdSer().getNome());
+//            data.put(b.get(i).getNome(), mapSER[i]);
+//            System.out.println("Valor em data: " + data.get(bairro));
+//        }
+//        try {
+//            Thread.sleep(30);
+//        } catch (InterruptedException ex) {
+//            Logger.getLogger(BairrosBySerDropdownView.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        Map<String, String> map = new HashMap<String, String>();
+//        sjc = new SerJpaController(Persistence.createEntityManagerFactory("ipePU"));
+//        s = sjc.findSerEntities();
+//        mapSER = new HashMap[s.size()];
+//        for (int i = 0; i <= s.size() - 1; i++) {
+//            mapSER[i] = new HashMap<String, String>();
+//            mapSER[i].put(s.get(i).getNome(), s.get(i).getNome());
+//        }
+//          try {
+//            Thread.sleep(30);
+//        } catch (InterruptedException ex) {
+//            Logger.getLogger(BairrosBySerDropdownView.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        for (int i = 0; i <= b.size() - 1; i++) {
+//            for (int j = 0; j <= s.size() - 1; j++) {
+//                if (b.get(i).getIdSer().getId() == s.get(j).getId()) {
+//                    data.put(b.get(i).getNome(), mapSER[j]);
+//                }
+//            }
+//
+//
+//        }
+//        
+//    }
+    
     @PostConstruct
     public void init() {
         bairros = new HashMap<String, String>();
@@ -72,7 +114,6 @@ public class BairrosBySerDropdownView implements Serializable {
 
 
         }
-        System.out.println("Passou pelo bean BairrosBySer");
         
     }
 

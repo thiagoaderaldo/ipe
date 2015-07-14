@@ -56,13 +56,12 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Atendimentos.findByEquipe", query = "SELECT a FROM Atendimentos a WHERE a.equipe = :equipe"),
     @NamedQuery(name = "Atendimentos.findAtendimentosWhereEquipeIsNull", query = "SELECT a FROM Atendimentos a WHERE a.equipe IS NULL")})
 public class Atendimentos implements Serializable {
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "latitude")
-    private String latitude;
+    private Double latitude;
     @Column(name = "longitude")
-    private String longitude;
+    private Double longitude;
 
-    @Column(name = "num_casa")
-    private String numCasa;
     @Column(name = "ponto_referencia")
     private String pontoReferencia;
     @Column(name = "equipe")
@@ -134,9 +133,7 @@ public class Atendimentos implements Serializable {
     @JoinColumn(name = "id_tipologia", referencedColumnName = "id")
     @ManyToOne
     private Tipologias idTipologia;
-    @JoinColumn(name = "id_ser", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private Ser idSer;
+    
     @JoinColumn(name = "id_bairro", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Bairros idBairro;
@@ -313,14 +310,6 @@ public class Atendimentos implements Serializable {
         this.idTipologia = idTipologia;
     }
 
-    public Ser getIdSer() {
-        return idSer;
-    }
-
-    public void setIdSer(Ser idSer) {
-        this.idSer = idSer;
-    }
-
     public Bairros getIdBairro() {
         return idBairro;
     }
@@ -352,14 +341,6 @@ public class Atendimentos implements Serializable {
     @Override
     public String toString() {
         return "entities.Atendimentos[ id=" + id + " ]";
-    }
-
-    public String getNumCasa() {
-        return numCasa;
-    }
-
-    public void setNumCasa(String numCasa) {
-        this.numCasa = numCasa;
     }
 
     public String getPontoReferencia() {
@@ -410,19 +391,19 @@ public class Atendimentos implements Serializable {
         this.qtdPessoasAtingidas = qtdPessoasAtingidas;
     }
 
-    public String getLatitude() {
+    public Double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(String latitude) {
+    public void setLatitude(Double latitude) {
         this.latitude = latitude;
     }
 
-    public String getLongitude() {
+    public Double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(String longitude) {
+    public void setLongitude(Double longitude) {
         this.longitude = longitude;
     }
 }

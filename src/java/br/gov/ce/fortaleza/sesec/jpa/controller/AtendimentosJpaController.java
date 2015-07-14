@@ -59,11 +59,6 @@ public class AtendimentosJpaController implements Serializable {
                 idTipologia = em.getReference(idTipologia.getClass(), idTipologia.getId());
                 atendimentos.setIdTipologia(idTipologia);
             }
-            Ser idSer = atendimentos.getIdSer();
-            if (idSer != null) {
-                idSer = em.getReference(idSer.getClass(), idSer.getId());
-                atendimentos.setIdSer(idSer);
-            }
             Bairros idBairro = atendimentos.getIdBairro();
             if (idBairro != null) {
                 idBairro = em.getReference(idBairro.getClass(), idBairro.getId());
@@ -83,10 +78,6 @@ public class AtendimentosJpaController implements Serializable {
             if (idTipologia != null) {
                 idTipologia.getAtendimentosCollection().add(atendimentos);
                 idTipologia = em.merge(idTipologia);
-            }
-            if (idSer != null) {
-                idSer.getAtendimentosCollection().add(atendimentos);
-                idSer = em.merge(idSer);
             }
             if (idBairro != null) {
                 idBairro.getAtendimentosCollection().add(atendimentos);
@@ -114,8 +105,6 @@ public class AtendimentosJpaController implements Serializable {
             Estatus idEstatusNew = atendimentos.getIdEstatus();
             Tipologias idTipologiaOld = persistentAtendimentos.getIdTipologia();
             Tipologias idTipologiaNew = atendimentos.getIdTipologia();
-            Ser idSerOld = persistentAtendimentos.getIdSer();
-            Ser idSerNew = atendimentos.getIdSer();
             Bairros idBairroOld = persistentAtendimentos.getIdBairro();
             Bairros idBairroNew = atendimentos.getIdBairro();
             Collection<Encaminhamentos> encaminhamentosCollectionOld = persistentAtendimentos.getEncaminhamentosCollection();
@@ -127,10 +116,6 @@ public class AtendimentosJpaController implements Serializable {
             if (idTipologiaNew != null) {
                 idTipologiaNew = em.getReference(idTipologiaNew.getClass(), idTipologiaNew.getId());
                 atendimentos.setIdTipologia(idTipologiaNew);
-            }
-            if (idSerNew != null) {
-                idSerNew = em.getReference(idSerNew.getClass(), idSerNew.getId());
-                atendimentos.setIdSer(idSerNew);
             }
             if (idBairroNew != null) {
                 idBairroNew = em.getReference(idBairroNew.getClass(), idBairroNew.getId());
@@ -159,14 +144,6 @@ public class AtendimentosJpaController implements Serializable {
             if (idTipologiaNew != null && !idTipologiaNew.equals(idTipologiaOld)) {
                 idTipologiaNew.getAtendimentosCollection().add(atendimentos);
                 idTipologiaNew = em.merge(idTipologiaNew);
-            }
-            if (idSerOld != null && !idSerOld.equals(idSerNew)) {
-                idSerOld.getAtendimentosCollection().remove(atendimentos);
-                idSerOld = em.merge(idSerOld);
-            }
-            if (idSerNew != null && !idSerNew.equals(idSerOld)) {
-                idSerNew.getAtendimentosCollection().add(atendimentos);
-                idSerNew = em.merge(idSerNew);
             }
             if (idBairroOld != null && !idBairroOld.equals(idBairroNew)) {
                 idBairroOld.getAtendimentosCollection().remove(atendimentos);
@@ -226,11 +203,6 @@ public class AtendimentosJpaController implements Serializable {
             if (idTipologia != null) {
                 idTipologia.getAtendimentosCollection().remove(atendimentos);
                 idTipologia = em.merge(idTipologia);
-            }
-            Ser idSer = atendimentos.getIdSer();
-            if (idSer != null) {
-                idSer.getAtendimentosCollection().remove(atendimentos);
-                idSer = em.merge(idSer);
             }
             Bairros idBairro = atendimentos.getIdBairro();
             if (idBairro != null) {
