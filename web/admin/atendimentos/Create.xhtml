@@ -26,23 +26,7 @@
                         <p:panel  header="Informações de procedência"
                                   >
                             <div class="ui-grid ui-grid-responsive">
-                                <div class="ui-grid-row">
-                                    <div class="ui-grid-col-1">
-                                        <h:outputLabel id="holTitulo"
-                                                       value="#{pt_br.CreateAtendimentosLabel_titulo}" 
-                                                       for="holTitulo" />
-                                    </div>
-                                </div>
-                                <div class="ui-grid-row">
-                                    <div class="ui-grid-col-1">
-                                        <p:inputText id="pitTitulo" 
-                                                     value="#{atendimentosController.selected.titulo}" 
-                                                     title="#{pt_br.CreateAtendimentosTitle_titulo}" 
-                                                     maxlength="45"
-                                                     style="min-width: 250px;"
-                                                     />
-                                    </div>
-                                </div>
+                                
                                 <div class="ui-grid-row">
                                     <div class="ui-grid-col-1">
                                         <h:outputLabel id="holProcedencia"
@@ -403,9 +387,9 @@
                                                      value="#{atendimentosController.selected.idEstatus}"                                       
                                                      style="min-width: 260px;"
                                                      >
-
+                                        
                                         <f:selectItems value="#{estatusController.itemsAvailableSelectOne}"/>
-
+                                        
                                         <!--
                                         <f:selectItem  id="estatusPendente" itemValue="2"  itemLabel="Pendente"/>
                                         <f:converter converterId="integerConverter"/>
@@ -417,6 +401,30 @@
                             <div class="ui-grid-row">
                                 <div class="ui-grid-col-1">
 
+                                </div>
+                            </div>
+                        </p:panel>
+                    </p:tab>
+                    <p:tab id="tabTitulo" title="Título">
+
+                        <p:panel header="Gostaria de atribuir um título ao atendimento?" style="color: #0088cc">
+                            <div class="ui-grid ui-grid-responsive">
+                                <div class="ui-grid-row">
+                                    <div class="ui-grid-col-1">
+                                        <h:outputLabel id="holTitulo"
+                                                       value="#{pt_br.CreateAtendimentosLabel_titulo}" 
+                                                       for="holTitulo" />
+                                    </div>
+                                </div>
+                                <div class="ui-grid-row">
+                                    <div class="ui-grid-col-1">
+                                        <p:inputText id="pitTitulo" 
+                                                     value="#{atendimentosController.selected.titulo}" 
+                                                     title="#{pt_br.CreateAtendimentosTitle_titulo}" 
+                                                     maxlength="45"
+                                                     style="min-width: 250px;"
+                                                     />
+                                    </div>
                                 </div>
                             </div>
                         </p:panel>
