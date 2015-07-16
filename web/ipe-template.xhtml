@@ -9,19 +9,15 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'/>
         <title><ui:insert name="title">Default Title</ui:insert></title>
-        <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
-        <h:outputStylesheet name="css/ipe-bootstrap-custom.css"/>
         <!-- bootstrap 3.0.2 -->
-        <h:outputStylesheet  name="css/bootstrap.min.css" />
+        <h:outputStylesheet  name="./css/bootstrap.min.css" />
         <!-- font Awesome -->
-        <h:outputStylesheet name="css/font-awesome.min.css" />
+        <h:outputStylesheet name="./css/font-awesome.min.css" />
         <!-- Ionicons -->
-        <h:outputStylesheet name="css/ionicons.min.css" />        
-        <!-- bootstrap wysihtml5 - text editor -->
-        <h:outputStylesheet name="css/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" />
+        <h:outputStylesheet name="./css/ionicons.min.css" /> 
         <!-- Theme style -->
-        <h:outputStylesheet name="css/AdminLTE.css"  />
-
+        <h:outputStylesheet name="./css/AdminLTE.css"  />
+        <h:outputStylesheet name="./css/ipe-bootstrap-custom.css"/>
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -31,6 +27,14 @@
         <link rel="icon"
               type="image/png" 
               href="/ipe/resources/css/images/ipe-favicon.png" />
+        <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+        <!-- Bootstrap -->
+
+        <h:outputScript name="./js/bootstrap.min.js" />       
+        <!-- Bootstrap WYSIHTML5 -->
+        <h:outputScript name="./js/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js" />
+        <!-- AdminLTE App -->
+        <h:outputScript name="./js/AdminLTE/app.js" />
     </h:head>  
 
     <h:body class="skin-blue">
@@ -390,7 +394,7 @@
                                 </li>                               
                             </ul>
                         </li>
-                        
+
                         <li class="treeview">
                             <a href="#">
                                 <i class="fa fa-bar-chart-o"></i>
@@ -418,7 +422,7 @@
                                                        style="height: 30px; padding-left: 15px"/>
                                     </h:form>
                                 </li>
-                                 <li style="height: 30px; padding-left: 25px">
+                                <li style="height: 30px; padding-left: 25px">
                                     <h:form>
                                         <i class="fa fa-angle-double-right"></i>
                                         <h:commandLink class="treeview"
@@ -427,7 +431,7 @@
                                                        immediate="true"
                                                        style="height: 30px; padding-left: 15px"/>
                                     </h:form>
-                                 </li>
+                                </li>
                                 <li style="height: 30px; padding-left: 25px">
                                     <h:form>
                                         <i class="fa fa-angle-double-right"></i>
@@ -438,8 +442,8 @@
                                                        style="height: 30px; padding-left: 15px"/>
                                     </h:form>
                                 </li>
-                               
-                                
+
+
                             </ul>
                         </li>
                     </ul>
@@ -489,13 +493,7 @@
 
 
 
-        <!-- Bootstrap -->
-
-        <h:outputScript name="js/bootstrap.min.js" />       
-        <!-- Bootstrap WYSIHTML5 -->
-        <h:outputScript name="js/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js" />
-        <!-- AdminLTE App -->
-        <h:outputScript name="js/AdminLTE/app.js" />
+        
 
     </h:body>
 
