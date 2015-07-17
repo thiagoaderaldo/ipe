@@ -4,11 +4,7 @@
  */
 package br.gov.ce.fortaleza.sesec.rest.config;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
-
 import javax.ws.rs.core.Application;
 
 /**
@@ -31,7 +27,8 @@ public class ApplicationJAXRS extends Application {
         resources.add(service.Hello.class);
         resources.add(service.AtendimentoService.class);
         resources.add(service.TesteService.class);
+        resources.add(service.RestRecourceAuthenticate.class);
         return resources;
     }
-
+   
 }

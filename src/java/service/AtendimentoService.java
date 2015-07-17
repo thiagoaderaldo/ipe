@@ -94,6 +94,7 @@ public class AtendimentoService {
     
     @GET
     @Path("/id")
+    @Produces(MediaType.APPLICATION_JSON)
     public Response findId(){
         Long id = new Long(333);
         Atendimentos ate = getJpaController().findAtendimentos(id);

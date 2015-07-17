@@ -67,6 +67,19 @@
             <param-name>javax.ws.rs.Application</param-name>
             <param-value>br.gov.ce.fortaleza.sesec.rest.config.ApplicationJAXRS</param-value>
         </init-param>
+        <init-param>
+            <param-name>jersey.config.server.provider.classnames</param-name>
+            <param-value>org.foobar.rest.services;org.codehaus.jackson.jaxrs</param-value>
+        </init-param>
+        <init-param>
+            <param-name>com.sun.jersey.spi.container.ContainerResponseFilters</param-name>
+            <param-value>br.gov.ce.fortaleza.sesec.rest.filter.RESTResponseFilter</param-value>
+        </init-param>
+        <init-param>
+            <param-name>com.sun.jersey.spi.container.ContainerRequestFilters</param-name>
+            <param-value>br.gov.ce.fortaleza.sesec.rest.filter.RESTRequestFilter</param-value>
+        </init-param>
+        
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
