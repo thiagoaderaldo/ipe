@@ -23,6 +23,7 @@
     <class>br.gov.ce.fortaleza.sesec.entities.VwQtdTotalAtdCurrentDate</class>
     <class>br.gov.ce.fortaleza.sesec.entities.VwMaxAtdPorTplgCurrentDate</class>
     <class>br.gov.ce.fortaleza.sesec.entities.VwMaxAtdPorRgnlCurrentDate</class>
+    <class>br.gov.ce.fortaleza.sesec.entities.VwDshbrdResumo</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/ipe"/>
