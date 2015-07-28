@@ -2,13 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package service;
+package br.gov.ce.fortaleza.sesec.rest.config;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
-
 import javax.ws.rs.core.Application;
 
 /**
@@ -17,6 +13,7 @@ import javax.ws.rs.core.Application;
  */
 public class ApplicationJAXRS extends Application {
 
+    @Override
     public Set<Class<?>> getClasses() {
         return getRestResourceClasses();
     }
@@ -29,7 +26,9 @@ public class ApplicationJAXRS extends Application {
         Set<Class<?>> resources = new java.util.HashSet<Class<?>>();
         resources.add(service.Hello.class);
         resources.add(service.AtendimentoService.class);
+        resources.add(service.TesteService.class);
+        resources.add(service.RestRecourceAuthenticate.class);
         return resources;
     }
-
+   
 }

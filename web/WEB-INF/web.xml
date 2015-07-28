@@ -50,7 +50,7 @@
         <url-pattern>*.jsf</url-pattern>
     </servlet-mapping>
     
-    <!--JAX-RS - jersey-->
+    <!--JAX-RS - jersey
     <servlet>
         <servlet-name>service.ApplicationJAXRS</servlet-name>
         <load-on-startup>1</load-on-startup>
@@ -59,7 +59,33 @@
         <servlet-name>service.ApplicationJAXRS</servlet-name>
         <url-pattern>/service/*</url-pattern>
     </servlet-mapping>
-    
+    -->
+    <servlet>
+        <servlet-name>RestFull jersey</servlet-name>
+        <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
+        <init-param>
+            <param-name>javax.ws.rs.Application</param-name>
+            <param-value>br.gov.ce.fortaleza.sesec.rest.config.ApplicationJAXRS</param-value>
+        </init-param>
+        <init-param>
+            <param-name>jersey.config.server.provider.classnames</param-name>
+            <param-value>org.foobar.rest.services;org.codehaus.jackson.jaxrs</param-value>
+        </init-param>
+        <init-param>
+            <param-name>com.sun.jersey.spi.container.ContainerResponseFilters</param-name>
+            <param-value>br.gov.ce.fortaleza.sesec.rest.filter.RESTResponseFilter</param-value>
+        </init-param>
+        <init-param>
+            <param-name>com.sun.jersey.spi.container.ContainerRequestFilters</param-name>
+            <param-value>br.gov.ce.fortaleza.sesec.rest.filter.RESTRequestFilter</param-value>
+        </init-param>
+        
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RestFull jersey</servlet-name>
+        <url-pattern>/service/*</url-pattern>
+    </servlet-mapping>
     <!-- Corrige imagens dos arquivos HTML do IReport
     <servlet>
         <servlet-name>ImageServlet</servlet-name>
