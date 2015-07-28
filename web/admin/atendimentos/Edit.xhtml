@@ -263,6 +263,7 @@
                                                      >
                                         <p:ajax listener="#{bairrosBySerDropdownView.onBairroChange}" update="ser" />
                                         <f:selectItem id="selectItemBairro" itemLabel="Selecione um bairro:" itemValue="" noSelectionOption="true" />
+     
                                         <f:selectItems id="selectItemsBairro" value="#{bairrosBySerDropdownView.bairros}" />
 
                                     </p:selectOneMenu>
@@ -282,9 +283,11 @@
                                                          required="true"
                                                          requiredMessage="#{pt_br.CreateAtendimentosRequiredMessage_idSer}"
                                                          binding="#{atendimentosController.SOMSer}"
+                                                         disabled="true"
                                                          >
-
+                                            
                                             <f:selectItems value="#{bairrosBySerDropdownView.sers}" />
+                                            
                                         </p:selectOneMenu>
                                     </div>
                                 </div>
@@ -315,7 +318,8 @@
                                 </div>
                                 <div class="ui-grid-row">
                                     <div class="ui-grid-col-1">
-                                        <p:inputText id="equipe" 
+                                        <p:inputText id="equipe"
+                                                     readonly="true"                                                     
                                                      value="#{atendimentosController.selected.equipe}" 
                                                      title="#{pt_br.CreateAtendimentosTitle_equipe}" 
                                                      required="true" 

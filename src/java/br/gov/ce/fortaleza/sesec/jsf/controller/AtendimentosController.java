@@ -280,6 +280,12 @@ public class AtendimentosController implements Serializable {
     public String prepareEdit() {
         current = (Atendimentos) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        SOMBairros = new SelectOneMenu();
+        SOMBairros.setValue(current.getIdBairro().getNome());
+        SOMSer = new SelectOneMenu();
+        SOMSer.setValue(current.getIdBairro().getIdSer().getNome());
+        System.out.println("Nome do Bairro: " + current.getIdBairro().getNome());
+        System.out.println("Nome da Regional: " + current.getIdBairro().getIdSer().getNome());
         return "Edit";
     }
 

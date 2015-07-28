@@ -420,4 +420,40 @@ public class AtendimentosJpaController implements Serializable {
         }
     }
     
+    public List<Atendimentos> findByCurrentDate() {
+        EntityManager em = getEntityManager();
+        try {
+            Query q = null;
+            try {
+                q = em.createNamedQuery("Atendimentos.findByCurrentDate",
+                        Atendimentos.class);
+
+            } catch (Exception ex) {
+                Logger.getLogger(AtendimentosJpaController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return q.getResultList();
+
+        } finally {
+            em.close();
+        }
+    }
+    
+    public List<Atendimentos> findByCurrentMonth() {
+        EntityManager em = getEntityManager();
+        try {
+            Query q = null;
+            try {
+                q = em.createNamedQuery("Atendimentos.findByCurrentMonth",
+                        Atendimentos.class);
+
+            } catch (Exception ex) {
+                Logger.getLogger(AtendimentosJpaController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return q.getResultList();
+
+        } finally {
+            em.close();
+        }
+    }
+    
 }
