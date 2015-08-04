@@ -31,21 +31,23 @@ public class RESTRequestFilter implements ContainerRequestFilter{
         String path = request.getPath(true);
         log.info( "Filtrando requisicao para: " + path );
         
-        /*if(method.equals("OPTIONS")) {
+        if(method.equals("OPTIONS")) {
             throw new WebApplicationException(Status.OK);
         }
         Authenticator authenticator = Authenticator.getInstance();
         String serviKey = request.getHeaderValue(HttpHeadersNames.SERVICE_KEY);
         if (!authenticator.isServiceKeyValid(serviKey)) {
+            log.info("chave de serviço invalida");
             throw new WebApplicationException(Status.UNAUTHORIZED);
         }
         
         if (!path.startsWith("resource/login")) {
             String authToken = request.getHeaderValue(HttpHeadersNames.AUTH_TOKEN );
+            log.info("verificando chave e token");
             if (!authenticator.isAuthTokenValid(serviKey, authToken)) {
                 throw new WebApplicationException(Status.UNAUTHORIZED);
             }
-        }*/
+        }
         return request;
     }
 }

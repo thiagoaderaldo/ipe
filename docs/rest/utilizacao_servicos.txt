@@ -1,0 +1,20 @@
+FLUXO DE AUTENTICAÇÃO DOS SERVIÇOS RESTFULL IPE
+	
+	1. Para cada sistema ou host que utilizara os serviços, será gerado uma chave de serviço.
+
+	2. As chaves de serviços não podem ser excluidas do sistema.
+
+	3. Cada usuario do sistema IPE tera acesso a uma chave
+
+	4. Toda requisição necessita de uma chave de serviço e um token de autenticação, exceto o serviço de login.
+
+	5. Para toda a requisição, é verificado se a chave de serviço existe .
+	
+	6. O token é fornecido após a autenticação do usuario atraves do serviço de login.
+	
+	7. Para o serviço de login é necessario a chave de serviço, login e senha de usuario pré cadastros no sistema ipe.
+
+	8. A chave de serviço e token são repassados atraves do cabeçalhos http
+
+	9. a senha e login de usario são repassados no corpo da requisição
+		

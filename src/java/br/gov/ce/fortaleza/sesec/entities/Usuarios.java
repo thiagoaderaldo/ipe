@@ -5,10 +5,13 @@
 package br.gov.ce.fortaleza.sesec.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -18,6 +21,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 /**
  *
@@ -34,9 +38,18 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Usuarios.findByCelular", query = "SELECT u FROM Usuarios u WHERE u.celular = :celular"),
     @NamedQuery(name = "Usuarios.findByLogin", query = "SELECT u FROM Usuarios u WHERE u.login = :login"),
     @NamedQuery(name = "Usuarios.findByEmail", query = "SELECT u FROM Usuarios u WHERE u.email = :email"),
-    @NamedQuery(name = "Usuarios.findBySenha", query = "SELECT u FROM Usuarios u WHERE u.senha = :senha")})
+    @NamedQuery(name = "Usuarios.findBySenha", query = "SELECT u FROM Usuarios u WHERE u.senha = :senha"),
+    @NamedQuery(name = "Usuarios.innerJoinKey", query = "SELECT u FROM Usuarios u LEFT JOIN u.chaveApiCollection c WHERE u.login = :login"),
+    @NamedQuery(name = "Usuarios.findUsuarioChavesByLogin", query = "SELECT u FROM Usuarios u LEFT JOIN u.chaveApiCollection c WHERE u.login = :login AND c.chave = :key")
+})
 public class Usuarios implements Serializable {
+
     private static final long serialVersionUID = 1L;
+    
+    public static final String USUARIOS_INNER_JOIN = "Usuarios.innerJoinKey";
+    public static final String USUARIOS_FIND_BY_LOGIN = "Usuarios.findByLogin";
+    public static final String USUARIOS_FIND_CHAVES = "Usuarios.findUsuarioChavesByLogin";
+    
     @Id
     @Basic(optional = false)
     @Column(name = "matricula")
@@ -61,6 +74,11 @@ public class Usuarios implements Serializable {
         @JoinColumn(name = "grupoId", referencedColumnName = "grupoId")})
     @ManyToMany
     private Collection<Grupos> gruposCollection;
+    @JoinTable(name = "usuario_x_chave", joinColumns = {
+        @JoinColumn(name = "usuarios_matricula", referencedColumnName = "matricula")}, inverseJoinColumns = {
+        @JoinColumn(name = "chave_api_chave", referencedColumnName = "chave")})
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Collection<ChaveApi> chaveApiCollection;
 
     public Usuarios() {
     }
@@ -92,7 +110,6 @@ public class Usuarios implements Serializable {
         this.nome = nome;
     }
 
-    
     public String getTelefone() {
         return telefone;
     }
@@ -166,5 +183,17 @@ public class Usuarios implements Serializable {
     public String toString() {
         return "entities.Usuarios[ matricula=" + matricula + " ]";
     }
-    
+
+    //@XmlTransient
+    //@JsonIgnore
+    public Collection<ChaveApi> getChaveApiCollection() {
+        if (chaveApiCollection == null) {
+            chaveApiCollection = new ArrayList<ChaveApi>();
+        }
+        return chaveApiCollection;
+    }
+
+    public void setChaveApiCollection(Collection<ChaveApi> chaveApiCollection) {
+        this.chaveApiCollection = chaveApiCollection;
+    }
 }

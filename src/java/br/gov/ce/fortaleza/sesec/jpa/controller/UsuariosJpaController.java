@@ -18,6 +18,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import br.gov.ce.fortaleza.sesec.jpa.controller.exceptions.NonexistentEntityException;
 import br.gov.ce.fortaleza.sesec.jpa.controller.exceptions.PreexistingEntityException;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -182,5 +183,31 @@ public class UsuariosJpaController implements Serializable {
             em.close();
         }
     }
-    
+
+    /* JORGE
+     * Consulta para obter a chave de api realcionada 
+     * com um usuario especifico
+     */
+    public Usuarios getUsuarioByLogin(String login) {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<Usuarios> query = em.createNamedQuery(Usuarios.USUARIOS_FIND_BY_LOGIN, Usuarios.class);
+            query.setParameter("login", login);
+            return query.getSingleResult();
+        } finally {
+            em.close();
+        }
+    }
+
+    public Usuarios getUsuarioChaves(String login, String key) {
+        EntityManager em = getEntityManager();
+        try {
+            Query query = em.createNamedQuery(Usuarios.USUARIOS_FIND_CHAVES, Usuarios.class);
+            query.setParameter("login", login);
+            query.setParameter("key", key);
+            return (Usuarios) query.getSingleResult();
+        } finally {
+            em.close();
+        }
+    }
 }
